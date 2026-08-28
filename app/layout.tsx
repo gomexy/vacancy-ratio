@@ -22,27 +22,19 @@ export const metadata: Metadata = {
     template: "%s — VacancyRatio",
   },
   description:
-    "Understand the relationship between the number of people graduating into a field and the number of relevant job vacancies available. Data-driven graduate market intelligence.",
-  openGraph: {
-    siteName: "VacancyRatio",
-    type: "website",
-  },
+    "Understand the relationship between the number of people graduating into a field and the number of relevant job vacancies. Data-driven graduate market intelligence.",
+  openGraph: { siteName: "VacancyRatio", type: "website" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="bg-neutral-50">
+    <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-neutral-50 font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white font-sans antialiased`}
       >
         <TopNav />
-        <main className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
-          {children}
-        </main>
+        {/* main has no container — each page/section owns its own width and background */}
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

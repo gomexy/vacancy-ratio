@@ -14,12 +14,15 @@ export default function ComparePage() {
   const countries = getCountries();
   const fields    = getFields();
   return (
-    <div className="flex flex-col gap-0">
-      <div className="pb-10 border-b border-neutral-200">
+    <div className="bg-white min-h-screen">
+      <div className="mx-auto max-w-5xl px-6 sm:px-12 pt-14 pb-10">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
           Compare Fields
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 leading-snug sm:text-4xl max-w-xl">
+        <h1
+          className="font-bold leading-tight tracking-tight text-neutral-900"
+          style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
+        >
           Which field has the strongest job availability relative to graduates?
         </h1>
       </div>

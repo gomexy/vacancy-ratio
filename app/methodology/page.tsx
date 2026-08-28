@@ -64,12 +64,11 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Divider() {
-  return <div className="border-t border-neutral-200" />;
-}
 
 export default function MethodologyPage() {
   return (
+    <div className="bg-white min-h-screen">
+    <div className="mx-auto max-w-5xl px-6 sm:px-12 py-14">
     <div className="max-w-2xl flex flex-col gap-0">
       {/* Page heading */}
       <div className="pb-10 border-b border-neutral-200">
@@ -273,6 +272,8 @@ export default function MethodologyPage() {
           ))}
         </ul>
       </div>
+    </div>
+    </div>
     </div>
   );
 }

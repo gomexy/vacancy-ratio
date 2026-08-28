@@ -10,10 +10,8 @@ export default function Card({
 }) {
   return (
     <div
-      className={cn(
-        "rounded-lg border border-neutral-200 bg-white p-5",
-        className
-      )}
+      className={cn("rounded-xl bg-white p-6", className)}
+      style={{ boxShadow: "var(--shadow-md)" }}
     >
       {children}
     </div>
