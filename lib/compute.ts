@@ -1,10 +1,10 @@
 import type { GraduationEntry, MarketSignal, MarketSnapshot } from "@/lib/types";
 
 export function getSignal(ratio: number): MarketSignal {
-  if (ratio > 2)    return "critical-shortage";
-  if (ratio >= 1)   return "strong-demand";
+  if (ratio > 2)     return "critical-shortage";
+  if (ratio >= 1)    return "strong-demand";
   if (ratio >= 0.75) return "balanced";
-  if (ratio >= 0.5) return "surplus";
+  if (ratio >= 0.5)  return "surplus";
   return "significant-surplus";
 }
 
@@ -21,41 +21,41 @@ export function computeSnapshot(entry: GraduationEntry): MarketSnapshot {
 
 export const SIGNAL_META: Record<
   MarketSignal,
-  { label: string; description: string; color: string; bg: string }
+  { label: string; description: string; color: string; hex: string }
 > = {
   "critical-shortage": {
     label: "Critical Shortage",
     description:
-      "Vacancies far exceed graduates. Strong employer competition for talent; excellent career prospects.",
-    color: "text-emerald-700",
-    bg: "bg-emerald-50 border-emerald-200",
+      "Vacancies far exceed graduates. Employers are competing for talent; new graduates enter a highly favourable market.",
+    color: "text-emerald-600",
+    hex: "#059669",
   },
   "strong-demand": {
     label: "Strong Demand",
     description:
-      "More vacancies than graduates. Good prospects; the market is actively absorbing new entrants.",
-    color: "text-blue-700",
-    bg: "bg-blue-50 border-blue-200",
+      "More vacancies than graduates. The market is actively absorbing new entrants with good career prospects.",
+    color: "text-blue-600",
+    hex: "#2563eb",
   },
   balanced: {
     label: "Balanced",
     description:
-      "Vacancies and graduates are roughly aligned. Competitive but fair entry conditions.",
-    color: "text-amber-700",
-    bg: "bg-amber-50 border-amber-200",
+      "Vacancies and graduates are broadly aligned. Entry is competitive but conditions are fair.",
+    color: "text-neutral-500",
+    hex: "#6b7280",
   },
   surplus: {
     label: "Surplus",
     description:
-      "More graduates than vacancies. Competitive market; differentiation matters.",
-    color: "text-orange-700",
-    bg: "bg-orange-50 border-orange-200",
+      "More graduates than vacancies. The market is competitive; differentiation and specialisation matter.",
+    color: "text-amber-600",
+    hex: "#d97706",
   },
   "significant-surplus": {
     label: "Significant Surplus",
     description:
-      "Graduates substantially outnumber vacancies. Difficult entry conditions; consider adjacent fields.",
-    color: "text-red-700",
-    bg: "bg-red-50 border-red-200",
+      "Graduates substantially outnumber available roles. Entry conditions are difficult; adjacent fields or specialisations may improve prospects.",
+    color: "text-red-600",
+    hex: "#dc2626",
   },
 };

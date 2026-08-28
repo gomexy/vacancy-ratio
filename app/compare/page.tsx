@@ -1,24 +1,27 @@
+import type { Metadata } from "next";
 import { getCountries, getFields } from "@/lib/service";
 import CompareClient from "./CompareClient";
 
-export const metadata = {
-  title: "Compare Fields — VacancyRatio",
+export const metadata: Metadata = {
+  title: "Compare",
+  description:
+    "Compare vacancy ratios across multiple fields side by side. Identify which disciplines have the strongest job availability relative to their graduate supply.",
 };
 
 const AVAILABLE_YEARS = [2021, 2022, 2023, 2024];
 
 export default function ComparePage() {
   const countries = getCountries();
-  const fields = getFields();
+  const fields    = getFields();
   return (
-    <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">
+    <div className="flex flex-col gap-0">
+      <div className="pb-10 border-b border-neutral-200">
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
           Compare Fields
-        </h1>
-        <p className="mt-2 text-neutral-500">
-          Select multiple fields to compare vacancy ratios side by side.
         </p>
+        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900 leading-snug sm:text-4xl max-w-xl">
+          Which field has the strongest job availability relative to graduates?
+        </h1>
       </div>
       <CompareClient countries={countries} fields={fields} years={AVAILABLE_YEARS} />
     </div>
