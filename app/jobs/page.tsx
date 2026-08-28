@@ -1,38 +1,36 @@
 import type { Metadata } from "next";
 import { getCountries, getFields } from "@/lib/service";
-import ExploreClient from "./ExploreClient";
+import { MOCK_LISTINGS } from "@/lib/data/mock-vacancies";
+import JobsClient from "./JobsClient";
 
 export const metadata: Metadata = {
-  title: "Explore the Market",
+  title: "Job Opportunities",
   description:
-    "Select a country, city, field, and year to see how many job vacancies exist per graduate. Explore historical trends, skills demand, and the five-year outlook.",
+    "Browse illustrative job listings across fields and locations. See the skills employers are asking for and understand where demand is concentrated.",
 };
 
-export default function ExplorePage() {
+export default function JobsPage() {
   const countries = getCountries();
   const fields    = getFields();
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Page header */}
       <div className="mx-auto max-w-5xl px-6 sm:px-12 pt-14 pb-10">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-          Explore the Market
+          Job Opportunities
         </p>
         <h1
           className="font-bold leading-tight tracking-tight text-neutral-900"
           style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
         >
-          What does the job market look like for this field?
+          What roles are employers posting?
         </h1>
         <p className="mt-3 text-sm text-neutral-500 max-w-xl leading-relaxed">
-          Choose a country, location, field, and year to see the current vacancy-to-graduate
-          ratio, historical trends, skills demand, and a five-year outlook.
+          Browse job listings by field and location. Each listing shows the skills
+          employers are asking for. Connect a real data provider to see live postings.
         </p>
       </div>
-
-      {/* Interactive content — client component manages its own layout */}
-      <ExploreClient countries={countries} fields={fields} />
+      <JobsClient countries={countries} fields={fields} listings={MOCK_LISTINGS} />
     </div>
   );
 }

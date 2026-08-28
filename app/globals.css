@@ -12,18 +12,18 @@
   --fg-faint:   #9ca3af;
 
   /* Borders */
-  --border:     #e8e8e8;
+  --border:      #e8e8e8;
   --border-dark: #2a2a2a;
 
-  /* Shadows — two-layer soft lift, Granola-style */
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-md:  0 2px 8px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.07);
-  --shadow-lg:  0 4px 16px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.09);
+  /* Shadows — two-layer soft lift */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.07);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.09);
 
   /* Shape */
-  --radius-sm:  6px;
-  --radius-md:  10px;
-  --radius-lg:  14px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 }
 
 html {
@@ -36,34 +36,47 @@ body {
   background: var(--bg);
   color: var(--fg);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+/* Type hierarchy */
+h1 { letter-spacing: -0.03em; line-height: 1.1; }
+h2 { letter-spacing: -0.02em; line-height: 1.2; }
+h3 { letter-spacing: -0.01em; line-height: 1.3; }
 
 /* Consistent transitions */
 a, button, select, input {
-  transition-duration: 160ms;
+  transition-duration: 150ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Recharts tooltip */
-.recharts-tooltip-wrapper {
-  outline: none !important;
-}
-.recharts-tooltip-wrapper:focus {
-  outline: none !important;
-}
+/* Recharts tooltip suppression */
+.recharts-tooltip-wrapper       { outline: none !important; }
+.recharts-tooltip-wrapper:focus { outline: none !important; }
 
 /* Table row hover */
-tbody tr:hover td {
-  background-color: #fafafa;
-}
+tbody tr { transition: background 120ms ease; }
+tbody tr:hover td { background-color: #fafafa; }
 
 /* Dark footer nav links */
 .footer-link { color: #8a8a8a; }
 .footer-link:hover { color: #ffffff; }
 
-/* Scrollbar */
-@media (min-width: 768px) {
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px; }
+/* Focus ring — keyboard only */
+:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 2px;
+  border-radius: 3px;
 }
+
+/* Scrollbar — subtle */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar        { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track  { background: transparent; }
+  ::-webkit-scrollbar-thumb  { background: #d4d4d4; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+}
+
+/* Text selection */
+::selection { background: #dbeafe; color: #1e3a8a; }

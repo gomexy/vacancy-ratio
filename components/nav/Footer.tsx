@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 const nav = [
-  { href: "/explore",     label: "Explore" },
-  { href: "/compare",     label: "Compare" },
-  { href: "/methodology", label: "Methodology" },
+  { href: "/explore",          label: "Explore" },
+  { href: "/compare",          label: "Compare" },
+  { href: "/location-compare", label: "Locations" },
+  { href: "/jobs",             label: "Jobs" },
+  { href: "/methodology",      label: "Methodology" },
 ];
 
 export default function Footer() {
@@ -26,7 +28,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "#8a8a8a" }}>
-              Graduate market intelligence. Understand job availability relative to graduate supply, by field and country.
+              Graduate career-market intelligence. Understand job demand relative
+              to graduate supply — by field, location and year.
             </p>
           </div>
 
@@ -54,7 +57,7 @@ export default function Footer() {
           style={{ borderTop: "1px solid #222222" }}
         >
           <p className="text-xs" style={{ color: "#555555" }}>
-            Illustrative demo data only. Not financial or career advice.
+            Illustrative demo data only. Not financial or career advice. Real data providers can be connected — see Methodology.
           </p>
           <p className="text-xs" style={{ color: "#444444" }}>
             © {new Date().getFullYear()} VacancyRatio

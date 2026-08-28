@@ -1,38 +1,36 @@
 import type { Metadata } from "next";
 import { getCountries, getFields } from "@/lib/service";
-import ExploreClient from "./ExploreClient";
+import LocationCompareClient from "./LocationCompareClient";
 
 export const metadata: Metadata = {
-  title: "Explore the Market",
+  title: "Location Comparison",
   description:
-    "Select a country, city, field, and year to see how many job vacancies exist per graduate. Explore historical trends, skills demand, and the five-year outlook.",
+    "Compare job vacancy concentration for the same field across cities within a country. See where demand is strongest.",
 };
 
-export default function ExplorePage() {
+export default function LocationComparePage() {
   const countries = getCountries();
   const fields    = getFields();
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Page header */}
       <div className="mx-auto max-w-5xl px-6 sm:px-12 pt-14 pb-10">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-          Explore the Market
+          Location Comparison
         </p>
         <h1
           className="font-bold leading-tight tracking-tight text-neutral-900"
           style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
         >
-          What does the job market look like for this field?
+          Where is demand strongest for this field?
         </h1>
         <p className="mt-3 text-sm text-neutral-500 max-w-xl leading-relaxed">
-          Choose a country, location, field, and year to see the current vacancy-to-graduate
-          ratio, historical trends, skills demand, and a five-year outlook.
+          Compare estimated vacancy concentration across cities within a country
+          for a specific field and year. Vacancy data reflects city-level distributions;
+          graduate supply is measured at the national level.
         </p>
       </div>
-
-      {/* Interactive content — client component manages its own layout */}
-      <ExploreClient countries={countries} fields={fields} />
+      <LocationCompareClient countries={countries} fields={fields} />
     </div>
   );
 }
