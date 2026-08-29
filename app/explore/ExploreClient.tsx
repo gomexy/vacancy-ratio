@@ -18,9 +18,11 @@ import {
   getTrendEntries,
   getAllEntries,
   getAvailableCitiesForCountry,
+  getCityVacancyBreakdown,
 } from "@/lib/service";
 import { getSkillsForField } from "@/lib/data/mock-skills";
 import { getFieldInsights } from "@/lib/insights";
+import { computeSynthesis } from "@/lib/synthesis";
 import { FIELDS } from "@/lib/data/fields";
 import { fmt, fmtRatio } from "@/lib/utils";
 import type { Country, Field, SkillDemand } from "@/lib/types";
@@ -76,6 +78,47 @@ function outlookColor(label: "Growing" | "Stable" | "Declining"): string {
   return "#737373";
 }
 
+function SignalRow({
+  label,
+  value,
+  detail,
+  valueColor,
+}: {
+  label: string;
+  value: string;
+  detail?: string;
+  valueColor?: string;
+}) {
+  return (
+    <div
+      className="flex items-start gap-4 py-3.5"
+      style={{ borderBottom: "1px solid #f5f5f5" }}
+    >
+      <p className="w-32 flex-shrink-0 pt-0.5 text-[10px] font-semibold uppercase leading-relaxed tracking-widest text-neutral-400">
+        {label}
+      </p>
+      <div className="flex min-w-0 flex-1 items-start gap-2">
+        <span className="flex-shrink-0 pt-0.5 text-sm text-neutral-300">
+          →
+        </span>
+        <div className="min-w-0">
+          <p
+            className="text-sm font-semibold leading-snug text-neutral-800"
+            style={valueColor ? { color: valueColor } : undefined}
+          >
+            {value}
+          </p>
+          {detail && (
+            <p className="mt-0.5 text-xs leading-relaxed text-neutral-400">
+              {detail}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function ExploreClient({ countries, fields }: Props) {
@@ -125,6 +168,26 @@ export default function ExploreClient({ countries, fields }: Props) {
   }, [snapshot, field]);
 
   const meta = snapshot ? SIGNAL_META[snapshot.signal] : null;
+
+  const cityBreakdown = useMemo(
+    () => getCityVacancyBreakdown(country, field, safeYear),
+    [country, field, safeYear]
+  );
+
+  const topCities = useMemo(
+    () =>
+      [...cityBreakdown]
+        .sort((a, b) => b.vacancies - a.vacancies)
+        .slice(0, 3)
+        .map((b) => b.city.name),
+    [cityBreakdown]
+  );
+
+  const synthesis = useMemo(() => {
+    if (!snapshot) return null;
+    const fl = FIELDS.find((f) => f.slug === field)?.label ?? field;
+    return computeSynthesis(snapshot, forecast ?? null, skills, topCities, fl);
+  }, [snapshot, forecast, skills, topCities, field]);
 
   // Derived trend sentence for the historical section
   const trendAnswer = useMemo(() => {
@@ -686,54 +749,121 @@ export default function ExploreClient({ countries, fields }: Props) {
             <div className={`${C} py-12`}>
               <SectionLabel>What This Means</SectionLabel>
               <SectionQuestion>
-                What does this data mean for your career?
+                What does this data tell you?
               </SectionQuestion>
 
-              <div className="max-w-2xl flex flex-col gap-10">
-                {/* Market summary */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                      Market summary
-                    </p>
-                    {aiSource === "claude" && (
-                      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-100">
-                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-                        AI
-                      </span>
-                    )}
-                  </div>
-                  {aiLoading ? (
-                    <div className="flex flex-col gap-3 animate-pulse">
-                      <div className="h-4 bg-neutral-100 rounded w-full" />
-                      <div className="h-4 bg-neutral-100 rounded w-5/6" />
-                      <div className="h-4 bg-neutral-100 rounded w-4/6" />
-                    </div>
-                  ) : (
-                    <p className="text-[15px] text-neutral-700 leading-relaxed">
-                      {aiAnalysis ?? insights.summary}
-                    </p>
+              {/* Synthesis paragraph */}
+              <div className="max-w-2xl mb-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+                    Market summary
+                  </p>
+                  {aiSource === "claude" && (
+                    <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-100">
+                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                      AI
+                    </span>
                   )}
                 </div>
-
-                {/* Considerations */}
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
-                    Considerations
+                {aiLoading ? (
+                  <div className="flex flex-col gap-3 animate-pulse">
+                    <div className="h-4 bg-neutral-100 rounded w-full" />
+                    <div className="h-4 bg-neutral-100 rounded w-5/6" />
+                    <div className="h-4 bg-neutral-100 rounded w-4/6" />
+                  </div>
+                ) : (
+                  <p className="text-[15px] text-neutral-700 leading-relaxed">
+                    {aiAnalysis ?? insights.summary}
                   </p>
-                  <ul className="flex flex-col gap-5">
-                    {insights.bullets.map((b, i) => (
-                      <li key={i} className="flex gap-3">
-                        <span className="text-neutral-300 flex-shrink-0 select-none mt-0.5">—</span>
-                        <span className="text-sm text-neutral-600 leading-relaxed">{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                )}
               </div>
 
-              <p className="mt-10 text-[10px] text-neutral-300 leading-relaxed max-w-2xl font-mono">
-                Illustrative guidance only — not personal career or financial advice.
+              {/* Key signals */}
+              {synthesis && (
+                <div
+                  className="max-w-2xl"
+                  style={{ borderTop: "1px solid #f0f0f0" }}
+                >
+                  <div className="flex items-center justify-between pt-6 mb-0">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+                      Key signals
+                    </p>
+                    <DataStatusBadge isDemo />
+                  </div>
+
+                  <SignalRow
+                    label="Key takeaway"
+                    value={synthesis.keyTakeaway.label}
+                    detail={synthesis.keyTakeaway.detail}
+                    valueColor={meta?.hex}
+                  />
+
+                  {synthesis.mainOpportunity && (
+                    <SignalRow
+                      label="Main opportunity"
+                      value={synthesis.mainOpportunity.label}
+                      detail={synthesis.mainOpportunity.detail}
+                    />
+                  )}
+
+                  {synthesis.mainRisk && (
+                    <SignalRow
+                      label="Main risk"
+                      value={synthesis.mainRisk.label}
+                      detail={synthesis.mainRisk.detail}
+                      valueColor="#d97706"
+                    />
+                  )}
+
+                  {synthesis.skillsToWatch.length > 0 && (
+                    <SignalRow
+                      label="Skills to watch"
+                      value={synthesis.skillsToWatch.join("  ·  ")}
+                      detail="Fastest-growing skills by year-on-year change in job postings."
+                    />
+                  )}
+
+                  {synthesis.bestLocations.length > 0 && !city && (
+                    <SignalRow
+                      label="Best locations"
+                      value={synthesis.bestLocations.join("  ·  ")}
+                      detail="Estimated top cities by vacancy concentration for this field and country."
+                    />
+                  )}
+
+                  {synthesis.fiveYearOutlook && (
+                    <SignalRow
+                      label="5-year outlook"
+                      value={synthesis.fiveYearOutlook.label}
+                      detail={synthesis.fiveYearOutlook.detail}
+                      valueColor={outlookColor(synthesis.fiveYearOutlook.label)}
+                    />
+                  )}
+                </div>
+              )}
+
+              {/* Further context */}
+              <div className="mt-10 max-w-2xl">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
+                  Further context
+                </p>
+                <ul className="flex flex-col gap-5">
+                  {insights.bullets.map((b, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="text-neutral-300 flex-shrink-0 select-none mt-0.5">
+                        —
+                      </span>
+                      <span className="text-sm text-neutral-600 leading-relaxed">
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="mt-10 max-w-2xl font-mono text-[10px] leading-relaxed text-neutral-300">
+                Illustrative guidance only — not personal career or financial
+                advice.
                 {aiSource === "claude"
                   ? " Summary generated by Claude from the data shown."
                   : " Set ANTHROPIC_API_KEY for AI-generated summaries."}
