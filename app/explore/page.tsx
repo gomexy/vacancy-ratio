@@ -5,7 +5,7 @@ import ExploreClient from "./ExploreClient";
 export const metadata: Metadata = {
   title: "Explore the Market",
   description:
-    "Select a country, city, field, and year to see how many job vacancies exist per graduate. Explore historical trends, skills demand, and the five-year outlook.",
+    "Select a field and location to see the current vacancy-to-graduate ratio, historical trend, skills demand, and five-year outlook.",
 };
 
 export default function ExplorePage() {
@@ -14,24 +14,6 @@ export default function ExplorePage() {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Page header */}
-      <div className="mx-auto max-w-5xl px-6 sm:px-12 pt-14 pb-10">
-        <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-          Explore the Market
-        </p>
-        <h1
-          className="font-bold leading-tight tracking-tight text-neutral-900"
-          style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
-        >
-          What does the job market look like for this field?
-        </h1>
-        <p className="mt-3 text-sm text-neutral-500 max-w-xl leading-relaxed">
-          Choose a country, location, field, and year to see the current vacancy-to-graduate
-          ratio, historical trends, skills demand, and a five-year outlook.
-        </p>
-      </div>
-
-      {/* Interactive content — client component manages its own layout */}
       <ExploreClient countries={countries} fields={fields} />
     </div>
   );
