@@ -463,3 +463,24 @@ export function getAllListings(
       (city === undefined || l.city === city)
   );
 }
+
+// Returns the salary min/max for a specific city + field, derived from listings.
+// When real salary APIs are available, replace the body of this function.
+export function getCitySalaryRange(
+  country: string,
+  field: string,
+  city: string
+): { min: number; max: number; currency: string } | null {
+  const listings = MOCK_LISTINGS.filter(
+    (l) =>
+      l.country === country &&
+      l.field === field &&
+      l.city === city &&
+      l.salaryMin != null &&
+      l.salaryMax != null
+  );
+  if (listings.length === 0) return null;
+  const min = Math.min(...listings.map((l) => l.salaryMin!));
+  const max = Math.max(...listings.map((l) => l.salaryMax!));
+  return { min, max, currency: listings[0].salaryCurrency ?? "USD" };
+}

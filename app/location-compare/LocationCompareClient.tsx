@@ -4,51 +4,77 @@ import { useState, useMemo } from "react";
 import Select from "@/components/ui/Select";
 import DataStatusBadge from "@/components/ui/DataStatusBadge";
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
-import { computeSnapshot, SIGNAL_META } from "@/lib/compute";
-import { getCityVacancyBreakdown, getAvailableYears } from "@/lib/service";
-import { fmt, fmtRatio, cn } from "@/lib/utils";
-import SignalBadge from "@/components/results/SignalBadge";
+  getCityVacancyBreakdown,
+  getAvailableYears,
+  getCitySalaryRange,
+} from "@/lib/service";
+import { fmt, cn } from "@/lib/utils";
+import { getSkillsForField } from "@/lib/data/mock-skills";
 import type { Country, Field } from "@/lib/types";
 
-const CONTAINER = "mx-auto max-w-5xl px-6 sm:px-12";
+const CONTAINER = "mx-auto max-w-3xl px-6 sm:px-12";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function CustomTooltip({ active, payload, label }: any) {
-  if (!active || !payload?.length) return null;
-  return (
-    <div className="rounded-md border border-neutral-200 bg-white px-3 py-2.5 text-xs shadow-md">
-      <p className="font-semibold text-neutral-700 mb-1">{label}</p>
-      <div className="flex justify-between gap-6">
-        <span className="text-neutral-500">Vacancies</span>
-        <span className="tabular-nums font-medium">{fmt(payload[0].value)}</span>
-      </div>
-    </div>
-  );
+type StrengthTier = "strong" | "moderate" | "emerging";
+
+function getStrengthTier(vacancies: number, maxVacancies: number): StrengthTier {
+  const ratio = vacancies / maxVacancies;
+  if (ratio > 0.66) return "strong";
+  if (ratio > 0.40) return "moderate";
+  return "emerging";
+}
+
+const TIER_META: Record<
+  StrengthTier,
+  { label: string; colorClass: string; hex: string; barHex: string }
+> = {
+  strong:   { label: "Strong",   colorClass: "text-blue-600",    hex: "#2563eb", barHex: "#2563eb" },
+  moderate: { label: "Moderate", colorClass: "text-neutral-500", hex: "#9ca3af", barHex: "#9ca3af" },
+  emerging: { label: "Emerging", colorClass: "text-amber-600",   hex: "#f59e0b", barHex: "#fbbf24" },
+};
+
+function formatSalary(min: number, max: number, currency: string): string {
+  if (currency === "INR") {
+    const f = (v: number) => `₹${Math.round(v / 100_000)}L`;
+    return `${f(min)} – ${f(max)}`;
+  }
+  const f = (v: number) => `$${Math.round(v / 1_000)}K`;
+  return `${f(min)} – ${f(max)}`;
+}
+
+function getWhyText(
+  rank: number,
+  tier: StrengthTier,
+  hasSalary: boolean,
+  salaryAboveMedian: boolean
+): string {
+  if (rank === 1) {
+    return "Highest vacancy concentration in this field among compared cities. This hub attracts the largest share of employer demand nationally.";
+  }
+  if (tier === "strong") {
+    return hasSalary && salaryAboveMedian
+      ? "High employer demand and strong hiring volume. Salary ranges are above the median for this comparison."
+      : "High employer demand and significant concentration of relevant roles.";
+  }
+  if (tier === "moderate") {
+    return "Moderate employer presence in this field. Less saturation than top-ranked cities may improve relative access for new entrants.";
+  }
+  return "Lower vacancy density compared to top-ranked cities. May suit candidates open to emerging markets or with location-specific ties.";
 }
 
 interface Props {
   countries: Country[];
-  fields:    Field[];
+  fields: Field[];
 }
 
 export default function LocationCompareClient({ countries, fields }: Props) {
   const [country, setCountry] = useState("IN");
-  const [field,   setField]   = useState("computer-science");
-  const [year,    setYear]    = useState(2023);
+  const [field, setField] = useState("computer-science");
+  const [year, setYear] = useState(2023);
 
-  const years      = useMemo(() => getAvailableYears(country, field), [country, field]);
-  const safeYear   = years.includes(year) ? year : (years[0] ?? 2023);
+  const years = useMemo(() => getAvailableYears(country, field), [country, field]);
+  const safeYear = years.includes(year) ? year : (years[0] ?? 2023);
 
-  const breakdown  = useMemo(
+  const breakdown = useMemo(
     () => getCityVacancyBreakdown(country, field, safeYear),
     [country, field, safeYear]
   );
@@ -58,48 +84,63 @@ export default function LocationCompareClient({ countries, fields }: Props) {
     [breakdown]
   );
 
-  const snapshots = useMemo(
-    () =>
-      sortedCities.map(({ city, vacancies, graduates }) => {
-        const ratio = vacancies / graduates;
-        const pseudo = {
-          country,
-          field,
-          year: safeYear,
-          graduates,
-          relevantVacancies: vacancies,
-          source: "Demo",
-        };
-        const snap = computeSnapshot(pseudo);
-        return { city, vacancies, graduates, snap };
-      }),
-    [sortedCities, country, field, safeYear]
+  const topSkills = useMemo(
+    () => getSkillsForField(field).slice(0, 4).map((s) => s.skill),
+    [field]
   );
 
-  const chartData = sortedCities.map(({ city, vacancies }) => ({
-    city: city.name,
-    vacancies,
-  }));
+  const maxVacancies = sortedCities[0]?.vacancies ?? 1;
+
+  const cityCards = useMemo(() => {
+    const salaries = sortedCities.map(({ city }) =>
+      getCitySalaryRange(country, field, city.code)
+    );
+    const mids = salaries.map((s) => (s ? (s.min + s.max) / 2 : null));
+    const validMids = mids.filter((v): v is number => v !== null).sort((a, b) => a - b);
+    const medianSalary =
+      validMids.length > 0 ? validMids[Math.floor(validMids.length / 2)] : null;
+
+    return sortedCities.map(({ city, vacancies, graduates }, i) => {
+      const tier = getStrengthTier(vacancies, maxVacancies);
+      const salary = salaries[i];
+      const mid = mids[i];
+      const aboveMedian = medianSalary !== null && mid !== null && mid > medianSalary;
+      const per100 =
+        graduates > 0 ? ((vacancies / graduates) * 100).toFixed(1) : "—";
+      const why = getWhyText(i + 1, tier, salary !== null, aboveMedian);
+      return { city, vacancies, tier, salary, per100, why, rank: i + 1 };
+    });
+  }, [sortedCities, country, field, maxVacancies]);
 
   const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
-  const fieldOptions   = fields.map((f)   => ({ value: f.slug,  label: f.label }));
-  const yearOptions    = years.map((y)    => ({ value: String(y), label: String(y) }));
+  const fieldOptions = fields.map((f) => ({ value: f.slug, label: f.label }));
+  const yearOptions = years.map((y) => ({ value: String(y), label: String(y) }));
+
+  const fieldLabel = fields.find((f) => f.slug === field)?.label ?? field;
+  const countryLabel = countries.find((c) => c.code === country)?.name ?? country;
 
   return (
     <div>
-      {/* Filter bar */}
-      <div style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}>
+      {/* Filter strip */}
+      <div
+        className="bg-white"
+        style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}
+      >
         <div className={CONTAINER}>
-          <div
-            className="my-6 rounded-xl px-6 py-5"
-            style={{ background: "#f7f7f7", boxShadow: "var(--shadow-sm)" }}
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-              Select parameters
-            </p>
+          <div className="py-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <Select label="Country" value={country}         options={countryOptions} onChange={setCountry} />
-              <Select label="Field"   value={field}           options={fieldOptions}   onChange={setField} />
+              <Select
+                label="Country"
+                value={country}
+                options={countryOptions}
+                onChange={setCountry}
+              />
+              <Select
+                label="Field"
+                value={field}
+                options={fieldOptions}
+                onChange={setField}
+              />
               <Select
                 label="Year"
                 value={String(safeYear)}
@@ -115,119 +156,153 @@ export default function LocationCompareClient({ countries, fields }: Props) {
       {breakdown.length === 0 ? (
         <div className={`${CONTAINER} py-24`}>
           <p className="text-sm text-neutral-400">
-            No city-level data for this combination. Try India or another supported country.
+            No city-level data for this combination. Try India or another supported
+            country.
           </p>
         </div>
       ) : (
-        <>
-          {/* Chart strip */}
-          <div className="py-14" style={{ background: "#f5f5f5" }}>
-            <div className={CONTAINER}>
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                    Vacancy distribution by city
-                  </p>
-                  <p className="text-xs text-neutral-400">
-                    Estimated share of national vacancies — based on illustrative city distributions.
-                  </p>
-                </div>
-                <DataStatusBadge isDemo source="Demo" />
-              </div>
-
-              <div
-                className="bg-white rounded-xl p-6"
-                style={{ boxShadow: "var(--shadow-md)" }}
-              >
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart
-                    data={chartData}
-                    barSize={28}
-                    barCategoryGap="30%"
-                  >
-                    <CartesianGrid strokeDasharray="2 4" stroke="#f0f0f0" vertical={false} />
-                    <XAxis
-                      dataKey="city"
-                      tick={{ fontSize: 11, fill: "#9ca3af" }}
-                      axisLine={false}
-                      tickLine={false}
-                    />
-                    <YAxis
-                      tickFormatter={(v: number) => fmt(v)}
-                      tick={{ fontSize: 10, fill: "#9ca3af" }}
-                      axisLine={false}
-                      tickLine={false}
-                      width={42}
-                    />
-                    <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f9fafb" }} />
-                    <Bar dataKey="vacancies" radius={[4, 4, 0, 0]}>
-                      {chartData.map((_, i) => (
-                        <Cell
-                          key={i}
-                          fill={`rgba(29, 78, 216, ${(1 - i / chartData.length * 0.6).toFixed(2)})`}
-                        />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+        <div className={`${CONTAINER} py-12`}>
+          {/* Heading row */}
+          <div className="mb-2 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
+                Location ranking — {safeYear}
+              </p>
+              <h2 className="text-xl font-semibold text-neutral-900">
+                {fieldLabel} in {countryLabel}
+              </h2>
+              <p className="mt-1 text-sm text-neutral-400">
+                Where is the strongest market for this career?
+              </p>
             </div>
+            <DataStatusBadge isDemo source="Demo" />
           </div>
 
-          {/* Rankings table */}
-          <div className={`${CONTAINER} py-14`}>
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-6">
-              City rankings — {safeYear}
+          {/* Disclaimer */}
+          <div className="mt-5 mb-8 rounded-lg border border-neutral-100 bg-neutral-50 px-4 py-3">
+            <p className="text-xs text-neutral-500 leading-relaxed">
+              <span className="font-semibold">What does &ldquo;strongest&rdquo; mean?</span>{" "}
+              Rankings reflect relative labour-market demand — estimated vacancy
+              concentration by city — not individual hiring probability or career outcome.
+              Strongest market ≠ guaranteed employment.
             </p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr style={{ borderBottom: "1px solid #ebebeb" }}>
-                    <th className="pb-3 pr-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">#</th>
-                    <th className="pb-3 pr-8 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">City</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Vacancies</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Ratio*</th>
-                    <th className="pb-3 pl-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Signal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {snapshots.map(({ city, vacancies, snap }, i) => (
-                    <tr
-                      key={city.code}
-                      style={{
-                        borderBottom:
-                          i < snapshots.length - 1 ? "1px solid #f5f5f5" : "none",
-                      }}
-                    >
-                      <td className="py-4 pr-4 text-neutral-300 text-xs tabular-nums">{i + 1}</td>
-                      <td className="py-4 pr-8 font-medium text-neutral-800">{city.name}</td>
-                      <td className="py-4 px-4 text-right tabular-nums text-neutral-600">
-                        {fmt(vacancies)}
-                      </td>
-                      <td
-                        className={cn(
-                          "py-4 px-4 text-right tabular-nums font-semibold",
-                          SIGNAL_META[snap.signal].color
+          </div>
+
+          {/* Ranked cards */}
+          <div className="space-y-4">
+            {cityCards.map(({ city, vacancies, tier, salary, per100, why, rank }) => {
+              const meta = TIER_META[tier];
+              const barPct = Math.max(6, (vacancies / maxVacancies) * 100);
+
+              return (
+                <div
+                  key={city.code}
+                  className="overflow-hidden rounded-xl border border-neutral-100 bg-white"
+                  style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
+                >
+                  <div className="flex">
+                    {/* Left accent */}
+                    <div
+                      className="w-1 flex-shrink-0"
+                      style={{ background: meta.hex }}
+                    />
+
+                    <div className="flex-1 px-5 py-4">
+                      {/* Rank + city + strength */}
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <div className="flex items-baseline gap-3">
+                          <span className="w-5 font-mono text-[11px] font-bold tabular-nums text-neutral-300">
+                            {String(rank).padStart(2, "0")}
+                          </span>
+                          <span className="text-base font-semibold text-neutral-900">
+                            {city.name}
+                          </span>
+                        </div>
+                        <span
+                          className={cn(
+                            "text-xs font-semibold tracking-wide",
+                            meta.colorClass
+                          )}
+                        >
+                          {meta.label}
+                        </span>
+                      </div>
+
+                      {/* Vacancy bar */}
+                      <div className="mb-4 flex items-center gap-3">
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-neutral-100">
+                          <div
+                            className="h-full rounded-full"
+                            style={{ width: `${barPct}%`, background: meta.barHex }}
+                          />
+                        </div>
+                        <span className="whitespace-nowrap text-xs tabular-nums font-medium text-neutral-500">
+                          {fmt(vacancies)} vacancies
+                        </span>
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="mb-3 flex flex-wrap gap-x-6 gap-y-3">
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-0.5">
+                            Per 100 graduates
+                          </p>
+                          <p className="text-sm font-medium tabular-nums text-neutral-700">
+                            {per100}
+                          </p>
+                        </div>
+                        {salary && (
+                          <div>
+                            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-0.5">
+                              Salary range
+                            </p>
+                            <p className="text-sm font-medium text-neutral-700">
+                              {formatSalary(salary.min, salary.max, salary.currency)}
+                            </p>
+                          </div>
                         )}
-                      >
-                        {fmtRatio(snap.vacancyRatio)}
-                      </td>
-                      <td className="py-4 pl-4">
-                        <SignalBadge signal={snap.signal} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                        {topSkills.length > 0 && (
+                          <div>
+                            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-0.5">
+                              Top skills
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {topSkills.map((skill) => (
+                                <span
+                                  key={skill}
+                                  className="rounded-full border border-neutral-100 bg-neutral-50 px-2 py-0.5 text-[10px] text-neutral-500"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
-            <p className="mt-6 text-[10px] text-neutral-300 leading-relaxed max-w-lg font-mono">
-              * Ratio = city vacancies ÷ national graduates. Graduate supply is measured at
-              the national level — a city ratio is not directly comparable to a national ratio.
-              Vacancy distributions are illustrative demo estimates.
-            </p>
+                      {/* Why this location */}
+                      <div className="mt-3 border-t border-neutral-50 pt-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-1">
+                          Why this location?
+                        </p>
+                        <p className="text-xs leading-relaxed text-neutral-500">
+                          {why}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </>
+
+          {/* Footer caveat */}
+          <p className="mt-8 max-w-lg font-mono text-[10px] leading-relaxed text-neutral-300">
+            Per-100-graduates figures use national graduate counts — city figures are not
+            directly comparable to national ratios. Vacancy distributions and salary ranges
+            are illustrative demo estimates. Skills shown are field-level, not city-specific.
+          </p>
+        </div>
       )}
     </div>
   );

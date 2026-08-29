@@ -6,7 +6,8 @@ import { MOCK_DATA } from "@/lib/data/mock";
 import { COUNTRIES } from "@/lib/data/countries";
 import { FIELDS } from "@/lib/data/fields";
 import { CITIES_BY_COUNTRY, getCitiesForCountry } from "@/lib/data/cities";
-import { getCityVacancyCount } from "@/lib/data/mock-vacancies";
+import { getCityVacancyCount, getCitySalaryRange } from "@/lib/data/mock-vacancies";
+export { getCitySalaryRange };
 import type { Country, Field, GraduationEntry } from "@/lib/types";
 import type { CityOption } from "@/lib/data/cities";
 
