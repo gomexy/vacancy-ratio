@@ -50,42 +50,37 @@ export default function CompareClient({ countries, fields, years }: Props) {
 
   return (
     <div>
-      {/* ── Filter bar ── same pattern as Explore */}
+      {/* ── Filter bar ── */}
       <div style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}>
         <div className={CONTAINER}>
-          <div
-            className="my-6 rounded-xl px-6 py-5"
-            style={{ background: "#f7f7f7", boxShadow: "var(--shadow-sm)" }}
-          >
-            <div className="flex flex-col gap-5">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-sm">
-                <Select label="Country" value={country}     options={countryOptions} onChange={setCountry} />
-                <Select label="Year"    value={String(year)} options={yearOptions}    onChange={(v) => setYear(Number(v))} />
-              </div>
+          <div className="py-5 flex flex-col gap-5">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-sm">
+              <Select label="Country" value={country}     options={countryOptions} onChange={setCountry} />
+              <Select label="Year"    value={String(year)} options={yearOptions}    onChange={(v) => setYear(Number(v))} />
+            </div>
 
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                  Fields — select to compare
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {fields.map((f) => {
-                    const active = selectedFields.includes(f.slug);
-                    return (
-                      <button
-                        key={f.slug}
-                        onClick={() => toggleField(f.slug)}
-                        className={cn(
-                          "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all",
-                          active
-                            ? "border-neutral-900 bg-neutral-900 text-white shadow-sm"
-                            : "border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 hover:text-neutral-900"
-                        )}
-                      >
-                        {f.label}
-                      </button>
-                    );
-                  })}
-                </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
+                Fields — select to compare
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {fields.map((f) => {
+                  const active = selectedFields.includes(f.slug);
+                  return (
+                    <button
+                      key={f.slug}
+                      onClick={() => toggleField(f.slug)}
+                      className={cn(
+                        "rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all",
+                        active
+                          ? "border-neutral-900 bg-neutral-900 text-white shadow-sm"
+                          : "border-neutral-200 bg-white text-neutral-600 hover:border-neutral-400 hover:text-neutral-900"
+                      )}
+                    >
+                      {f.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -94,24 +89,19 @@ export default function CompareClient({ countries, fields, years }: Props) {
 
       {entries.length > 0 ? (
         <div>
-          {/* Chart strip — gray background */}
-          <div className="py-10" style={{ background: "#f5f5f5" }}>
-            <div className={CONTAINER}>
-              <div
-                className="bg-white rounded-xl p-6"
-                style={{ boxShadow: "var(--shadow-md)" }}
-              >
-                <p className="text-sm font-semibold text-neutral-800 mb-1">
-                  Vacancy ratio by field
-                </p>
-                <p className="text-xs text-neutral-400 mb-6">
-                  Higher ratio = more vacancies relative to graduates. Colour indicates market signal.
-                </p>
-                <CompareBarChart entries={entries} />
-                <p className="mt-4 text-xs text-neutral-400">
-                  Ratio = vacancies ÷ graduates. Above 1.0 = more vacancies than graduates.
-                </p>
-              </div>
+          {/* Chart */}
+          <div style={{ borderBottom: "1px solid #f0f0f0" }}>
+            <div className={`${CONTAINER} py-10`}>
+              <p className="text-sm font-semibold text-neutral-800 mb-1">
+                Vacancy ratio by field
+              </p>
+              <p className="text-xs text-neutral-400 mb-6">
+                Higher ratio = more vacancies relative to graduates. Colour indicates market signal.
+              </p>
+              <CompareBarChart entries={entries} />
+              <p className="mt-4 text-xs text-neutral-400">
+                Ratio = vacancies ÷ graduates. Above 1.0 = more vacancies than graduates.
+              </p>
             </div>
           </div>
 

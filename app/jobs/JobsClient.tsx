@@ -42,10 +42,7 @@ export default function JobsClient({ countries, fields, listings }: Props) {
       {/* Filter bar */}
       <div style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}>
         <div className={CONTAINER}>
-          <div
-            className="my-6 rounded-xl px-6 py-5"
-            style={{ background: "#f7f7f7", boxShadow: "var(--shadow-sm)" }}
-          >
+          <div className="py-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 flex-1">
                 <Select
