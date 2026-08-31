@@ -343,18 +343,20 @@ export default function ExploreClient({ countries, fields }: Props) {
       )}
 
       {snapshot && meta && (
-        <div className={`${C} py-8 sm:py-10 flex flex-col gap-6`}>
+        <div className={`${C} py-8 sm:py-10`}>
 
           {/* Context heading */}
-          <div className="pt-2">
+          <div className="mb-4">
             <h1 className="font-semibold tracking-tight text-neutral-900 mb-1" style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}>
               {fieldLabel}
             </h1>
             <p className="text-base text-neutral-500">{locationLabel} · {safeYear}</p>
           </div>
 
-          {/* ── Section 1 — Current Market ── */}
-          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+          <div className="grid grid-cols-12 gap-4">
+
+          {/* ── Cell A — Current Market ── */}
+          <div className="col-span-12 lg:col-span-7 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Current Market</SectionLabel>
 
             <div
@@ -417,9 +419,9 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           </div>
 
-          {/* ── Section 2 — Historical Trend ── */}
+          {/* ── Cell B — Historical Trend ── */}
           {trendEntries.length >= 2 && (
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-5 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Historical Trend</SectionLabel>
               <SectionQuestion>Is vacancy demand growing faster than graduate supply?</SectionQuestion>
 
@@ -464,9 +466,9 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           )}
 
-          {/* ── Section 3 — Skills ── */}
+          {/* ── Cell C — Skills ── */}
           {skills.length > 0 && (
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-5 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Skills</SectionLabel>
               <SectionQuestion>What skills are employers prioritising right now?</SectionQuestion>
               <p className="text-sm text-neutral-500 mb-10">
@@ -474,7 +476,7 @@ export default function ExploreClient({ countries, fields }: Props) {
                 <span className="text-neutral-400">Demo data.</span>
               </p>
 
-              <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+              <div className="grid grid-cols-1 gap-10">
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">Most in demand</p>
                   <SkillsBarChart skills={skills} />
@@ -509,9 +511,9 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           )}
 
-          {/* ── Section 4 — Five-Year Outlook ── */}
+          {/* ── Cell D — Five-Year Outlook ── */}
           {hasProjected && forecast && (
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-7 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>5-Year Outlook</SectionLabel>
               <SectionQuestion>Where could this market be heading?</SectionQuestion>
 
@@ -577,9 +579,9 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           )}
 
-          {/* ── Section 5 — What This Means ── */}
+          {/* ── Cell E — What This Means ── */}
           {insights && (
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-8 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>What This Means</SectionLabel>
               <SectionQuestion>What does this data tell you?</SectionQuestion>
 
@@ -657,8 +659,8 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           )}
 
-          {/* ── Jobs CTA ── */}
-          <div className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8">
+          {/* ── Cell F — Jobs CTA ── */}
+          <div className="col-span-12 lg:col-span-4 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">Job opportunities</p>
@@ -674,6 +676,8 @@ export default function ExploreClient({ countries, fields }: Props) {
                 </svg>
               </Link>
             </div>
+          </div>
+
           </div>
 
         </div>

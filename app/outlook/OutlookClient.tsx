@@ -390,12 +390,13 @@ export default function OutlookClient({ countries, fields }: Props) {
       )}
 
       {forecast && trendFirst && trendLast && (
-        <>
+        <div className={`${C} py-6`}>
+          <div className="grid grid-cols-12 gap-4">
+
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 1 — Overview                                              */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} py-6`}>
-          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+          <div className="col-span-12 lg:col-span-5 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>5-Year Outlook</SectionLabel>
             <h1
               className="font-semibold tracking-tight text-neutral-900 mb-1"
@@ -503,13 +504,11 @@ export default function OutlookClient({ countries, fields }: Props) {
               </div>
             </div>
           </div>
-          </div>
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 2 — Timeline                                              */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} pt-0 pb-6`}>
-          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+          <div className="col-span-12 lg:col-span-7 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Timeline</SectionLabel>
             <SectionHeading>Observed to Projected</SectionHeading>
             <p className="text-sm text-neutral-500 mb-8">
@@ -584,14 +583,12 @@ export default function OutlookClient({ countries, fields }: Props) {
               <DataStatusBadge isDemo />
             </div>
           </div>
-          </div>
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 3 — Why this outlook?                                     */}
           {/* ══════════════════════════════════════════════════════════════════ */}
           {outlookFactors.length > 0 && (
-            <div className={`${C} pt-0 pb-6`}>
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-6 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Why?</SectionLabel>
               <SectionHeading>What is driving this projection?</SectionHeading>
               <p className="text-sm text-neutral-500 mb-8">
@@ -639,15 +636,13 @@ export default function OutlookClient({ countries, fields }: Props) {
                 ))}
               </div>
             </div>
-            </div>
           )}
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 4 — What could change this?                               */}
           {/* ══════════════════════════════════════════════════════════════════ */}
           {changeScenarios.length > 0 && (
-            <div className={`${C} pt-0 pb-6`}>
-            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+            <div className="col-span-12 lg:col-span-6 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Uncertainty</SectionLabel>
               <SectionHeading>What could change this outlook?</SectionHeading>
               <p className="text-sm text-neutral-500 mb-8">
@@ -683,14 +678,12 @@ export default function OutlookClient({ countries, fields }: Props) {
                 ))}
               </div>
             </div>
-            </div>
           )}
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 5 — How this outlook was built                            */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} pt-0 pb-10`}>
-          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
+          <div className="col-span-12 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Methodology</SectionLabel>
             <SectionHeading>How this outlook was built</SectionHeading>
 
@@ -866,9 +859,9 @@ export default function OutlookClient({ countries, fields }: Props) {
             </p>
             <DataStatusBadge isDemo />
           </div>
-          </div>
 
-        </>
+          </div>
+        </div>
       )}
     </div>
   );
