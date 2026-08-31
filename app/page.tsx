@@ -76,15 +76,15 @@ export default function HomePage() {
     <div className="bg-white">
 
       {/* ── 1. Hero ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#EBEBEB" }}>
-        <div className={`${C} py-6 sm:py-8`}>
+      <section className="flex flex-col" style={{ background: "#EBEBEB", minHeight: "calc(100vh - 64px)" }}>
+        <div className={`${C} flex flex-1 flex-col py-6 sm:py-8`}>
           {/* Rounded card */}
           <div
-            className="overflow-hidden rounded-2xl"
+            className="flex flex-1 flex-col overflow-hidden rounded-2xl"
             style={{ background: "#F5F5F5", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}
           >
             {/* Two-column layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="grid flex-1 grid-cols-1 lg:grid-cols-2">
 
               {/* Left — headline + CTAs */}
               <div className="px-8 sm:px-10 pt-10 sm:pt-14 pb-10">
