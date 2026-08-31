@@ -20,8 +20,8 @@ export default function TopNav() {
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-[#ebebeb]">
       <div
-        className="mx-auto flex max-w-5xl items-center justify-between px-6 sm:px-12"
-        style={{ height: 64 }}
+        className="mx-auto max-w-5xl px-6 sm:px-12"
+        style={{ height: 64, display: "grid", gridTemplateColumns: "auto 1fr auto", alignItems: "center", gap: "1rem" }}
       >
         {/* Wordmark */}
         <Link
@@ -38,35 +38,35 @@ export default function TopNav() {
           </span>
         </Link>
 
-        {/* Desktop nav + CTA */}
-        <div className="flex items-center gap-6">
-          <nav className="hidden lg:flex items-center gap-6">
-            {links.map((l) => {
-              const active =
-                pathname === l.href || pathname.startsWith(l.href + "/");
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "text-sm transition-colors whitespace-nowrap",
-                    active
-                      ? "text-neutral-900 font-medium"
-                      : "text-neutral-400 hover:text-neutral-800"
-                  )}
-                >
-                  {l.label}
-                </Link>
-              );
-            })}
-          </nav>
+        {/* Desktop nav — centered */}
+        <nav className="hidden lg:flex items-center justify-center gap-5">
+          {links.map((l) => {
+            const active =
+              pathname === l.href || pathname.startsWith(l.href + "/");
+            return (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={cn(
+                  "text-sm transition-colors whitespace-nowrap",
+                  active
+                    ? "text-neutral-900 font-medium"
+                    : "text-neutral-400 hover:text-neutral-800"
+                )}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
+        </nav>
 
-          {/* CTA — desktop */}
+        {/* Right: CTA + mobile hamburger */}
+        <div className="flex items-center justify-end gap-3">
           <Link
             href="/explore"
-            className="hidden sm:inline-flex h-8 items-center rounded-md bg-neutral-900 px-4 text-xs font-medium text-white transition-colors hover:bg-neutral-700 flex-shrink-0"
+            className="hidden sm:inline-flex h-8 items-center rounded-full bg-neutral-900 px-4 text-xs font-medium text-white transition-colors hover:bg-neutral-700 flex-shrink-0"
           >
-            Explore data
+            Explore your field
           </Link>
 
           {/* Mobile hamburger */}

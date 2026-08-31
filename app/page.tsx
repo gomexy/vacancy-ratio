@@ -76,34 +76,155 @@ export default function HomePage() {
     <div className="bg-white">
 
       {/* ── 1. Hero ─────────────────────────────────────────────────────────── */}
-      <section className="pt-20 pb-16 sm:pt-28 sm:pb-20">
-        <div className={C}>
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
-            Career-market intelligence
-          </p>
-          <h1
-            className="font-semibold leading-[1.07] tracking-tight text-neutral-900 mb-5 max-w-2xl"
-            style={{ fontSize: "clamp(2.25rem, 5.5vw, 3.5rem)" }}
+      <section style={{ background: "#EBEBEB" }}>
+        <div className={`${C} py-6 sm:py-8`}>
+          {/* Rounded card */}
+          <div
+            className="overflow-hidden rounded-2xl"
+            style={{ background: "#F5F5F5", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}
           >
-            Understand where your career is heading.
-          </h1>
-          <p className="text-[17px] text-neutral-500 leading-relaxed max-w-[34rem] mb-9">
-            See how graduate supply compares with job demand, explore where
-            opportunities are strongest, and understand how your field could evolve.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/explore"
-              className="inline-flex h-10 items-center rounded-md bg-neutral-900 px-5 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
+            {/* Two-column layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+
+              {/* Left — headline + CTAs */}
+              <div className="px-8 sm:px-10 pt-10 sm:pt-14 pb-10">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
+                  Career-market intelligence
+                </p>
+                <h1
+                  className="font-bold leading-[1.05] tracking-tight text-neutral-900 mb-4 max-w-md"
+                  style={{ fontSize: "clamp(2.4rem, 5vw, 3.75rem)" }}
+                >
+                  Understand where your{" "}
+                  <span style={{ color: "#3B6FE8" }}>career</span>{" "}
+                  is heading.
+                </h1>
+                <p className="text-base sm:text-[17px] text-neutral-500 leading-relaxed max-w-sm mb-8">
+                  See how graduate supply compares with job demand, explore where
+                  opportunities are strongest, and understand how your field could evolve.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/explore"
+                    className="inline-flex h-11 items-center rounded-full bg-neutral-900 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
+                  >
+                    Explore your field
+                  </Link>
+                  <Link
+                    href="/compare"
+                    className="inline-flex h-11 items-center rounded-full border border-neutral-300 bg-white px-6 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
+                  >
+                    Compare fields
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right — feature cards */}
+              <div className="flex flex-col justify-center gap-3 px-6 sm:px-8 pb-8 pt-0 lg:border-l lg:pt-10 lg:pb-10" style={{ borderColor: "#E2E2E2" }}>
+
+                {/* Explore card */}
+                <div className="rounded-xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E2E2E2" }}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
+                        Explore
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        {[
+                          "Vacancy-to-graduate ratio",
+                          "Historical trend view",
+                          "Skills in demand",
+                          "City-level market strength",
+                        ].map((item) => (
+                          <div key={item} className="flex items-center gap-2.5">
+                            <span className="flex-shrink-0 text-xs font-bold" style={{ color: "#3B6FE8" }}>✓</span>
+                            <span className="text-sm text-neutral-600">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <Link
+                      href="/explore"
+                      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-neutral-400 transition-all hover:border-neutral-400 hover:text-neutral-700"
+                      aria-label="Go to Explore"
+                    >
+                      +
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Outlook + Compare card */}
+                <div className="rounded-xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E2E2E2" }}>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
+                        Outlook &amp; Compare
+                      </p>
+                      <div className="flex flex-col gap-2">
+                        {[
+                          "5-year trend projection",
+                          "CAGR and growth analysis",
+                          "Field-level comparison",
+                          "AI-assisted interpretation",
+                        ].map((item) => (
+                          <div key={item} className="flex items-center gap-2.5">
+                            <span className="flex-shrink-0 text-xs font-bold" style={{ color: "#3B6FE8" }}>✓</span>
+                            <span className="text-sm text-neutral-600">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <Link
+                      href="/outlook"
+                      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-neutral-400 transition-all hover:border-neutral-400 hover:text-neutral-700"
+                      aria-label="Go to Outlook"
+                    >
+                      +
+                    </Link>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Gradient banner */}
+            <div
+              className="relative overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, #A5B4FF 0%, #7B97F5 35%, #4A7BF7 70%, #3B6FE8 100%)",
+                height: 152,
+              }}
             >
-              Explore your field
-            </Link>
-            <Link
-              href="/compare"
-              className="inline-flex h-10 items-center rounded-md border border-neutral-200 px-5 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
-            >
-              Compare fields
-            </Link>
+              {/* Waveform bars */}
+              <div
+                className="absolute inset-y-0 left-0 flex items-center gap-1.5"
+                style={{ paddingLeft: "clamp(2rem, 5vw, 3.5rem)" }}
+              >
+                {[28,45,72,100,80,112,64,88,115,76,96,122,84,68,104,56,90,118,72,60,94,80,44,66,100].map(
+                  (h, i) => (
+                    <div
+                      key={i}
+                      className="flex-shrink-0 rounded-full"
+                      style={{ width: 3, height: `${h}px`, background: "rgba(255,255,255,0.22)" }}
+                    />
+                  )
+                )}
+              </div>
+
+              {/* 3D sphere */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2"
+                style={{
+                  right: "clamp(2rem, 8vw, 6rem)",
+                  width: 110,
+                  height: 110,
+                  borderRadius: "50%",
+                  background: "radial-gradient(circle at 35% 32%, #DDE8FF 0%, #7B97F5 45%, #2B55D8 75%, #1A3AB0 100%)",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.15), 0 8px 32px rgba(30,60,180,0.4)",
+                }}
+              />
+            </div>
+
           </div>
         </div>
       </section>
