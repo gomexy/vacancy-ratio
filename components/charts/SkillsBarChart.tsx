@@ -82,13 +82,13 @@ export default function SkillsBarChart({ skills, showGrowth }: Props) {
         <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f9fafb" }} />
         <Bar dataKey={key} radius={[0, 3, 3, 0]}>
           {data.map((d, i) => {
-            let fill = "#1d4ed8";
+            let fill = "#F5C518";
             if (showGrowth) {
               fill = (d.growthPct ?? 0) >= 0 ? "#059669" : "#dc2626";
             } else {
               // gradient effect: top skills darker
               const alpha = 0.4 + (1 - i / data.length) * 0.6;
-              fill = `rgba(29, 78, 216, ${alpha.toFixed(2)})`;
+              fill = `rgba(245, 197, 24, ${alpha.toFixed(2)})`;
             }
             return <Cell key={i} fill={fill} />;
           })}

@@ -281,10 +281,10 @@ export default function ExploreClient({ countries, fields }: Props) {
   // ─────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="bg-white">
+    <div style={{ background: "#F0F0F0" }}>
 
       {/* ── Selection strip ────────────────────────────────────────────────── */}
-      <div className="border-b border-neutral-100 bg-white">
+      <div className="border-b border-neutral-200 bg-white">
         <div className={`${C} py-5`}>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Select label="Field" value={field} options={fieldOptions} onChange={setField} />
@@ -311,33 +311,20 @@ export default function ExploreClient({ countries, fields }: Props) {
         </div>
       </div>
 
-      {/* ── Sticky context strip — stays visible while scrolling ─────────────── */}
+      {/* ── Sticky context strip ─────────────────────────────────────────────── */}
       {snapshot && meta && (
-        <div
-          className="sticky z-30 bg-white border-b border-neutral-100"
-          style={{ top: 64 }}
-        >
+        <div className="sticky z-30 bg-white border-b border-neutral-200" style={{ top: 64 }}>
           <div className={`${C} py-2.5 flex items-center justify-between gap-4`}>
             <div className="flex items-center gap-2 min-w-0 overflow-hidden">
-              <span className="text-sm font-semibold text-neutral-800 truncate">
-                {fieldLabel}
-              </span>
+              <span className="text-sm font-semibold text-neutral-800 truncate">{fieldLabel}</span>
               <span className="text-neutral-300 flex-shrink-0">·</span>
-              <span className="text-sm text-neutral-500 truncate hidden sm:block">
-                {locationLabel}
-              </span>
+              <span className="text-sm text-neutral-500 truncate hidden sm:block">{locationLabel}</span>
               <span className="text-neutral-300 flex-shrink-0 hidden sm:block">·</span>
               <span className="text-sm text-neutral-500 flex-shrink-0">{safeYear}</span>
             </div>
             <div className="flex items-center gap-1.5 flex-shrink-0">
-              <span
-                className="h-1.5 w-1.5 rounded-full flex-shrink-0"
-                style={{ background: meta.hex }}
-              />
-              <span
-                className="text-[10px] font-semibold uppercase tracking-widest"
-                style={{ color: meta.hex }}
-              >
+              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
+              <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
                 {meta.label}
               </span>
             </div>
@@ -348,9 +335,7 @@ export default function ExploreClient({ countries, fields }: Props) {
       {/* ── No data ──────────────────────────────────────────────────────────── */}
       {!snapshot && (
         <div className={`${C} py-24`}>
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-3">
-            No data
-          </p>
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-300 mb-3">No data</p>
           <p className="text-sm text-neutral-400 leading-relaxed">
             No data available for this combination. Try a different country, field, or year.
           </p>
@@ -358,125 +343,73 @@ export default function ExploreClient({ countries, fields }: Props) {
       )}
 
       {snapshot && meta && (
-        <>
-          {/* ── Context heading ─────────────────────────────────────────────── */}
-          <div className={`${C} pt-12 pb-10`}>
-            <h1
-              className="font-semibold tracking-tight text-neutral-900 mb-1"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
-            >
+        <div className={`${C} py-8 sm:py-10 flex flex-col gap-6`}>
+
+          {/* Context heading */}
+          <div className="pt-2">
+            <h1 className="font-semibold tracking-tight text-neutral-900 mb-1" style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}>
               {fieldLabel}
             </h1>
-            <p className="text-base text-neutral-500">
-              {locationLabel} · {safeYear}
-            </p>
+            <p className="text-base text-neutral-500">{locationLabel} · {safeYear}</p>
           </div>
 
-          <Divider />
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 1 — Current Market                                      */}
-          {/* ════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} py-12`}>
+          {/* ── Section 1 — Current Market ── */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Current Market</SectionLabel>
 
-            {/* Signal pill */}
             <div
               className="mb-5 inline-flex items-center gap-2 rounded-full px-3 py-1"
-              style={{
-                background: `${meta.hex}10`,
-                border: `1px solid ${meta.hex}28`,
-              }}
+              style={{ background: "#FFFBEB", border: "1px solid #FDE68A" }}
             >
-              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: meta.hex }} />
-              <span
-                className="text-[10px] font-semibold uppercase tracking-widest"
-                style={{ color: meta.hex }}
-              >
+              <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
+              <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
                 {meta.label}
               </span>
             </div>
 
-            {/* Hero: per-100 graduates */}
             <div className="mb-2">
               <div className="flex flex-wrap items-baseline gap-2 mb-1">
                 <span
                   className="font-semibold tabular-nums tracking-tight leading-none"
-                  style={{
-                    fontSize: "clamp(4rem, 12vw, 6.5rem)",
-                    color: meta.hex,
-                  }}
+                  style={{ fontSize: "clamp(4rem, 12vw, 6.5rem)", color: "#F5C518" }}
                 >
                   {fmtPer100(snapshot.vacanciesPer100Graduates)}
                 </span>
-                <span className="text-base text-neutral-500 pb-1.5">
-                  vacancies per 100 graduates
-                </span>
+                <span className="text-base text-neutral-500 pb-1.5">vacancies per 100 graduates</span>
               </div>
             </div>
 
-            {/* Signal description */}
-            <p className="text-[15px] text-neutral-500 leading-relaxed max-w-lg mb-8">
-              {meta.description}
-            </p>
+            <p className="text-[15px] text-neutral-500 leading-relaxed max-w-lg mb-8">{meta.description}</p>
 
-            {/* Scale bar + ratio */}
             <div className="mb-10 flex flex-col gap-3 max-w-sm">
               <RatioScaleBar ratio={snapshot.vacancyRatio} />
-              <p className="text-xs text-neutral-400">
-                Ratio: {fmtRatio(snapshot.vacancyRatio)} vacancies per graduate
-              </p>
+              <p className="text-xs text-neutral-400">Ratio: {fmtRatio(snapshot.vacancyRatio)} vacancies per graduate</p>
             </div>
 
-            {/* Supporting metrics row */}
-            <div
-              className="flex flex-wrap gap-x-8 gap-y-6 pt-8"
-              style={{ borderTop: "1px solid #f0f0f0" }}
-            >
+            <div className="flex flex-wrap gap-x-8 gap-y-6 pt-8" style={{ borderTop: "1px solid #F3F4F6" }}>
               <div className="flex flex-col gap-0.5">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                  Graduates
-                </p>
-                <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">
-                  {fmt(snapshot.entry.graduates)}
-                </p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Graduates</p>
+                <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">{fmt(snapshot.entry.graduates)}</p>
                 <p className="text-xs text-neutral-400">{safeYear} completions</p>
               </div>
-
               <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
-
               <div className="flex flex-col gap-0.5">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                  Relevant Vacancies
-                </p>
-                <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">
-                  {fmt(snapshot.entry.relevantVacancies)}
-                </p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Relevant Vacancies</p>
+                <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">{fmt(snapshot.entry.relevantVacancies)}</p>
                 <p className="text-xs text-neutral-400">job postings</p>
               </div>
-
               {forecast && (
                 <>
                   <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
                   <div className="flex flex-col gap-0.5">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                      Vacancy Growth
-                    </p>
-                    <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">
-                      {fmtCagr(forecast.vacancyCAGR)}
-                    </p>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Vacancy Growth</p>
+                    <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">{fmtCagr(forecast.vacancyCAGR)}</p>
                     <p className="text-xs text-neutral-400">per year (CAGR)</p>
                   </div>
-
                   <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
-
                   <div className="flex flex-col gap-0.5">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                      Graduate Growth
-                    </p>
-                    <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">
-                      {fmtCagr(forecast.graduateCAGR)}
-                    </p>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Graduate Growth</p>
+                    <p className="text-xl font-semibold tabular-nums text-neutral-900 tracking-tight">{fmtCagr(forecast.graduateCAGR)}</p>
                     <p className="text-xs text-neutral-400">per year (CAGR)</p>
                   </div>
                 </>
@@ -484,23 +417,14 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           </div>
 
-          <Divider />
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 2 — Historical Trend                                    */}
-          {/* ════════════════════════════════════════════════════════════════ */}
+          {/* ── Section 2 — Historical Trend ── */}
           {trendEntries.length >= 2 && (
-            <div className={`${C} py-12`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Historical Trend</SectionLabel>
-              <SectionQuestion>
-                Is vacancy demand growing faster than graduate supply?
-              </SectionQuestion>
+              <SectionQuestion>Is vacancy demand growing faster than graduate supply?</SectionQuestion>
 
-              {/* Data-derived answer */}
               {trendAnswer && (
-                <p className="text-sm text-neutral-600 leading-relaxed max-w-xl mb-10">
-                  {trendAnswer}
-                </p>
+                <p className="text-sm text-neutral-600 leading-relaxed max-w-xl mb-10">{trendAnswer}</p>
               )}
               {!trendAnswer && trendFirst && trendLast && (
                 <p className="text-sm text-neutral-500 leading-relaxed mb-10">
@@ -511,67 +435,40 @@ export default function ExploreClient({ countries, fields }: Props) {
                 </p>
               )}
 
-              {/* Primary chart: supply vs demand bars */}
               <RatioBarChart entries={trendEntries} />
 
-              {/* Secondary: ratio line */}
-              <div className="mt-12 pt-8" style={{ borderTop: "1px solid #f5f5f5" }}>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                  Vacancy ratio over time
-                </p>
-                <p className="text-sm text-neutral-500 mb-5">
-                  Ratio = vacancies ÷ graduates. Above 1.0 means more vacancies than graduates.
-                </p>
+              <div className="mt-10 pt-8" style={{ borderTop: "1px solid #F3F4F6" }}>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">Vacancy ratio over time</p>
+                <p className="text-sm text-neutral-500 mb-5">Ratio = vacancies ÷ graduates. Above 1.0 means more vacancies than graduates.</p>
                 <TrendLineChart entries={trendEntries} />
               </div>
 
-              {/* CAGR callout */}
               {forecast && (
-                <div
-                  className="mt-8 flex flex-wrap gap-8 pt-6"
-                  style={{ borderTop: "1px solid #f5f5f5" }}
-                >
+                <div className="mt-8 flex flex-wrap gap-8 pt-6" style={{ borderTop: "1px solid #F3F4F6" }}>
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">
-                      Vacancy demand (CAGR)
-                    </p>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">Vacancy demand (CAGR)</p>
                     <p
                       className="text-2xl font-semibold tabular-nums tracking-tight"
-                      style={{
-                        color:
-                          forecast.vacancyCAGR > forecast.graduateCAGR
-                            ? "#059669"
-                            : "#dc2626",
-                      }}
+                      style={{ color: forecast.vacancyCAGR > forecast.graduateCAGR ? "#059669" : "#dc2626" }}
                     >
                       {fmtCagr(forecast.vacancyCAGR)} p.a.
                     </p>
                   </div>
                   <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">
-                      Graduate supply (CAGR)
-                    </p>
-                    <p className="text-2xl font-semibold tabular-nums tracking-tight text-neutral-600">
-                      {fmtCagr(forecast.graduateCAGR)} p.a.
-                    </p>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">Graduate supply (CAGR)</p>
+                    <p className="text-2xl font-semibold tabular-nums tracking-tight text-neutral-600">{fmtCagr(forecast.graduateCAGR)} p.a.</p>
                   </div>
                 </div>
               )}
             </div>
           )}
 
-          <Divider />
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 3 — Skills                                              */}
-          {/* ════════════════════════════════════════════════════════════════ */}
+          {/* ── Section 3 — Skills ── */}
           {skills.length > 0 && (
-            <div className={`${C} py-12`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Skills</SectionLabel>
-              <SectionQuestion>
-                What skills are employers prioritising right now?
-              </SectionQuestion>
+              <SectionQuestion>What skills are employers prioritising right now?</SectionQuestion>
               <p className="text-sm text-neutral-500 mb-10">
                 Frequency in {fieldLabel} job postings.{" "}
                 <span className="text-neutral-400">Demo data.</span>
@@ -579,88 +476,47 @@ export default function ExploreClient({ countries, fields }: Props) {
 
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
-                    Most in demand
-                  </p>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">Most in demand</p>
                   <SkillsBarChart skills={skills} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
-                    Fastest growing
-                  </p>
-                  <SkillsBarChart
-                    skills={[...skills].sort((a, b) => (b.growthPct ?? 0) - (a.growthPct ?? 0))}
-                    showGrowth
-                  />
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">Fastest growing</p>
+                  <SkillsBarChart skills={[...skills].sort((a, b) => (b.growthPct ?? 0) - (a.growthPct ?? 0))} showGrowth />
                 </div>
               </div>
 
-              {/* All skills tags */}
-              <div className="mt-10 pt-8" style={{ borderTop: "1px solid #f5f5f5" }}>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                  All tracked skills
-                </p>
+              <div className="mt-10 pt-8" style={{ borderTop: "1px solid #F3F4F6" }}>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">All tracked skills</p>
                 <div className="flex flex-wrap gap-2">
-                  {[...skills]
-                    .sort((a, b) => b.pct - a.pct)
-                    .map((s) => (
-                      <span
-                        key={s.skill}
-                        className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs text-neutral-600"
-                        title={`${s.pct}% of postings${
-                          s.growthPct !== undefined
-                            ? ` · ${s.growthPct > 0 ? "+" : ""}${s.growthPct} ppt YoY`
-                            : ""
-                        }`}
-                      >
-                        {s.skill}
-                        <span className="font-mono text-[9px] text-neutral-400">{s.pct}%</span>
-                        {s.growthPct !== undefined && s.growthPct !== 0 && (
-                          <span
-                            className={`font-mono text-[9px] ${
-                              s.growthPct > 10
-                                ? "text-emerald-500"
-                                : s.growthPct < 0
-                                ? "text-red-400"
-                                : "text-neutral-300"
-                            }`}
-                          >
-                            {s.growthPct > 0 ? "↑" : "↓"}
-                          </span>
-                        )}
-                      </span>
-                    ))}
+                  {[...skills].sort((a, b) => b.pct - a.pct).map((s) => (
+                    <span
+                      key={s.skill}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs text-neutral-600"
+                      title={`${s.pct}% of postings${s.growthPct !== undefined ? ` · ${s.growthPct > 0 ? "+" : ""}${s.growthPct} ppt YoY` : ""}`}
+                    >
+                      {s.skill}
+                      <span className="font-mono text-[9px] text-neutral-400">{s.pct}%</span>
+                      {s.growthPct !== undefined && s.growthPct !== 0 && (
+                        <span className={`font-mono text-[9px] ${s.growthPct > 10 ? "text-emerald-500" : s.growthPct < 0 ? "text-red-400" : "text-neutral-300"}`}>
+                          {s.growthPct > 0 ? "↑" : "↓"}
+                        </span>
+                      )}
+                    </span>
+                  ))}
                 </div>
-                <div className="mt-4">
-                  <DataStatusBadge isDemo />
-                </div>
+                <div className="mt-4"><DataStatusBadge isDemo /></div>
               </div>
             </div>
           )}
 
-          <Divider />
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 4 — Five-Year Outlook                                   */}
-          {/* ════════════════════════════════════════════════════════════════ */}
+          {/* ── Section 4 — Five-Year Outlook ── */}
           {hasProjected && forecast && (
-            <div className={`${C} py-12`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>5-Year Outlook</SectionLabel>
-              <SectionQuestion>
-                Where could this market be heading?
-              </SectionQuestion>
+              <SectionQuestion>Where could this market be heading?</SectionQuestion>
 
-              {/* Projected disclaimer */}
-              <div
-                className="mb-8 rounded-md px-4 py-3.5"
-                style={{
-                  background: "#fffbeb",
-                  border: "1px solid #fde68a",
-                }}
-              >
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-amber-700 mb-1">
-                  Projection · Not observed data
-                </p>
+              <div className="mb-8 rounded-xl px-4 py-3.5" style={{ background: "#FFFBEB", border: "1px solid #FDE68A" }}>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-amber-700 mb-1">Projection · Not observed data</p>
                 <p className="text-sm text-amber-800 leading-relaxed">
                   Extrapolated from{" "}
                   {trendFirst ? trendFirst.year : "historical"}–{trendLast ? trendLast.year : "trend"}{" "}
@@ -669,51 +525,34 @@ export default function ExploreClient({ countries, fields }: Props) {
                 </p>
               </div>
 
-              {/* Outlook headline */}
               <div className="mb-2">
                 <p
                   className="font-semibold tracking-tight leading-none mb-2"
-                  style={{
-                    fontSize: "clamp(2.5rem, 7vw, 4rem)",
-                    color: outlookColor(forecast.outlookLabel),
-                  }}
+                  style={{ fontSize: "clamp(2.5rem, 7vw, 4rem)", color: outlookColor(forecast.outlookLabel) }}
                 >
                   {forecast.outlookLabel}{" "}
-                  <span style={{ fontSize: "0.7em" }}>
-                    {outlookArrow(forecast.outlookLabel)}
-                  </span>
+                  <span style={{ fontSize: "0.7em" }}>{outlookArrow(forecast.outlookLabel)}</span>
                 </p>
                 <p className="text-sm text-neutral-500">
-                  {projectedRange
-                    ? `${projectedRange.first} → ${projectedRange.last}`
-                    : "5-year projection"}{" "}
-                  ·{" "}
-                  <span className="font-medium text-neutral-600">{forecast.confidence} confidence</span>
+                  {projectedRange ? `${projectedRange.first} → ${projectedRange.last}` : "5-year projection"}{" "}
+                  · <span className="font-medium text-neutral-600">{forecast.confidence} confidence</span>
                 </p>
               </div>
 
-              {/* CAGR sub-line */}
               <p className="text-sm text-neutral-400 mb-10">
-                Vacancy demand {fmtCagr(forecast.vacancyCAGR)} p.a. ·{" "}
-                Graduate supply {fmtCagr(forecast.graduateCAGR)} p.a.
+                Vacancy demand {fmtCagr(forecast.vacancyCAGR)} p.a. · Graduate supply {fmtCagr(forecast.graduateCAGR)} p.a.
               </p>
 
-              {/* Outlook chart */}
               <OutlookChart entries={allEntries} />
 
               <div className="mt-3 flex items-center gap-3">
                 <DataStatusBadge isDemo source="Extrapolation from historical trend" />
-                <p className="text-[10px] text-neutral-400 font-mono">
-                  Projected values assume continuation of observed trend rates
-                </p>
+                <p className="text-[10px] text-neutral-400 font-mono">Projected values assume continuation of observed trend rates</p>
               </div>
 
-              {/* Drivers + caveats */}
-              <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2">
+              <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-                    Key drivers
-                  </p>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">Key drivers</p>
                   <ul className="flex flex-col gap-4">
                     {forecast.drivers.map((d, i) => (
                       <li key={i} className="flex gap-3 text-sm text-neutral-600">
@@ -724,9 +563,7 @@ export default function ExploreClient({ countries, fields }: Props) {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
-                    Caveats
-                  </p>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">Caveats</p>
                   <ul className="flex flex-col gap-4">
                     {forecast.caveats.map((c, i) => (
                       <li key={i} className="flex gap-3 text-sm text-neutral-500">
@@ -740,27 +577,21 @@ export default function ExploreClient({ countries, fields }: Props) {
             </div>
           )}
 
-          <Divider />
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 5 — What This Means                                     */}
-          {/* ════════════════════════════════════════════════════════════════ */}
+          {/* ── Section 5 — What This Means ── */}
           {insights && (
-            <div className={`${C} py-12`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>What This Means</SectionLabel>
-              <SectionQuestion>
-                What does this data tell you?
-              </SectionQuestion>
+              <SectionQuestion>What does this data tell you?</SectionQuestion>
 
-              {/* Synthesis paragraph */}
               <div className="max-w-2xl mb-10">
                 <div className="flex items-center gap-2 mb-3">
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                    Market summary
-                  </p>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Market summary</p>
                   {aiSource === "claude" && (
-                    <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-100">
-                      <span className="h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                    <span
+                      className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest"
+                      style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
                       AI
                     </span>
                   )}
@@ -772,134 +603,80 @@ export default function ExploreClient({ countries, fields }: Props) {
                     <div className="h-4 bg-neutral-100 rounded w-4/6" />
                   </div>
                 ) : (
-                  <p className="text-[15px] text-neutral-700 leading-relaxed">
-                    {aiAnalysis ?? insights.summary}
-                  </p>
+                  <p className="text-[15px] text-neutral-700 leading-relaxed">{aiAnalysis ?? insights.summary}</p>
                 )}
               </div>
 
-              {/* Key signals */}
               {synthesis && (
-                <div
-                  className="max-w-2xl"
-                  style={{ borderTop: "1px solid #f0f0f0" }}
-                >
+                <div className="max-w-2xl" style={{ borderTop: "1px solid #F3F4F6" }}>
                   <div className="flex items-center justify-between pt-6 mb-0">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                      Key signals
-                    </p>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Key signals</p>
                     <DataStatusBadge isDemo />
                   </div>
 
-                  <SignalRow
-                    label="Key takeaway"
-                    value={synthesis.keyTakeaway.label}
-                    detail={synthesis.keyTakeaway.detail}
-                    valueColor={meta?.hex}
-                  />
+                  <SignalRow label="Key takeaway" value={synthesis.keyTakeaway.label} detail={synthesis.keyTakeaway.detail} valueColor="#92600A" />
 
                   {synthesis.mainOpportunity && (
-                    <SignalRow
-                      label="Main opportunity"
-                      value={synthesis.mainOpportunity.label}
-                      detail={synthesis.mainOpportunity.detail}
-                    />
+                    <SignalRow label="Main opportunity" value={synthesis.mainOpportunity.label} detail={synthesis.mainOpportunity.detail} />
                   )}
 
                   {synthesis.mainRisk && (
-                    <SignalRow
-                      label="Main risk"
-                      value={synthesis.mainRisk.label}
-                      detail={synthesis.mainRisk.detail}
-                      valueColor="#d97706"
-                    />
+                    <SignalRow label="Main risk" value={synthesis.mainRisk.label} detail={synthesis.mainRisk.detail} valueColor="#d97706" />
                   )}
 
                   {synthesis.skillsToWatch.length > 0 && (
-                    <SignalRow
-                      label="Skills to watch"
-                      value={synthesis.skillsToWatch.join("  ·  ")}
-                      detail="Fastest-growing skills by year-on-year change in job postings."
-                    />
+                    <SignalRow label="Skills to watch" value={synthesis.skillsToWatch.join("  ·  ")} detail="Fastest-growing skills by year-on-year change in job postings." />
                   )}
 
                   {synthesis.bestLocations.length > 0 && !city && (
-                    <SignalRow
-                      label="Best locations"
-                      value={synthesis.bestLocations.join("  ·  ")}
-                      detail="Estimated top cities by vacancy concentration for this field and country."
-                    />
+                    <SignalRow label="Best locations" value={synthesis.bestLocations.join("  ·  ")} detail="Estimated top cities by vacancy concentration for this field and country." />
                   )}
 
                   {synthesis.fiveYearOutlook && (
-                    <SignalRow
-                      label="5-year outlook"
-                      value={synthesis.fiveYearOutlook.label}
-                      detail={synthesis.fiveYearOutlook.detail}
-                      valueColor={outlookColor(synthesis.fiveYearOutlook.label)}
-                    />
+                    <SignalRow label="5-year outlook" value={synthesis.fiveYearOutlook.label} detail={synthesis.fiveYearOutlook.detail} valueColor={outlookColor(synthesis.fiveYearOutlook.label)} />
                   )}
                 </div>
               )}
 
-              {/* Further context */}
               <div className="mt-10 max-w-2xl">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
-                  Further context
-                </p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">Further context</p>
                 <ul className="flex flex-col gap-5">
                   {insights.bullets.map((b, i) => (
                     <li key={i} className="flex gap-3">
-                      <span className="text-neutral-300 flex-shrink-0 select-none mt-0.5">
-                        —
-                      </span>
-                      <span className="text-sm text-neutral-600 leading-relaxed">
-                        {b}
-                      </span>
+                      <span className="text-neutral-300 flex-shrink-0 select-none mt-0.5">—</span>
+                      <span className="text-sm text-neutral-600 leading-relaxed">{b}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <p className="mt-10 max-w-2xl font-mono text-[10px] leading-relaxed text-neutral-300">
-                Illustrative guidance only — not personal career or financial
-                advice.
-                {aiSource === "claude"
-                  ? " Summary generated by Claude from the data shown."
-                  : " Set ANTHROPIC_API_KEY for AI-generated summaries."}
+                Illustrative guidance only — not personal career or financial advice.
+                {aiSource === "claude" ? " Summary generated by Claude from the data shown." : " Set ANTHROPIC_API_KEY for AI-generated summaries."}
               </p>
             </div>
           )}
 
-          <Divider />
-
-          {/* ── Jobs CTA ──────────────────────────────────────────────────── */}
-          <div className={`${C} py-10`}>
+          {/* ── Jobs CTA ── */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                  Job opportunities
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Explore relevant listings for {fieldLabel} in {locationLabel}
-                </p>
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">Job opportunities</p>
+                <p className="text-sm text-neutral-600">Explore relevant listings for {fieldLabel} in {locationLabel}</p>
               </div>
               <Link
                 href="/jobs"
-                className="flex-shrink-0 inline-flex h-9 items-center gap-2 rounded-md bg-neutral-900 px-5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
+                className="flex-shrink-0 inline-flex h-9 items-center gap-2 rounded-full bg-neutral-900 px-5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
               >
                 Browse job listings
-                <svg
-                  width="11" height="11" viewBox="0 0 12 12" fill="none"
-                  stroke="currentColor" strokeWidth="1.5"
-                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
-                >
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M2 6h8M6 2l4 4-4 4" />
                 </svg>
               </Link>
             </div>
           </div>
-        </>
+
+        </div>
       )}
     </div>
   );

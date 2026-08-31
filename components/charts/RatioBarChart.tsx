@@ -99,7 +99,7 @@ export default function RatioBarChart({ entries, title, subtitle }: Props) {
             iconSize={8}
           />
           <Bar dataKey="Graduates" fill="#d4d4d4" radius={[3, 3, 0, 0]} />
-          <Bar dataKey="Vacancies" fill="#1d4ed8" radius={[3, 3, 0, 0]} />
+          <Bar dataKey="Vacancies" fill="#F5C518" radius={[3, 3, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

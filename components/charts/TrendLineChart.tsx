@@ -101,9 +101,9 @@ export default function TrendLineChart({ entries, title, subtitle }: Props) {
           <Line
             type="monotone"
             dataKey="ratio"
-            stroke="#1d4ed8"
+            stroke="#F5C518"
             strokeWidth={1.5}
-            dot={{ r: 3, fill: "#1d4ed8", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#F5C518", strokeWidth: 0 }}
             activeDot={{ r: 5, strokeWidth: 0 }}
           />
         </LineChart>

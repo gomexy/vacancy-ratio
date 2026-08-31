@@ -10,7 +10,7 @@ const SEGMENTS = [
   { pct: 25,   color: "#fca5a5", label: "Sig. Surplus" },  // 0.0 – 0.5
   { pct: 12.5, color: "#fde68a", label: "Surplus" },        // 0.5 – 0.75
   { pct: 12.5, color: "#e5e5e5", label: "Balanced" },       // 0.75 – 1.0
-  { pct: 50,   color: "#93c5fd", label: "Strong / Critical" }, // 1.0 – 2.0+
+  { pct: 50,   color: "#FDE68A", label: "Strong / Critical" }, // 1.0 – 2.0+
 ];
 
 interface Props {

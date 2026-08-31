@@ -58,14 +58,14 @@ function CustomLegend({ payload }: any) {
   return (
     <div className="flex gap-5 text-xs text-neutral-500 mt-2 justify-center">
       <span className="flex items-center gap-1.5">
-        <span className="inline-block h-0.5 w-5 bg-[#1d4ed8] rounded" />
+        <span className="inline-block h-0.5 w-5 bg-[#F5C518] rounded" />
         Historical
       </span>
       <span className="flex items-center gap-1.5">
         <svg width="20" height="2" className="overflow-visible">
           <line
             x1="0" y1="1" x2="20" y2="1"
-            stroke="#93c5fd"
+            stroke="#FDE68A"
             strokeWidth="2"
             strokeDasharray="4 2"
           />
@@ -170,9 +170,9 @@ export default function OutlookChart({ entries }: Props) {
             type="monotone"
             dataKey="historical"
             name="Historical"
-            stroke="#1d4ed8"
+            stroke="#F5C518"
             strokeWidth={2}
-            dot={{ r: 3, fill: "#1d4ed8", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#F5C518", strokeWidth: 0 }}
             activeDot={{ r: 5, strokeWidth: 0 }}
             connectNulls={false}
           />
@@ -181,10 +181,10 @@ export default function OutlookChart({ entries }: Props) {
             type="monotone"
             dataKey="projected"
             name="Projected"
-            stroke="#93c5fd"
+            stroke="#FDE68A"
             strokeWidth={2}
             strokeDasharray="5 3"
-            dot={{ r: 3, fill: "#93c5fd", strokeWidth: 0 }}
+            dot={{ r: 3, fill: "#FDE68A", strokeWidth: 0 }}
             activeDot={{ r: 5, strokeWidth: 0 }}
             connectNulls={false}
           />
