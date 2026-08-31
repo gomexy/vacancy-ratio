@@ -38,7 +38,7 @@ function CustomTooltip({ active, payload }: any) {
         </span>
       </div>
       {sigMeta && (
-        <p className={`mt-1.5 font-semibold uppercase tracking-widest text-[10px] ${sigMeta.color}`}>
+        <p className="mt-1.5 font-semibold uppercase tracking-widest text-[10px]" style={{ color: "#92600A" }}>
           {sigMeta.label}
         </p>
       )}
@@ -88,11 +88,9 @@ export default function CompareBarChart({ entries }: Props) {
         />
         <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f9fafb" }} />
         <Bar dataKey="ratio" radius={[0, 3, 3, 0]}>
-          {data.map((entry, i) => {
-            const sig = entry.signal;
-            const hex = isMarketSignal(sig) ? SIGNAL_META[sig].hex : "#a3a3a3";
-            return <Cell key={i} fill={hex} />;
-          })}
+          {data.map((_entry, i) => (
+            <Cell key={i} fill="#F5C518" />
+          ))}
           <LabelList
             dataKey="ratio"
             position="right"

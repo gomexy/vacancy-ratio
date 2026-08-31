@@ -12,7 +12,7 @@ export default function OutlookPage() {
   const countries = getCountries();
   const fields = getFields();
   return (
-    <div className="bg-white min-h-screen">
+    <div style={{ background: "#F0F0F0" }} className="min-h-screen">
       <OutlookClient countries={countries} fields={fields} />
     </div>
   );

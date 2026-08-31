@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import Select from "@/components/ui/Select";
 import CompareBarChart from "@/components/charts/CompareBarChart";
-import SignalBadge from "@/components/results/SignalBadge";
 import { computeSnapshot, SIGNAL_META } from "@/lib/compute";
 import { getEntriesForFieldYear } from "@/lib/service";
 import { fmt, fmtRatio, cn } from "@/lib/utils";
@@ -49,9 +48,9 @@ export default function CompareClient({ countries, fields, years }: Props) {
   const yearOptions    = years.map((y)    => ({ value: String(y), label: String(y) }));
 
   return (
-    <div>
+    <div style={{ background: "#F0F0F0" }}>
       {/* ── Filter bar ── */}
-      <div style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}>
+      <div className="border-b border-neutral-200 bg-white">
         <div className={CONTAINER}>
           <div className="py-5 flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 max-w-sm">
@@ -88,59 +87,77 @@ export default function CompareClient({ countries, fields, years }: Props) {
       </div>
 
       {entries.length > 0 ? (
-        <div>
-          {/* Chart */}
-          <div style={{ borderBottom: "1px solid #f0f0f0" }}>
-            <div className={`${CONTAINER} py-10`}>
-              <p className="text-sm font-semibold text-neutral-800 mb-1">
-                Vacancy ratio by field
-              </p>
-              <p className="text-xs text-neutral-400 mb-6">
-                Higher ratio = more vacancies relative to graduates. Colour indicates market signal.
-              </p>
-              <CompareBarChart entries={entries} />
-              <p className="mt-4 text-xs text-neutral-400">
-                Ratio = vacancies ÷ graduates. Above 1.0 = more vacancies than graduates.
-              </p>
-            </div>
+        <div className={`${CONTAINER} py-8 flex flex-col gap-6`}>
+          {/* Chart card */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-8">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
+              Field comparison
+            </p>
+            <p className="text-sm font-semibold text-neutral-800 mb-1">
+              Vacancy ratio by field
+            </p>
+            <p className="text-xs text-neutral-400 mb-6">
+              Higher ratio = more vacancies relative to graduates.
+            </p>
+            <CompareBarChart entries={entries} />
+            <p className="mt-4 text-xs text-neutral-400">
+              Ratio = vacancies ÷ graduates · Above 1.0 = more vacancies than graduates.
+            </p>
           </div>
 
-          {/* Table — white background */}
-          <div className={`${CONTAINER} py-10`}>
-            <div className="overflow-x-auto">
+          {/* Table card */}
+          <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white">
+            <div className="px-8 pt-7 pb-5" style={{ borderBottom: "1px solid #F3F4F6" }}>
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
+                Detailed breakdown
+              </p>
+              <p className="text-sm font-semibold text-neutral-800">
+                All selected fields ranked by vacancy ratio
+              </p>
+            </div>
+            <div className="px-8 py-2 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ borderBottom: "1px solid #ebebeb" }}>
-                    <th className="pb-3 pr-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">#</th>
-                    <th className="pb-3 pr-6 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Field</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Graduates</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Vacancies</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Ratio</th>
-                    <th className="pb-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 hidden sm:table-cell">Per 100</th>
-                    <th className="pb-3 pl-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Signal</th>
+                  <tr style={{ borderBottom: "1px solid #F3F4F6" }}>
+                    <th className="py-3 pr-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">#</th>
+                    <th className="py-3 pr-6 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Field</th>
+                    <th className="py-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Graduates</th>
+                    <th className="py-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Vacancies</th>
+                    <th className="py-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Ratio</th>
+                    <th className="py-3 px-4 text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 hidden sm:table-cell">Per 100</th>
+                    <th className="py-3 pl-4 text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400">Signal</th>
                   </tr>
                 </thead>
                 <tbody>
                   {snapshots.map(({ snap, field }, i) => (
                     <tr
                       key={snap.entry.field}
-                      style={{ borderBottom: i < snapshots.length - 1 ? "1px solid #f5f5f5" : "none" }}
+                      style={{ borderBottom: i < snapshots.length - 1 ? "1px solid #F9FAFB" : "none" }}
                     >
                       <td className="py-4 pr-4 text-neutral-300 tabular-nums text-xs">{i + 1}</td>
                       <td className="py-4 pr-6 font-medium text-neutral-800">{field?.label ?? snap.entry.field}</td>
                       <td className="py-4 px-4 text-right tabular-nums text-neutral-500">{fmt(snap.entry.graduates)}</td>
                       <td className="py-4 px-4 text-right tabular-nums text-neutral-500">{fmt(snap.entry.relevantVacancies)}</td>
-                      <td className={cn("py-4 px-4 text-right tabular-nums font-semibold", SIGNAL_META[snap.signal].color)}>
+                      <td className="py-4 px-4 text-right tabular-nums font-semibold" style={{ color: "#F5C518" }}>
                         {fmtRatio(snap.vacancyRatio)}
                       </td>
                       <td className="py-4 px-4 text-right tabular-nums text-neutral-500 hidden sm:table-cell">
                         {fmtRatio(snap.vacanciesPer100Graduates)}
                       </td>
-                      <td className="py-4 pl-4"><SignalBadge signal={snap.signal} /></td>
+                      <td className="py-4 pl-4">
+                        <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
+                          {SIGNAL_META[snap.signal].label}
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div className="px-8 pb-6">
+              <p className="text-[10px] text-neutral-300 font-mono">
+                Demo data · Ratio = vacancies ÷ graduates · Above 1.0 = more vacancies than graduates
+              </p>
             </div>
           </div>
         </div>
@@ -151,6 +168,7 @@ export default function CompareClient({ countries, fields, years }: Props) {
           </p>
         </div>
       )}
+
     </div>
   );
 }

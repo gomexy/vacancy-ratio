@@ -14,7 +14,7 @@ export default function ComparePage() {
   const countries = getCountries();
   const fields    = getFields();
   return (
-    <div className="bg-white min-h-screen">
+    <div style={{ background: "#F0F0F0" }} className="min-h-screen">
       <div className="mx-auto max-w-5xl px-6 sm:px-12 pt-14 pb-10">
         <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-4">
           Compare Fields

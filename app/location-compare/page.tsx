@@ -13,7 +13,7 @@ export default function LocationComparePage() {
   const fields    = getFields();
 
   return (
-    <div className="bg-white min-h-screen">
+    <div style={{ background: "#F0F0F0" }} className="min-h-screen">
       <LocationCompareClient countries={countries} fields={fields} />
     </div>
   );

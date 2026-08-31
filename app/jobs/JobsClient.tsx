@@ -40,7 +40,7 @@ export default function JobsClient({ countries, fields, listings }: Props) {
   return (
     <div>
       {/* Filter bar */}
-      <div style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}>
+      <div className="border-b border-neutral-200 bg-white">
         <div className={CONTAINER}>
           <div className="py-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -89,7 +89,7 @@ export default function JobsClient({ countries, fields, listings }: Props) {
         )}
 
         {/* Provider note */}
-        <div className="mt-12 pt-8 border-t border-neutral-100">
+        <div className="mt-12 pt-8 border-t border-neutral-200">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-2">
             Data provider
           </p>

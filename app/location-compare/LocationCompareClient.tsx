@@ -8,7 +8,7 @@ import {
   getAvailableYears,
   getCitySalaryRange,
 } from "@/lib/service";
-import { fmt, cn } from "@/lib/utils";
+import { fmt } from "@/lib/utils";
 import { getSkillsForField } from "@/lib/data/mock-skills";
 import type { Country, Field } from "@/lib/types";
 
@@ -27,7 +27,7 @@ const TIER_META: Record<
   StrengthTier,
   { label: string; colorClass: string; hex: string; barHex: string }
 > = {
-  strong:   { label: "Strong",   colorClass: "text-blue-600",    hex: "#2563eb", barHex: "#2563eb" },
+  strong:   { label: "Strong",   colorClass: "",                 hex: "#92600A", barHex: "#F5C518" },
   moderate: { label: "Moderate", colorClass: "text-neutral-500", hex: "#9ca3af", barHex: "#9ca3af" },
   emerging: { label: "Emerging", colorClass: "text-amber-600",   hex: "#f59e0b", barHex: "#fbbf24" },
 };
@@ -120,12 +120,9 @@ export default function LocationCompareClient({ countries, fields }: Props) {
   const countryLabel = countries.find((c) => c.code === country)?.name ?? country;
 
   return (
-    <div>
+    <div style={{ background: "#F0F0F0" }}>
       {/* Filter strip */}
-      <div
-        className="bg-white"
-        style={{ borderTop: "1px solid #ebebeb", borderBottom: "1px solid #ebebeb" }}
-      >
+      <div className="border-b border-neutral-200 bg-white">
         <div className={CONTAINER}>
           <div className="py-5">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -179,7 +176,7 @@ export default function LocationCompareClient({ countries, fields }: Props) {
           </div>
 
           {/* Disclaimer */}
-          <div className="mt-5 mb-8 rounded-lg border border-neutral-100 bg-neutral-50 px-4 py-3">
+          <div className="mt-5 mb-8 rounded-lg border border-neutral-200 bg-white px-4 py-3">
             <p className="text-xs text-neutral-500 leading-relaxed">
               <span className="font-semibold">What does &ldquo;strongest&rdquo; mean?</span>{" "}
               Rankings reflect relative labour-market demand — estimated vacancy
@@ -197,14 +194,13 @@ export default function LocationCompareClient({ countries, fields }: Props) {
               return (
                 <div
                   key={city.code}
-                  className="overflow-hidden rounded-xl border border-neutral-100 bg-white"
-                  style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
+                  className="overflow-hidden rounded-xl border border-neutral-200 bg-white"
                 >
                   <div className="flex">
                     {/* Left accent */}
                     <div
                       className="w-1 flex-shrink-0"
-                      style={{ background: meta.hex }}
+                      style={{ background: meta.barHex }}
                     />
 
                     <div className="flex-1 px-5 py-4">
@@ -219,10 +215,8 @@ export default function LocationCompareClient({ countries, fields }: Props) {
                           </span>
                         </div>
                         <span
-                          className={cn(
-                            "text-xs font-semibold tracking-wide",
-                            meta.colorClass
-                          )}
+                          className="text-xs font-semibold tracking-wide"
+                          style={{ color: meta.hex }}
                         >
                           {meta.label}
                         </span>

@@ -165,14 +165,14 @@ export default function OutlookTimeline({ entries }: Props) {
             />
           )}
 
-          {/* Historical — solid blue, filled dots */}
+          {/* Historical — solid yellow, filled dots */}
           <Line
             type="monotone"
             dataKey="historical"
             name="Observed"
-            stroke="#1d4ed8"
+            stroke="#F5C518"
             strokeWidth={2.5}
-            dot={{ r: 4, fill: "#1d4ed8", strokeWidth: 0 }}
+            dot={{ r: 4, fill: "#F5C518", strokeWidth: 0 }}
             activeDot={{ r: 6, strokeWidth: 0 }}
             connectNulls={false}
           />
@@ -195,7 +195,7 @@ export default function OutlookTimeline({ entries }: Props) {
       {/* Legend below chart */}
       <div className="flex items-center gap-5 justify-center text-xs text-neutral-500 mt-1">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-0.5 w-5 rounded" style={{ background: "#1d4ed8" }} />
+          <span className="inline-block h-0.5 w-5 rounded" style={{ background: "#F5C518" }} />
           Observed
         </span>
         <span className="flex items-center gap-1.5">

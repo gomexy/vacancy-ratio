@@ -99,8 +99,9 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export default function MethodologyPage() {
   return (
-    <div className="bg-white min-h-screen">
-    <div className="mx-auto max-w-5xl px-6 sm:px-12 py-14">
+    <div style={{ background: "#F0F0F0" }} className="min-h-screen">
+    <div className="mx-auto max-w-5xl px-6 sm:px-12 py-10">
+    <div className="rounded-2xl border border-neutral-200 bg-white px-8 sm:px-12 py-10">
     <div className="max-w-2xl flex flex-col gap-0">
 
       {/* Page heading */}
@@ -397,6 +398,7 @@ export default function MethodologyPage() {
         </ul>
       </div>
 
+    </div>
     </div>
     </div>
     </div>

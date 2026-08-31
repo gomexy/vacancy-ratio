@@ -299,10 +299,10 @@ export default function OutlookClient({ countries, fields }: Props) {
   // ─────────────────────────────────────────────────────────────────────────────
 
   return (
-    <div className="bg-white">
+    <div style={{ background: "#F0F0F0" }}>
 
       {/* ── Filter strip ──────────────────────────────────────────────────────── */}
-      <div className="border-b border-neutral-100 bg-white">
+      <div className="border-b border-neutral-200 bg-white">
         <div className={`${C} py-5`}>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <Select
@@ -345,7 +345,7 @@ export default function OutlookClient({ countries, fields }: Props) {
       {/* ── Sticky context strip ──────────────────────────────────────────────── */}
       {forecast && (
         <div
-          className="sticky z-30 bg-white border-b border-neutral-100"
+          className="sticky z-30 bg-white border-b border-neutral-200"
           style={{ top: 64 }}
         >
           <div className={`${C} py-2.5 flex items-center justify-between gap-4`}>
@@ -394,7 +394,8 @@ export default function OutlookClient({ countries, fields }: Props) {
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 1 — Overview                                              */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} pt-12 pb-10`}>
+          <div className={`${C} py-6`}>
+          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>5-Year Outlook</SectionLabel>
             <h1
               className="font-semibold tracking-tight text-neutral-900 mb-1"
@@ -502,13 +503,13 @@ export default function OutlookClient({ countries, fields }: Props) {
               </div>
             </div>
           </div>
-
-          <Divider />
+          </div>
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 2 — Timeline                                              */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} py-12`}>
+          <div className={`${C} pt-0 pb-6`}>
+          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Timeline</SectionLabel>
             <SectionHeading>Observed to Projected</SectionHeading>
             <p className="text-sm text-neutral-500 mb-8">
@@ -533,7 +534,7 @@ export default function OutlookClient({ countries, fields }: Props) {
               </p>
               <table className="w-full text-sm border-collapse">
                 <thead>
-                  <tr style={{ borderBottom: "1px solid #f0f0f0" }}>
+                  <tr style={{ borderBottom: "1px solid #F3F4F6" }}>
                     <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 pr-6">
                       Year
                     </th>
@@ -550,8 +551,8 @@ export default function OutlookClient({ countries, fields }: Props) {
                     <tr
                       key={row.year}
                       style={{
-                        borderBottom: "1px solid #f9f9f9",
-                        background: row.isProjected ? "#fffdf0" : "transparent",
+                        borderBottom: "1px solid #F9FAFB",
+                        background: row.isProjected ? "#FFFBEB" : "transparent",
                       }}
                     >
                       <td className="py-2.5 pr-6 tabular-nums text-neutral-800 font-medium">
@@ -568,7 +569,7 @@ export default function OutlookClient({ countries, fields }: Props) {
                             Projected
                           </span>
                         ) : (
-                          <span className="text-[9px] font-semibold uppercase tracking-widest text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100">
+                          <span className="text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}>
                             Historical
                           </span>
                         )}
@@ -583,14 +584,14 @@ export default function OutlookClient({ countries, fields }: Props) {
               <DataStatusBadge isDemo />
             </div>
           </div>
-
-          <Divider />
+          </div>
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 3 — Why this outlook?                                     */}
           {/* ══════════════════════════════════════════════════════════════════ */}
           {outlookFactors.length > 0 && (
-            <div className={`${C} py-12`}>
+            <div className={`${C} pt-0 pb-6`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Why?</SectionLabel>
               <SectionHeading>What is driving this projection?</SectionHeading>
               <p className="text-sm text-neutral-500 mb-8">
@@ -601,11 +602,7 @@ export default function OutlookClient({ countries, fields }: Props) {
                 {outlookFactors.map((factor) => (
                   <div
                     key={factor.id}
-                    className="rounded-lg p-4"
-                    style={{
-                      border: "1px solid #f0f0f0",
-                      background: "#fafafa",
-                    }}
+                    className="rounded-xl border border-neutral-100 bg-neutral-50 p-4"
                   >
                     {/* Direction icon + label */}
                     <div className="flex items-center gap-2 mb-3">
@@ -642,15 +639,15 @@ export default function OutlookClient({ countries, fields }: Props) {
                 ))}
               </div>
             </div>
+            </div>
           )}
-
-          <Divider />
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 4 — What could change this?                               */}
           {/* ══════════════════════════════════════════════════════════════════ */}
           {changeScenarios.length > 0 && (
-            <div className={`${C} py-12`}>
+            <div className={`${C} pt-0 pb-6`}>
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
               <SectionLabel>Uncertainty</SectionLabel>
               <SectionHeading>What could change this outlook?</SectionHeading>
               <p className="text-sm text-neutral-500 mb-8">
@@ -665,7 +662,7 @@ export default function OutlookClient({ countries, fields }: Props) {
                     className="pl-4 py-4 pr-4 rounded-r-md"
                     style={{
                       borderLeft: `3px solid ${scenarioTypeBorderColor(scenario.type)}`,
-                      background: "#fafafa",
+                      background: "#F9FAFB",
                     }}
                   >
                     <div className="flex items-center gap-2 mb-1.5">
@@ -686,14 +683,14 @@ export default function OutlookClient({ countries, fields }: Props) {
                 ))}
               </div>
             </div>
+            </div>
           )}
-
-          <Divider />
 
           {/* ══════════════════════════════════════════════════════════════════ */}
           {/* SECTION 5 — How this outlook was built                            */}
           {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className={`${C} py-12`}>
+          <div className={`${C} pt-0 pb-10`}>
+          <div className="rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
             <SectionLabel>Methodology</SectionLabel>
             <SectionHeading>How this outlook was built</SectionHeading>
 
@@ -702,8 +699,7 @@ export default function OutlookClient({ countries, fields }: Props) {
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-0">
                 {/* Step 1 */}
                 <div
-                  className="flex-1 rounded-md p-4"
-                  style={{ border: "1px solid #f0f0f0", background: "#fafafa" }}
+                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
                 >
                   <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
                     Step 1
@@ -726,8 +722,7 @@ export default function OutlookClient({ countries, fields }: Props) {
 
                 {/* Step 2 */}
                 <div
-                  className="flex-1 rounded-md p-4"
-                  style={{ border: "1px solid #f0f0f0", background: "#fafafa" }}
+                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
                 >
                   <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
                     Step 2
@@ -750,8 +745,7 @@ export default function OutlookClient({ countries, fields }: Props) {
 
                 {/* Step 3 */}
                 <div
-                  className="flex-1 rounded-md p-4"
-                  style={{ border: "1px solid #f0f0f0", background: "#fafafa" }}
+                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
                 >
                   <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
                     Step 3
@@ -774,8 +768,7 @@ export default function OutlookClient({ countries, fields }: Props) {
 
                 {/* Step 4 */}
                 <div
-                  className="flex-1 rounded-md p-4"
-                  style={{ border: "1px solid #f0f0f0", background: "#fafafa" }}
+                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
                 >
                   <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
                     Step 4
@@ -794,17 +787,14 @@ export default function OutlookClient({ countries, fields }: Props) {
             </div>
 
             {/* AI interpretation section */}
-            <div
-              className="rounded-lg p-5 mb-10"
-              style={{ border: "1px solid #f0f0f0" }}
-            >
+            <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 mb-10">
               <div className="flex items-center gap-2 mb-3">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
                   Interpretation
                 </p>
                 {aiSource === "claude" && (
-                  <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-blue-700 bg-blue-50 border border-blue-100">
-                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0" />
+                  <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest" style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}>
+                    <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
                     AI
                   </span>
                 )}
@@ -834,10 +824,10 @@ export default function OutlookClient({ countries, fields }: Props) {
               <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
                 Confidence levels
               </p>
-              <div style={{ border: "1px solid #f0f0f0", borderRadius: 6, overflow: "hidden" }}>
+              <div className="overflow-hidden rounded-xl border border-neutral-200">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr style={{ background: "#fafafa", borderBottom: "1px solid #f0f0f0" }}>
+                    <tr style={{ background: "#FAFAFA", borderBottom: "1px solid #F3F4F6" }}>
                       <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2.5 px-4 w-28">
                         Confidence
                       </th>
@@ -876,11 +866,8 @@ export default function OutlookClient({ countries, fields }: Props) {
             </p>
             <DataStatusBadge isDemo />
           </div>
+          </div>
 
-          <Divider />
-
-          {/* Bottom spacing */}
-          <div className="pb-16" />
         </>
       )}
     </div>
