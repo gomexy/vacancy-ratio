@@ -81,38 +81,46 @@ export default function HomePage() {
           {/* Rounded card */}
           <div
             className="flex flex-1 flex-col overflow-hidden rounded-2xl"
-            style={{ background: "#F5F5F5", boxShadow: "0 4px 32px rgba(0,0,0,0.10)" }}
+            style={{ background: "#F5F5F5", boxShadow: "0 2px 24px rgba(0,0,0,0.08)" }}
           >
             {/* Two-column layout */}
             <div className="grid flex-1 grid-cols-1 lg:grid-cols-2">
 
               {/* Left — headline + CTAs */}
-              <div className="px-8 sm:px-10 pt-10 sm:pt-14 pb-10">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-5">
+              <div className="flex flex-col px-8 sm:px-12 pt-10 sm:pt-14 pb-10">
+                {/* Eyebrow */}
+                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF", marginBottom: "1.25rem" }}>
                   Career-market intelligence
                 </p>
+
+                {/* Headline */}
                 <h1
-                  className="font-bold leading-[1.05] tracking-tight text-neutral-900 mb-4 max-w-md"
-                  style={{ fontSize: "clamp(2.4rem, 5vw, 3.75rem)" }}
+                  className="font-bold tracking-tight text-neutral-900"
+                  style={{ fontSize: "clamp(2.6rem, 5.5vw, 4rem)", lineHeight: 1.04, letterSpacing: "-0.025em", marginBottom: "1.25rem", maxWidth: "17ch" }}
                 >
                   Understand where your{" "}
-                  <span style={{ color: "#3B6FE8" }}>career</span>{" "}
+                  <span style={{ color: "#3B82F6" }}>career</span>{" "}
                   is heading.
                 </h1>
-                <p className="text-base sm:text-[17px] text-neutral-500 leading-relaxed max-w-sm mb-8">
+
+                {/* Subtitle */}
+                <p style={{ fontSize: 15, lineHeight: 1.65, color: "#6B7280", maxWidth: "30rem", marginBottom: "2.25rem" }}>
                   See how graduate supply compares with job demand, explore where
                   opportunities are strongest, and understand how your field could evolve.
                 </p>
-                <div className="flex flex-wrap gap-3">
+
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-3 mt-auto">
                   <Link
                     href="/explore"
-                    className="inline-flex h-11 items-center rounded-full bg-neutral-900 px-6 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
+                    className="inline-flex h-11 items-center rounded-full bg-neutral-900 px-7 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
                   >
                     Explore your field
                   </Link>
                   <Link
                     href="/compare"
-                    className="inline-flex h-11 items-center rounded-full border border-neutral-300 bg-white px-6 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
+                    className="inline-flex h-11 items-center rounded-full bg-white px-7 text-sm font-medium text-neutral-800 transition-colors hover:bg-neutral-100"
+                    style={{ border: "1.5px solid #1F2937" }}
                   >
                     Compare fields
                   </Link>
@@ -120,107 +128,120 @@ export default function HomePage() {
               </div>
 
               {/* Right — feature cards */}
-              <div className="flex flex-col justify-center gap-3 px-6 sm:px-8 pb-8 pt-0 lg:border-l lg:pt-10 lg:pb-10" style={{ borderColor: "#E2E2E2" }}>
-
-                {/* Explore card */}
-                <div className="rounded-xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E2E2E2" }}>
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                        Explore
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        {[
-                          "Vacancy-to-graduate ratio",
-                          "Historical trend view",
-                          "Skills in demand",
-                          "City-level market strength",
-                        ].map((item) => (
-                          <div key={item} className="flex items-center gap-2.5">
-                            <span className="flex-shrink-0 text-xs font-bold" style={{ color: "#3B6FE8" }}>✓</span>
-                            <span className="text-sm text-neutral-600">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+              <div
+                className="flex flex-col justify-center gap-3 px-6 sm:px-8 pb-8 pt-6 lg:pt-10 lg:pb-10 lg:border-l"
+                style={{ borderColor: "#D8D8D8" }}
+              >
+                {/* Feature card — Explore */}
+                <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E8E8E8" }}>
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF" }}>
+                      Explore
+                    </p>
                     <Link
                       href="/explore"
-                      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-neutral-400 transition-all hover:border-neutral-400 hover:text-neutral-700"
+                      className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-base font-medium leading-none text-neutral-400 transition-all hover:text-neutral-700"
+                      style={{ border: "1.5px solid #D1D5DB" }}
                       aria-label="Go to Explore"
                     >
                       +
                     </Link>
                   </div>
+                  <div className="flex flex-col gap-2">
+                    {[
+                      "Vacancy-to-graduate ratio",
+                      "Historical trend view",
+                      "Skills in demand",
+                      "City-level market strength",
+                    ].map((item) => (
+                      <div key={item} className="flex items-center gap-2.5">
+                        <span className="flex-shrink-0 font-bold" style={{ fontSize: 13, color: "#3B82F6", lineHeight: 1 }}>✓</span>
+                        <span style={{ fontSize: 13, color: "#374151" }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Outlook + Compare card */}
-                <div className="rounded-xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E2E2E2" }}>
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                        Outlook &amp; Compare
-                      </p>
-                      <div className="flex flex-col gap-2">
-                        {[
-                          "5-year trend projection",
-                          "CAGR and growth analysis",
-                          "Field-level comparison",
-                          "AI-assisted interpretation",
-                        ].map((item) => (
-                          <div key={item} className="flex items-center gap-2.5">
-                            <span className="flex-shrink-0 text-xs font-bold" style={{ color: "#3B6FE8" }}>✓</span>
-                            <span className="text-sm text-neutral-600">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                {/* Feature card — Outlook & Compare */}
+                <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E8E8E8" }}>
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF" }}>
+                      Outlook &amp; Compare
+                    </p>
                     <Link
                       href="/outlook"
-                      className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-neutral-200 text-sm font-semibold text-neutral-400 transition-all hover:border-neutral-400 hover:text-neutral-700"
+                      className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-base font-medium leading-none text-neutral-400 transition-all hover:text-neutral-700"
+                      style={{ border: "1.5px solid #D1D5DB" }}
                       aria-label="Go to Outlook"
                     >
                       +
                     </Link>
                   </div>
+                  <div className="flex flex-col gap-2">
+                    {[
+                      "5-year trend projection",
+                      "CAGR and growth analysis",
+                      "Field-level comparison",
+                      "AI-assisted interpretation",
+                    ].map((item) => (
+                      <div key={item} className="flex items-center gap-2.5">
+                        <span className="flex-shrink-0 font-bold" style={{ fontSize: 13, color: "#3B82F6", lineHeight: 1 }}>✓</span>
+                        <span style={{ fontSize: 13, color: "#374151" }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-
               </div>
+
             </div>
 
-            {/* Gradient banner */}
+            {/* Gradient stripe — pinned flush to bottom */}
             <div
-              className="relative overflow-hidden"
+              className="relative overflow-hidden flex-shrink-0"
               style={{
-                background: "linear-gradient(135deg, #A5B4FF 0%, #7B97F5 35%, #4A7BF7 70%, #3B6FE8 100%)",
-                height: 152,
+                height: 148,
+                background: "linear-gradient(to right, #3B82F6 0%, #6366F1 55%, #8B5CF6 100%)",
               }}
             >
-              {/* Waveform bars */}
+              {/* Faint waveform — left half */}
               <div
-                className="absolute inset-y-0 left-0 flex items-center gap-1.5"
-                style={{ paddingLeft: "clamp(2rem, 5vw, 3.5rem)" }}
+                className="absolute inset-y-0 left-0 flex items-center"
+                style={{ paddingLeft: "clamp(1.75rem, 4vw, 3rem)", gap: 5, width: "50%" }}
               >
-                {[28,45,72,100,80,112,64,88,115,76,96,122,84,68,104,56,90,118,72,60,94,80,44,66,100].map(
-                  (h, i) => (
-                    <div
-                      key={i}
-                      className="flex-shrink-0 rounded-full"
-                      style={{ width: 3, height: `${h}px`, background: "rgba(255,255,255,0.22)" }}
-                    />
-                  )
-                )}
+                {[18,30,52,76,96,118,104,86,68,50,80,108,92,64,48,38,58,84,72,44,62,90,56,34,48].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-shrink-0 rounded-full"
+                    style={{ width: 2.5, height: `${Math.min(h, 116)}px`, background: "rgba(255,255,255,0.16)" }}
+                  />
+                ))}
               </div>
 
-              {/* 3D sphere */}
+              {/* 3D glossy sphere — right side */}
               <div
                 className="absolute top-1/2 -translate-y-1/2"
                 style={{
-                  right: "clamp(2rem, 8vw, 6rem)",
-                  width: 110,
-                  height: 110,
+                  right: "clamp(1.75rem, 7vw, 5rem)",
+                  width: 108,
+                  height: 108,
                   borderRadius: "50%",
-                  background: "radial-gradient(circle at 35% 32%, #DDE8FF 0%, #7B97F5 45%, #2B55D8 75%, #1A3AB0 100%)",
-                  boxShadow: "0 0 0 1px rgba(255,255,255,0.15), 0 8px 32px rgba(30,60,180,0.4)",
+                  background: [
+                    "radial-gradient(",
+                    "  ellipse at 36% 28%,",
+                    "  rgba(255,255,255,0.92) 0%,",
+                    "  rgba(255,255,255,0.55) 6%,",
+                    "  #BFDBFE 14%,",
+                    "  #818CF8 36%,",
+                    "  #4F46E5 58%,",
+                    "  #3730A3 76%,",
+                    "  #1E1B4B 100%",
+                    ")",
+                  ].join(""),
+                  boxShadow: [
+                    "inset 0 0 0 1px rgba(255,255,255,0.18),",
+                    "0 4px 24px rgba(79,70,229,0.55),",
+                    "0 0 0 2px rgba(255,255,255,0.08)",
+                  ].join(" "),
                 }}
               />
             </div>
