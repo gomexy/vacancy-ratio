@@ -174,7 +174,7 @@ export default function HomePage() {
           className="hidden lg:block lg:w-[46%] relative overflow-hidden flex-shrink-0"
           style={{
             borderRadius: "2.5rem 0 0 2.5rem",
-            background: "linear-gradient(155deg, #EEF2FF 0%, #E8F0FE 28%, #DBEAFE 62%, #EFF6FF 100%)",
+            background: "linear-gradient(155deg, #FFFEF8 0%, #FFFAE8 28%, #FFF5D0 62%, #FFFEF2 100%)",
           }}
         >
           {/* Ambient glow — sphere light bleeding into background */}
@@ -187,7 +187,7 @@ export default function HomePage() {
               width: 420,
               height: 420,
               borderRadius: "50%",
-              background: "radial-gradient(circle at center, rgba(59,130,246,0.28) 0%, rgba(99,102,241,0.12) 44%, transparent 70%)",
+              background: "radial-gradient(circle at center, rgba(245,197,24,0.28) 0%, rgba(202,138,4,0.12) 44%, transparent 70%)",
               filter: "blur(52px)",
               zIndex: 0,
               pointerEvents: "none",
@@ -204,8 +204,8 @@ export default function HomePage() {
               width: "44%",
               height: "76%",
               borderRadius: 72,
-              background: "repeating-linear-gradient(to right, rgba(255,255,255,0.70) 0px, rgba(255,255,255,0.70) 7px, rgba(186,218,255,0.13) 7px, rgba(186,218,255,0.13) 16px)",
-              boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.60), 0 0 0 1px rgba(147,197,253,0.12)",
+              background: "repeating-linear-gradient(to right, rgba(255,255,255,0.70) 0px, rgba(255,255,255,0.70) 7px, rgba(253,224,71,0.14) 7px, rgba(253,224,71,0.14) 16px)",
+              boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.60), 0 0 0 1px rgba(245,197,24,0.12)",
               zIndex: 2,
               pointerEvents: "none",
             }}
@@ -226,15 +226,15 @@ export default function HomePage() {
                 "circle at 32% 28%,",
                 "rgba(255,255,255,0.97) 0%,",
                 "rgba(255,255,255,0.80) 4%,",
-                "#BFDBFE 11%,",
-                "#60A5FA 26%,",
-                "#2563EB 50%,",
-                "#1D4ED8 68%,",
-                "#1E3A8A 86%,",
-                "#172554 100%",
+                "#FEFCE8 11%,",
+                "#FDE047 26%,",
+                "#F5C518 50%,",
+                "#CA8A04 68%,",
+                "#854D0E 86%,",
+                "#422006 100%",
                 ")",
               ].join(""),
-              boxShadow: "0 24px 64px rgba(37,99,235,0.55), 0 0 0 1px rgba(255,255,255,0.20)",
+              boxShadow: "0 24px 64px rgba(202,138,4,0.50), 0 0 0 1px rgba(255,255,255,0.20)",
               zIndex: 1,
               pointerEvents: "none",
             }}
