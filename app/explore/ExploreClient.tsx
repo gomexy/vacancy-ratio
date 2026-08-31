@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo, useEffect, useCallback } from "react";
-import Link from "next/link";
 import Select from "@/components/ui/Select";
 import RatioBarChart from "@/components/charts/RatioBarChart";
 import TrendLineChart from "@/components/charts/TrendLineChart";
@@ -658,25 +657,6 @@ export default function ExploreClient({ countries, fields }: Props) {
               </p>
             </div>
           )}
-
-          {/* ── Cell F — Jobs CTA ── */}
-          <div className="col-span-12 lg:col-span-4 rounded-2xl border border-neutral-200 bg-white p-6 sm:p-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">Job opportunities</p>
-                <p className="text-sm text-neutral-600">Explore relevant listings for {fieldLabel} in {locationLabel}</p>
-              </div>
-              <Link
-                href="/jobs"
-                className="flex-shrink-0 inline-flex h-9 items-center gap-2 rounded-full bg-neutral-900 px-5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                Browse job listings
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M2 6h8M6 2l4 4-4 4" />
-                </svg>
-              </Link>
-            </div>
-          </div>
 
           </div>
 

@@ -5,7 +5,6 @@ const nav = [
   { href: "/outlook",          label: "Outlook" },
   { href: "/compare",          label: "Compare" },
   { href: "/location-compare", label: "Locations" },
-  { href: "/jobs",             label: "Jobs" },
   { href: "/methodology",      label: "Methodology" },
 ];
 
