@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Playfair_Display } from "next/font/google";
 import { computeSnapshot, SIGNAL_META } from "@/lib/compute";
 import { getEntry, getEntriesForCountryYear, getTrendEntries } from "@/lib/service";
 import { computeForecast } from "@/lib/forecast";
@@ -7,6 +8,8 @@ import SignalBadge from "@/components/results/SignalBadge";
 import { FIELDS } from "@/lib/data/fields";
 import { getSkillsForField } from "@/lib/data/mock-skills";
 import type { MarketSignal } from "@/lib/types";
+
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700", "800"], display: "swap" });
 
 // ── Data helpers ──────────────────────────────────────────────────────────────
 
@@ -76,177 +79,167 @@ export default function HomePage() {
     <div className="bg-white">
 
       {/* ── 1. Hero ─────────────────────────────────────────────────────────── */}
-      <section className="flex flex-col" style={{ background: "#EBEBEB", minHeight: "calc(100vh - 64px)" }}>
-        <div className={`${C} flex flex-1 flex-col py-6 sm:py-8`}>
-          {/* Rounded card */}
-          <div
-            className="flex flex-1 flex-col overflow-hidden rounded-2xl"
-            style={{ background: "#F5F5F5", boxShadow: "0 2px 24px rgba(0,0,0,0.08)" }}
+      <section
+        className="flex overflow-hidden"
+        style={{ minHeight: "calc(100vh - 64px)", background: "#FFFFFF" }}
+      >
+        {/* ── Left: white content column ──────────────────────────────────── */}
+        <div
+          className="flex flex-col justify-center w-full py-16 lg:w-[54%]"
+          style={{
+            paddingLeft: "max(1.5rem, calc((100vw - 64rem) / 2 + 3rem))",
+            paddingRight: "clamp(2rem, 4vw, 3.5rem)",
+          }}
+        >
+          {/* Eyebrow */}
+          <p
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "#9CA3AF",
+              marginBottom: "1.5rem",
+            }}
           >
-            {/* Two-column layout */}
-            <div className="grid flex-1 grid-cols-1 lg:grid-cols-2">
+            Career-market intelligence
+          </p>
 
-              {/* Left — headline + CTAs */}
-              <div className="flex flex-col px-8 sm:px-12 pt-10 sm:pt-14 pb-10">
-                {/* Eyebrow */}
-                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF", marginBottom: "1.25rem" }}>
-                  Career-market intelligence
-                </p>
+          {/* Headline — serif display */}
+          <h1
+            className={playfair.className}
+            style={{
+              fontSize: "clamp(3rem, 6.5vw, 5rem)",
+              fontWeight: 800,
+              lineHeight: 1.06,
+              color: "#111827",
+              marginBottom: "2.5rem",
+              maxWidth: "14ch",
+            }}
+          >
+            Understand where your{" "}
+            <span style={{ color: "#3B82F6" }}>career</span>{" "}
+            is heading.
+          </h1>
 
-                {/* Headline */}
-                <h1
-                  className="font-bold tracking-tight text-neutral-900"
-                  style={{ fontSize: "clamp(2.6rem, 5.5vw, 4rem)", lineHeight: 1.04, letterSpacing: "-0.025em", marginBottom: "1.25rem", maxWidth: "17ch" }}
-                >
-                  Understand where your{" "}
-                  <span style={{ color: "#3B82F6" }}>career</span>{" "}
-                  is heading.
-                </h1>
-
-                {/* Subtitle */}
-                <p style={{ fontSize: 15, lineHeight: 1.65, color: "#6B7280", maxWidth: "30rem", marginBottom: "2.25rem" }}>
-                  See how graduate supply compares with job demand, explore where
-                  opportunities are strongest, and understand how your field could evolve.
-                </p>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-3 mt-auto">
-                  <Link
-                    href="/explore"
-                    className="inline-flex h-11 items-center rounded-full bg-neutral-900 px-7 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
-                  >
-                    Explore your field
-                  </Link>
-                  <Link
-                    href="/compare"
-                    className="inline-flex h-11 items-center rounded-full bg-white px-7 text-sm font-medium text-neutral-800 transition-colors hover:bg-neutral-100"
-                    style={{ border: "1.5px solid #1F2937" }}
-                  >
-                    Compare fields
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right — feature cards */}
+          {/* Checklist */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.875rem",
+              marginBottom: "2.5rem",
+            }}
+          >
+            {[
+              "Vacancy-to-graduate ratio",
+              "Historical trend analysis",
+              "Skills in demand",
+              "Location market strength",
+            ].map((item) => (
               <div
-                className="flex flex-col justify-center gap-3 px-6 sm:px-8 pb-8 pt-6 lg:pt-10 lg:pb-10 lg:border-l"
-                style={{ borderColor: "#D8D8D8" }}
+                key={item}
+                style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
               >
-                {/* Feature card — Explore */}
-                <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E8E8E8" }}>
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF" }}>
-                      Explore
-                    </p>
-                    <Link
-                      href="/explore"
-                      className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-base font-medium leading-none text-neutral-400 transition-all hover:text-neutral-700"
-                      style={{ border: "1.5px solid #D1D5DB" }}
-                      aria-label="Go to Explore"
-                    >
-                      +
-                    </Link>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {[
-                      "Vacancy-to-graduate ratio",
-                      "Historical trend view",
-                      "Skills in demand",
-                      "City-level market strength",
-                    ].map((item) => (
-                      <div key={item} className="flex items-center gap-2.5">
-                        <span className="flex-shrink-0 font-bold" style={{ fontSize: 13, color: "#3B82F6", lineHeight: 1 }}>✓</span>
-                        <span style={{ fontSize: 13, color: "#374151" }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Feature card — Outlook & Compare */}
-                <div className="rounded-2xl p-5" style={{ background: "#FFFFFF", border: "1px solid #E8E8E8" }}>
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#9CA3AF" }}>
-                      Outlook &amp; Compare
-                    </p>
-                    <Link
-                      href="/outlook"
-                      className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-base font-medium leading-none text-neutral-400 transition-all hover:text-neutral-700"
-                      style={{ border: "1.5px solid #D1D5DB" }}
-                      aria-label="Go to Outlook"
-                    >
-                      +
-                    </Link>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {[
-                      "5-year trend projection",
-                      "CAGR and growth analysis",
-                      "Field-level comparison",
-                      "AI-assisted interpretation",
-                    ].map((item) => (
-                      <div key={item} className="flex items-center gap-2.5">
-                        <span className="flex-shrink-0 font-bold" style={{ fontSize: 13, color: "#3B82F6", lineHeight: 1 }}>✓</span>
-                        <span style={{ fontSize: 13, color: "#374151" }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <span style={{ color: "#D1D5DB", fontSize: 15, fontWeight: 600, flexShrink: 0, lineHeight: 1 }}>
+                  ✓
+                </span>
+                <span style={{ fontSize: 14, color: "#9CA3AF" }}>{item}</span>
               </div>
-
-            </div>
-
-            {/* Gradient stripe — pinned flush to bottom */}
-            <div
-              className="relative overflow-hidden flex-shrink-0"
-              style={{
-                height: 148,
-                background: "linear-gradient(to right, #3B82F6 0%, #6366F1 55%, #8B5CF6 100%)",
-              }}
-            >
-              {/* Faint waveform — left half */}
-              <div
-                className="absolute inset-y-0 left-0 flex items-center"
-                style={{ paddingLeft: "clamp(1.75rem, 4vw, 3rem)", gap: 5, width: "50%" }}
-              >
-                {[18,30,52,76,96,118,104,86,68,50,80,108,92,64,48,38,58,84,72,44,62,90,56,34,48].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-shrink-0 rounded-full"
-                    style={{ width: 2.5, height: `${Math.min(h, 116)}px`, background: "rgba(255,255,255,0.16)" }}
-                  />
-                ))}
-              </div>
-
-              {/* 3D glossy sphere — right side */}
-              <div
-                className="absolute top-1/2 -translate-y-1/2"
-                style={{
-                  right: "clamp(1.75rem, 7vw, 5rem)",
-                  width: 108,
-                  height: 108,
-                  borderRadius: "50%",
-                  background: [
-                    "radial-gradient(",
-                    "  ellipse at 36% 28%,",
-                    "  rgba(255,255,255,0.92) 0%,",
-                    "  rgba(255,255,255,0.55) 6%,",
-                    "  #BFDBFE 14%,",
-                    "  #818CF8 36%,",
-                    "  #4F46E5 58%,",
-                    "  #3730A3 76%,",
-                    "  #1E1B4B 100%",
-                    ")",
-                  ].join(""),
-                  boxShadow: [
-                    "inset 0 0 0 1px rgba(255,255,255,0.18),",
-                    "0 4px 24px rgba(79,70,229,0.55),",
-                    "0 0 0 2px rgba(255,255,255,0.08)",
-                  ].join(" "),
-                }}
-              />
-            </div>
-
+            ))}
           </div>
+
+          {/* Pill "more info" button */}
+          <Link
+            href="/explore"
+            className="inline-flex items-center gap-2 self-start rounded-full transition-colors hover:bg-neutral-200"
+            style={{
+              background: "#F3F4F6",
+              border: "1px solid #E5E7EB",
+              paddingTop: "0.5rem",
+              paddingBottom: "0.5rem",
+              paddingLeft: "1rem",
+              paddingRight: "1.25rem",
+              color: "#6B7280",
+              fontSize: 13,
+              fontWeight: 500,
+            }}
+          >
+            <span style={{ fontSize: 16, fontWeight: 700, color: "#9CA3AF", lineHeight: 1 }}>+</span>
+            more info
+          </Link>
+        </div>
+
+        {/* ── Right: tall card, bleeds flush to viewport right edge ──────── */}
+        <div
+          className="hidden lg:block lg:w-[46%] relative overflow-hidden flex-shrink-0"
+          style={{
+            borderRadius: "2.5rem 0 0 2.5rem",
+            background: "linear-gradient(155deg, #EEF2FF 0%, #E8F0FE 28%, #DBEAFE 62%, #EFF6FF 100%)",
+          }}
+        >
+          {/* Ambient glow — sphere light bleeding into background */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "32%",
+              transform: "translate(-50%, -50%)",
+              width: 420,
+              height: 420,
+              borderRadius: "50%",
+              background: "radial-gradient(circle at center, rgba(59,130,246,0.28) 0%, rgba(99,102,241,0.12) 44%, transparent 70%)",
+              filter: "blur(52px)",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Ribbed frosted-glass panel */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "5%",
+              transform: "translateY(-50%)",
+              width: "44%",
+              height: "76%",
+              borderRadius: 72,
+              background: "repeating-linear-gradient(to right, rgba(255,255,255,0.70) 0px, rgba(255,255,255,0.70) 7px, rgba(186,218,255,0.13) 7px, rgba(186,218,255,0.13) 16px)",
+              boxShadow: "inset 0 0 0 1.5px rgba(255,255,255,0.60), 0 0 0 1px rgba(147,197,253,0.12)",
+              zIndex: 2,
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* 3D Glossy Sphere — emerges from behind the ribbed panel */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "35%",
+              transform: "translateY(-50%)",
+              width: 220,
+              height: 220,
+              borderRadius: "50%",
+              background: [
+                "radial-gradient(",
+                "circle at 32% 28%,",
+                "rgba(255,255,255,0.97) 0%,",
+                "rgba(255,255,255,0.80) 4%,",
+                "#BFDBFE 11%,",
+                "#60A5FA 26%,",
+                "#2563EB 50%,",
+                "#1D4ED8 68%,",
+                "#1E3A8A 86%,",
+                "#172554 100%",
+                ")",
+              ].join(""),
+              boxShadow: "0 24px 64px rgba(37,99,235,0.55), 0 0 0 1px rgba(255,255,255,0.20)",
+              zIndex: 1,
+              pointerEvents: "none",
+            }}
+          />
         </div>
       </section>
 
