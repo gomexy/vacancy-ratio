@@ -97,6 +97,212 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ── Inline SVG illustrations ──────────────────────────────────────────────────
+
+function VacancyPipelineDiagram() {
+  return (
+    <svg width="220" height="48" viewBox="0 0 220 48" fill="none" aria-hidden="true">
+      <rect x="0" y="14" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="28" y="27" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">API / survey</text>
+      <line x1="56" y1="24" x2="74" y2="24" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="70,20 74,24 70,28" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="74" y="14" width="64" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="106" y="27" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">tag + dedupe</text>
+      <line x1="138" y1="24" x2="156" y2="24" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="152,20 156,24 152,28" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="156" y="14" width="64" height="20" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="188" y="27" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">vacancy count</text>
+    </svg>
+  );
+}
+
+function GraduateBarDiagram() {
+  return (
+    <svg width="160" height="56" viewBox="0 0 160 56" fill="none" aria-hidden="true">
+      <line x1="16" y1="4" x2="16" y2="44" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="44" x2="152" y2="44" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      <rect x="24" y="28" width="14" height="16" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="46" y="22" width="14" height="22" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="68" y="18" width="14" height="26" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="90" y="14" width="14" height="30" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="112" y="16" width="14" height="28" rx="1" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="31" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">20</text>
+      <text x="53" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">21</text>
+      <text x="75" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">22</text>
+      <text x="97" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">23</text>
+      <text x="119" y="53" textAnchor="middle" fontSize="6" fill="#92600A" fontFamily="monospace">24</text>
+    </svg>
+  );
+}
+
+function FieldMappingDiagram() {
+  return (
+    <svg width="220" height="64" viewBox="0 0 220 64" fill="none" aria-hidden="true">
+      <rect x="0" y="4" width="64" height="14" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="0" y="24" width="64" height="14" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <rect x="0" y="44" width="64" height="14" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <text x="32" y="14" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">ISCED-0612</text>
+      <text x="32" y="34" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">SOC-15-1250</text>
+      <text x="32" y="54" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">ISCO-2512</text>
+      <line x1="64" y1="11" x2="140" y2="19" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="64" y1="31" x2="140" y2="31" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="64" y1="51" x2="140" y2="43" stroke="#e5e5e5" strokeWidth="1"/>
+      <rect x="140" y="15" width="80" height="18" rx="2" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="180" y="27" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">computer-science</text>
+      <rect x="140" y="39" width="80" height="18" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <text x="180" y="51" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">engineering</text>
+    </svg>
+  );
+}
+
+function DeduplicationDiagram() {
+  return (
+    <svg width="160" height="44" viewBox="0 0 160 44" fill="none" aria-hidden="true">
+      <rect x="0" y="2" width="52" height="16" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <text x="26" y="13" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">Provider A</text>
+      <rect x="0" y="26" width="52" height="16" rx="2" stroke="#d4d4d4" strokeWidth="1"/>
+      <text x="26" y="37" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">Provider B</text>
+      <line x1="52" y1="10" x2="86" y2="22" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
+      <line x1="52" y1="34" x2="86" y2="22" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="88" cy="22" r="3" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="91" y1="22" x2="108" y2="22" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      <polyline points="104,18 108,22 104,26" stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      <rect x="108" y="14" width="52" height="16" rx="2" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="134" y="25" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">1 record</text>
+    </svg>
+  );
+}
+
+function BalanceScaleDiagram() {
+  return (
+    <svg width="220" height="88" viewBox="0 0 220 88" fill="none" aria-hidden="true">
+      {/* Stand */}
+      <line x1="110" y1="74" x2="110" y2="50" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="88" y1="74" x2="132" y2="74" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="110" cy="50" r="2.5" fill="#e5e5e5"/>
+      {/* Beam tilted — graduates side down, vacancies side up */}
+      <line x1="26" y1="56" x2="194" y2="44" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Left pan (graduates) */}
+      <line x1="26" y1="56" x2="26" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <line x1="10" y1="68" x2="42" y2="68" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="19" cy="64" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <circle cx="33" cy="64" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <text x="26" y="82" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="sans-serif">graduates</text>
+      {/* Right pan (vacancies) — higher, yellow */}
+      <line x1="194" y1="44" x2="194" y2="56" stroke="#F5C518" strokeWidth="1" strokeLinecap="round"/>
+      <line x1="178" y1="56" x2="210" y2="56" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="183" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="194" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="205" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="194" y="82" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="sans-serif">vacancies</text>
+      {/* Ratio = label */}
+      <text x="110" y="40" textAnchor="middle" fontSize="8" fill="#d4d4d4" fontFamily="monospace">ratio</text>
+      <line x1="110" y1="42" x2="110" y2="49" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 1.5"/>
+    </svg>
+  );
+}
+
+function ThresholdSpectrumDiagram() {
+  return (
+    <svg width="100%" height="48" viewBox="0 0 280 48" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      {/* Track */}
+      <line x1="8" y1="22" x2="272" y2="22" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* End arrow */}
+      <polyline points="268,18 272,22 268,26" stroke="#e5e5e5" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      {/* Ticks: 0 */}
+      <line x1="8" y1="15" x2="8" y2="29" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      <text x="8" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0</text>
+      {/* 0.50 */}
+      <line x1="72" y1="17" x2="72" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <text x="72" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0.5</text>
+      {/* 0.75 */}
+      <line x1="108" y1="17" x2="108" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <text x="108" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0.75</text>
+      {/* 1.0 — key threshold, yellow */}
+      <line x1="152" y1="12" x2="152" y2="32" stroke="#F5C518" strokeWidth="2" strokeLinecap="round"/>
+      <text x="152" y="42" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">1.0</text>
+      {/* 2.0 */}
+      <line x1="248" y1="17" x2="248" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <text x="248" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">2.0+</text>
+      {/* Zone labels above */}
+      <text x="40" y="10" textAnchor="middle" fontSize="6.5" fill="#d4d4d4" fontFamily="monospace">surplus</text>
+      <text x="130" y="10" textAnchor="middle" fontSize="6.5" fill="#d4d4d4" fontFamily="monospace">balanced</text>
+      <text x="210" y="10" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">demand ↑</text>
+    </svg>
+  );
+}
+
+function ForecastTimelineDiagram() {
+  return (
+    <svg width="220" height="68" viewBox="0 0 220 68" fill="none" aria-hidden="true">
+      {/* Axes */}
+      <line x1="16" y1="8" x2="16" y2="52" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="52" x2="212" y2="52" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* 1:1 reference line */}
+      <line x1="16" y1="40" x2="212" y2="40" stroke="#f0f0f0" strokeWidth="1" strokeDasharray="3 3"/>
+      <text x="12" y="43" textAnchor="end" fontSize="6" fill="#e5e5e5" fontFamily="monospace">1.0</text>
+      {/* Historical line (yellow, solid) */}
+      <polyline points="24,46 52,40 80,36 108,32 124,30" stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx="24" cy="46" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="52" cy="40" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="80" cy="36" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="108" cy="32" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="124" cy="30" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      {/* Forecast boundary */}
+      <line x1="124" y1="8" x2="124" y2="52" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
+      {/* Projected line (grey, dashed) */}
+      <polyline points="124,30 152,26 180,22 208,18" stroke="#d4d4d4" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5 3"/>
+      {/* Labels */}
+      <text x="70" y="63" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">observed</text>
+      <text x="168" y="63" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">projected</text>
+    </svg>
+  );
+}
+
+function AiFlowDiagram() {
+  return (
+    <svg width="220" height="44" viewBox="0 0 220 44" fill="none" aria-hidden="true">
+      <rect x="0" y="12" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="28" y="24" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">computed</text>
+      <text x="28" y="33" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">data</text>
+      <line x1="56" y1="22" x2="74" y2="22" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="70,18 74,22 70,26" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="74" y="12" width="72" height="20" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="110" y="25" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">Claude (AI model)</text>
+      <line x1="146" y1="22" x2="164" y2="22" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="160,18 164,22 160,26" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="164" y="12" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="192" y="24" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">market</text>
+      <text x="192" y="33" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">summary</text>
+    </svg>
+  );
+}
+
+function GeographicPinDiagram() {
+  return (
+    <svg width="140" height="80" viewBox="0 0 140 80" fill="none" aria-hidden="true">
+      {/* Country outline */}
+      <rect x="4" y="4" width="132" height="72" rx="5" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="5 3"/>
+      {/* Main city pin (yellow - strongest hub) */}
+      <circle cx="42" cy="32" r="7" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="42" y1="39" x2="42" y2="50" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Ripple */}
+      <circle cx="42" cy="32" r="14" stroke="#F5C518" strokeWidth="0.75" strokeDasharray="2 3" strokeOpacity="0.5"/>
+      {/* Secondary pins */}
+      <circle cx="88" cy="44" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="88" y1="48" x2="88" y2="56" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="112" cy="26" r="3" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="112" y1="29" x2="112" y2="36" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="68" cy="60" r="2.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="68" y1="62" x2="68" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      {/* National label */}
+      <text x="70" y="76" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national level</text>
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default function MethodologyPage() {
   return (
     <div style={{ background: "#F0F0F0" }} className="min-h-screen">
@@ -149,6 +355,9 @@ export default function MethodologyPage() {
           as demo data. The vacancy total shown on the Explore page is based on national-level
           figures from planned data sources below.
         </p>
+        <div className="mt-2">
+          <VacancyPipelineDiagram />
+        </div>
       </div>
 
       {/* Graduate data */}
@@ -166,6 +375,9 @@ export default function MethodologyPage() {
           remains national and the vacancy count is estimated at city level — this is clearly
           labelled.
         </p>
+        <div className="mt-2">
+          <GraduateBarDiagram />
+        </div>
       </div>
 
       {/* Field classification */}
@@ -178,6 +390,9 @@ export default function MethodologyPage() {
           used throughout the product. The mapping is approximate — some graduates and vacancies
           near field boundaries may be mis-assigned.
         </p>
+        <div className="mt-2">
+          <FieldMappingDiagram />
+        </div>
       </div>
 
       {/* Deduplication */}
@@ -189,6 +404,9 @@ export default function MethodologyPage() {
           and city. If two records share all three after normalisation, only one is counted.
           No deduplication is applied in the demo data because all listings have unique IDs.
         </p>
+        <div className="mt-2">
+          <DeduplicationDiagram />
+        </div>
       </div>
 
       {/* Formula */}
@@ -198,6 +416,10 @@ export default function MethodologyPage() {
           Two metrics are computed. Neither is stored — both are derived at query time from
           the raw source figures. This ensures consistency and auditability.
         </p>
+
+        <div className="mt-1">
+          <BalanceScaleDiagram />
+        </div>
 
         <div className="rounded-md border border-neutral-800 bg-neutral-950 px-5 py-5 font-mono text-sm">
           <p className="text-neutral-500 text-xs mb-3">// Primary metric</p>
@@ -239,6 +461,9 @@ export default function MethodologyPage() {
           Ratios are mapped to five named signals. These thresholds are editorial
           judgements, not regulatory definitions.
         </p>
+        <div className="mt-1">
+          <ThresholdSpectrumDiagram />
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -285,6 +510,9 @@ export default function MethodologyPage() {
             labelled <em>Declining</em>. Otherwise it is <em>Stable</em>.
           </li>
         </ol>
+        <div className="mt-1">
+          <ForecastTimelineDiagram />
+        </div>
         <p className="text-sm text-neutral-600 leading-relaxed">
           Confidence is capped at <em>Medium</em> when demo data is in use, because the
           underlying figures have not been externally validated.
@@ -305,6 +533,9 @@ export default function MethodologyPage() {
           CAGR figures, outlook label, top skills — and is asked to write a 2–3 sentence
           summary grounded only in those numbers.
         </p>
+        <div className="mt-1">
+          <AiFlowDiagram />
+        </div>
         <p className="text-sm text-neutral-600 leading-relaxed">
           The AI is explicitly instructed not to invent statistics, companies, salaries,
           or trends not present in the supplied data. If data is insufficient, it is
@@ -335,6 +566,9 @@ export default function MethodologyPage() {
           estimated at city level. The resulting ratio is therefore not directly comparable
           to a national ratio and is labelled accordingly.
         </p>
+        <div className="mt-2">
+          <GeographicPinDiagram />
+        </div>
       </div>
 
       {/* Data sources */}
