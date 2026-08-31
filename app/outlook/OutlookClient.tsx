@@ -20,7 +20,7 @@ import { FIELDS } from "@/lib/data/fields";
 import { fmt } from "@/lib/utils";
 import type { Country, Field } from "@/lib/types";
 
-const C = "mx-auto max-w-3xl px-6 sm:px-12";
+const C = "mx-auto max-w-5xl px-6 sm:px-12";
 
 interface Props {
   countries: Country[];
