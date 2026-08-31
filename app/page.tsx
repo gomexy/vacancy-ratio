@@ -4,7 +4,6 @@ import { computeSnapshot, SIGNAL_META } from "@/lib/compute";
 import { getEntry, getEntriesForCountryYear, getTrendEntries } from "@/lib/service";
 import { computeForecast } from "@/lib/forecast";
 import { fmt, fmtRatio, cn } from "@/lib/utils";
-import SignalBadge from "@/components/results/SignalBadge";
 import { FIELDS } from "@/lib/data/fields";
 import { getSkillsForField } from "@/lib/data/mock-skills";
 import type { MarketSignal } from "@/lib/types";
@@ -118,7 +117,7 @@ export default function HomePage() {
             }}
           >
             Understand where your{" "}
-            <span style={{ color: "#3B82F6" }}>career</span>{" "}
+            <span style={{ color: "#F5C518" }}>career</span>{" "}
             is heading.
           </h1>
 
@@ -141,7 +140,7 @@ export default function HomePage() {
                 key={item}
                 style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
               >
-                <span style={{ color: "#D1D5DB", fontSize: 15, fontWeight: 600, flexShrink: 0, lineHeight: 1 }}>
+                <span style={{ color: "#F5C518", fontSize: 15, fontWeight: 600, flexShrink: 0, lineHeight: 1 }}>
                   ✓
                 </span>
                 <span style={{ fontSize: 14, color: "#9CA3AF" }}>{item}</span>
@@ -260,10 +259,10 @@ export default function HomePage() {
                   <div className="max-w-lg">
                     <div
                       className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1"
-                      style={{ background: `${pMeta.hex}12`, border: `1px solid ${pMeta.hex}28` }}
+                      style={{ background: "#FFFBEB", border: "1px solid #FDE68A" }}
                     >
-                      <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: pMeta.hex }} />
-                      <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: pMeta.hex }}>
+                      <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
+                      <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
                         {pMeta.label}
                       </span>
                     </div>
@@ -271,7 +270,7 @@ export default function HomePage() {
                     <div className="flex flex-wrap items-baseline gap-3 mb-3">
                       <p
                         className="font-semibold tracking-tight tabular-nums leading-none"
-                        style={{ fontSize: "clamp(3.5rem, 10vw, 5rem)", color: "#3B82F6" }}
+                        style={{ fontSize: "clamp(3.5rem, 10vw, 5rem)", color: "#F5C518" }}
                       >
                         {fmtRatio(preview.snap.vacancyRatio)}
                       </p>
@@ -305,7 +304,7 @@ export default function HomePage() {
                           <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
                           <div>
                             <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">5-year outlook</p>
-                            <p className="text-2xl font-semibold tracking-tight" style={{ color: "#3B82F6" }}>
+                            <p className="text-2xl font-semibold tracking-tight" style={{ color: "#F5C518" }}>
                               {preview.forecast.outlookLabel}
                             </p>
                           </div>
@@ -330,7 +329,7 @@ export default function HomePage() {
                           <div className="h-1 w-full rounded-full bg-neutral-100 overflow-hidden">
                             <div
                               className="h-full rounded-full"
-                              style={{ width: `${s.pct}%`, background: "#3B82F6", opacity: 0.4 + (s.pct / 200) }}
+                              style={{ width: `${s.pct}%`, background: "#F5C518", opacity: 0.4 + (s.pct / 200) }}
                             />
                           </div>
                         </div>
@@ -372,11 +371,13 @@ export default function HomePage() {
                 </p>
                 {preview && pMeta && (
                   <div>
-                    <p className="text-4xl font-semibold tabular-nums tracking-tight leading-none mb-2" style={{ color: "#3B82F6" }}>
+                    <p className="text-4xl font-semibold tabular-nums tracking-tight leading-none mb-2" style={{ color: "#F5C518" }}>
                       {fmtRatio(preview.snap.vacancyRatio)}
                     </p>
                     <p className="text-xs text-neutral-400 mb-2">vacancies per graduate</p>
-                    <SignalBadge signal={preview.snap.signal} />
+                    <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
+                      {SIGNAL_META[preview.snap.signal].label}
+                    </span>
                   </div>
                 )}
               </div>
@@ -398,7 +399,7 @@ export default function HomePage() {
                           <div key={r.year} className="flex-1 flex flex-col items-center gap-1">
                             <div
                               className="w-full rounded-sm"
-                              style={{ height: `${(r.ratio / maxRatio) * 48}px`, background: isLast ? "#3B82F6" : "#E5E7EB" }}
+                              style={{ height: `${(r.ratio / maxRatio) * 48}px`, background: isLast ? "#F5C518" : "#E5E7EB" }}
                             />
                           </div>
                         );
@@ -421,7 +422,7 @@ export default function HomePage() {
                   outpace supply — or the other way around.
                 </p>
                 <div>
-                  <p className="text-4xl font-semibold tracking-tight leading-none mb-2" style={{ color: "#3B82F6" }}>
+                  <p className="text-4xl font-semibold tracking-tight leading-none mb-2" style={{ color: "#F5C518" }}>
                     {q3Label}
                   </p>
                   <p className="text-xs text-neutral-400">
@@ -469,13 +470,17 @@ export default function HomePage() {
                       <span className="text-sm font-medium text-neutral-800 w-44 flex-shrink-0 truncate">{field!.label}</span>
                       <div className="flex-1 hidden sm:flex items-center">
                         <div className="w-full h-1.5 bg-neutral-100 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full transition-all" style={{ width: `${barWidth}%`, background: "#3B82F6" }} />
+                          <div className="h-full rounded-full transition-all" style={{ width: `${barWidth}%`, background: "#F5C518" }} />
                         </div>
                       </div>
-                      <span className="font-semibold tabular-nums text-sm w-10 text-right flex-shrink-0" style={{ color: "#3B82F6" }}>
+                      <span className="font-semibold tabular-nums text-sm w-10 text-right flex-shrink-0" style={{ color: "#F5C518" }}>
                         {fmtRatio(snap.vacancyRatio)}
                       </span>
-                      <span className="w-36 hidden sm:block"><SignalBadge signal={snap.signal} /></span>
+                      <span className="w-36 hidden sm:block">
+                        <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
+                          {SIGNAL_META[snap.signal].label}
+                        </span>
+                      </span>
                     </div>
                   );
                 })}
@@ -509,7 +514,7 @@ export default function HomePage() {
                     <div style={{ width: "25%",  background: "#fca5a5" }} />
                     <div style={{ width: "12.5%", background: "#fde68a" }} />
                     <div style={{ width: "12.5%", background: "#e5e5e5" }} />
-                    <div style={{ width: "50%",  background: "#93c5fd" }} />
+                    <div style={{ width: "50%",  background: "#FDE68A" }} />
                   </div>
                   <div className="flex justify-between font-mono text-[9px] text-neutral-300">
                     <span>0</span><span>0.5</span><span>1.0</span><span>2.0+</span>
@@ -526,7 +531,7 @@ export default function HomePage() {
                         style={{ borderBottom: "1px solid #F9FAFB" }}
                       >
                         <div className="flex items-center gap-3 flex-shrink-0 sm:w-52">
-                          <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#3B82F6" }}>
+                          <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#92600A" }}>
                             {m.label}
                           </span>
                           <span className="font-mono text-[9px] text-neutral-300">{SIGNAL_RANGE[sig]}</span>
