@@ -97,44 +97,78 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── Inline SVG illustrations ──────────────────────────────────────────────────
+// ── Editorial illustrations ───────────────────────────────────────────────────
 
-function VacancyPipelineDiagram() {
+// 1. Graduate Supply — abstract people flowing into a national count
+function GraduateSupplyIllustration() {
   return (
-    <svg width="220" height="48" viewBox="0 0 220 48" fill="none" aria-hidden="true">
-      <rect x="0" y="14" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="28" y="27" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">API / survey</text>
-      <line x1="56" y1="24" x2="74" y2="24" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="70,20 74,24 70,28" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <rect x="74" y="14" width="64" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="106" y="27" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">tag + dedupe</text>
-      <line x1="138" y1="24" x2="156" y2="24" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="152,20 156,24 152,28" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <rect x="156" y="14" width="64" height="20" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
-      <text x="188" y="27" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">vacancy count</text>
+    <svg width="220" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
+      {/* Person 1 */}
+      <circle cx="13" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="13" y1="25.5" x2="13" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Person 2 */}
+      <circle cx="33" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="33" y1="25.5" x2="33" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Person 3 */}
+      <circle cx="53" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="53" y1="25.5" x2="53" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Graduate — highlighted yellow */}
+      <circle cx="73" cy="20" r="5.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="73" y1="25.5" x2="73" y2="40" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Mortarboard brim + cap */}
+      <line x1="63" y1="14" x2="83" y2="14" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      <rect x="68" y="7" width="10" height="7" rx="1.5" stroke="#F5C518" strokeWidth="1" fill="none"/>
+      {/* Ellipsis "many more" */}
+      <circle cx="90" cy="27" r="1.5" fill="#e5e5e5"/>
+      <circle cx="96" cy="27" r="1.5" fill="#e5e5e5"/>
+      <circle cx="102" cy="27" r="1.5" fill="#e5e5e5"/>
+      {/* Flow arrow */}
+      <line x1="110" y1="40" x2="128" y2="40" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
+      <polyline points="124,36 128,40 124,44" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      {/* Output block */}
+      <rect x="132" y="26" width="80" height="28" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="172" y="37.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">graduate supply</text>
+      <text x="172" y="47" textAnchor="middle" fontSize="7.5" fill="#92600A" fontFamily="monospace" fontWeight="600">n completions / yr</text>
+      {/* Labels */}
+      <text x="43" y="58" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">ISCED completions</text>
+      <text x="172" y="62" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national aggregate</text>
     </svg>
   );
 }
 
-function GraduateBarDiagram() {
+// 2. Job Demand — stacked job cards flowing to a vacancy count
+function JobDemandIllustration() {
   return (
-    <svg width="160" height="56" viewBox="0 0 160 56" fill="none" aria-hidden="true">
-      <line x1="16" y1="4" x2="16" y2="44" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="16" y1="44" x2="152" y2="44" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      <rect x="24" y="28" width="14" height="16" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
-      <rect x="46" y="22" width="14" height="22" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
-      <rect x="68" y="18" width="14" height="26" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
-      <rect x="90" y="14" width="14" height="30" rx="1" stroke="#d4d4d4" strokeWidth="1"/>
-      <rect x="112" y="16" width="14" height="28" rx="1" stroke="#F5C518" strokeWidth="1.5"/>
-      <text x="31" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">20</text>
-      <text x="53" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">21</text>
-      <text x="75" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">22</text>
-      <text x="97" y="53" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">23</text>
-      <text x="119" y="53" textAnchor="middle" fontSize="6" fill="#92600A" fontFamily="monospace">24</text>
+    <svg width="220" height="64" viewBox="0 0 220 64" fill="none" aria-hidden="true">
+      {/* Back card */}
+      <rect x="4" y="4" width="72" height="42" rx="4" stroke="#ebebeb" strokeWidth="1"/>
+      {/* Mid card */}
+      <rect x="8" y="8" width="72" height="42" rx="4" stroke="#d4d4d4" strokeWidth="1"/>
+      {/* Front card */}
+      <rect x="12" y="12" width="72" height="42" rx="4" stroke="#d4d4d4" strokeWidth="1.5"/>
+      {/* Card content lines */}
+      <line x1="20" y1="22" x2="70" y2="22" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="20" y1="29" x2="58" y2="29" stroke="#e8e8e8" strokeWidth="1" strokeLinecap="round"/>
+      <line x1="20" y1="35" x2="64" y2="35" stroke="#e8e8e8" strokeWidth="1" strokeLinecap="round"/>
+      {/* Location pin */}
+      <circle cx="66" cy="42" r="4" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="66" y1="46" x2="66" y2="52" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Flow dots */}
+      <circle cx="100" cy="33" r="1.5" fill="#e5e5e5"/>
+      <circle cx="107" cy="33" r="1.5" fill="#e5e5e5"/>
+      <circle cx="114" cy="33" r="1.5" fill="#e5e5e5"/>
+      <polyline points="118,29 122,33 118,37" stroke="#e5e5e5" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+      {/* Vacancy count block */}
+      <rect x="126" y="14" width="88" height="38" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <text x="170" y="30" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">relevant vacancies</text>
+      <text x="170" y="42" textAnchor="middle" fontSize="7.5" fill="#92600A" fontFamily="monospace" fontWeight="600">field + location</text>
+      {/* Label */}
+      <text x="48" y="62" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">API / survey data</text>
     </svg>
   );
 }
 
+// 3. Field mapping — unchanged (already good)
 function FieldMappingDiagram() {
   return (
     <svg width="220" height="64" viewBox="0 0 220 64" fill="none" aria-hidden="true">
@@ -155,6 +189,7 @@ function FieldMappingDiagram() {
   );
 }
 
+// 4. Deduplication — unchanged (already good)
 function DeduplicationDiagram() {
   return (
     <svg width="160" height="44" viewBox="0 0 160 44" fill="none" aria-hidden="true">
@@ -173,129 +208,173 @@ function DeduplicationDiagram() {
   );
 }
 
-function BalanceScaleDiagram() {
+// 5. Ratio — THE FOCAL PIECE: graduate dots ← ratio circle → vacancy dots
+function RatioIllustration() {
+  // 6 graduate dots (2 × 3) on left
+  const grad: [number, number][] = [
+    [16, 34], [28, 34],
+    [16, 50], [28, 50],
+    [16, 66], [28, 66],
+  ];
+  // 9 vacancy dots (3 × 3) on right — more = demand > supply
+  const vac: [number, number][] = [
+    [224, 34], [236, 34], [248, 34],
+    [224, 50], [236, 50], [248, 50],
+    [224, 66], [236, 66], [248, 66],
+  ];
   return (
-    <svg width="220" height="88" viewBox="0 0 220 88" fill="none" aria-hidden="true">
-      {/* Stand */}
-      <line x1="110" y1="74" x2="110" y2="50" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="88" y1="74" x2="132" y2="74" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="110" cy="50" r="2.5" fill="#e5e5e5"/>
-      {/* Beam tilted — graduates side down, vacancies side up */}
-      <line x1="26" y1="56" x2="194" y2="44" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Left pan (graduates) */}
-      <line x1="26" y1="56" x2="26" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <line x1="10" y1="68" x2="42" y2="68" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="19" cy="64" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
-      <circle cx="33" cy="64" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
-      <text x="26" y="82" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="sans-serif">graduates</text>
-      {/* Right pan (vacancies) — higher, yellow */}
-      <line x1="194" y1="44" x2="194" y2="56" stroke="#F5C518" strokeWidth="1" strokeLinecap="round"/>
-      <line x1="178" y1="56" x2="210" y2="56" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="183" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="194" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="205" cy="52" r="4" stroke="#F5C518" strokeWidth="1.5"/>
-      <text x="194" y="82" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="sans-serif">vacancies</text>
-      {/* Ratio = label */}
-      <text x="110" y="40" textAnchor="middle" fontSize="8" fill="#d4d4d4" fontFamily="monospace">ratio</text>
-      <line x1="110" y1="42" x2="110" y2="49" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 1.5"/>
+    <svg width="264" height="104" viewBox="0 0 264 104" fill="none" aria-hidden="true">
+      {/* Graduate dots */}
+      {grad.map(([cx, cy], i) => (
+        <circle key={`g${i}`} cx={cx} cy={cy} r="4.5" stroke="#d4d4d4" strokeWidth="1.5"/>
+      ))}
+      {/* Left label */}
+      <text x="22" y="86" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">graduates</text>
+
+      {/* Connecting line left side */}
+      <line x1="40" y1="50" x2="86" y2="50" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="82,46 86,50 82,54" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
+
+      {/* Central ratio circle */}
+      <circle cx="132" cy="50" r="38" stroke="#F5C518" strokeWidth="1.5"/>
+      <circle cx="132" cy="50" r="33" stroke="#FDE68A" strokeWidth="0.75" strokeDasharray="2 4" strokeOpacity="0.6"/>
+      <text x="132" y="44" textAnchor="middle" fontSize="20" fontWeight="700" fill="#111827" fontFamily="monospace">1.21</text>
+      <text x="132" y="57" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">vacancy ratio</text>
+
+      {/* Connecting line right side */}
+      <line x1="174" y1="50" x2="218" y2="50" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="178,46 174,50 178,54" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
+
+      {/* Vacancy dots */}
+      {vac.map(([cx, cy], i) => (
+        <circle key={`v${i}`} cx={cx} cy={cy} r="4.5" stroke="#F5C518" strokeWidth="1.5"/>
+      ))}
+      {/* Right label */}
+      <text x="236" y="86" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">vacancies</text>
+
+      {/* Bottom equation hint */}
+      <text x="132" y="100" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">vacancies ÷ graduates = ratio</text>
     </svg>
   );
 }
 
-function ThresholdSpectrumDiagram() {
+// 6. Market Spectrum — five-zone horizontal spectrum with indicator
+function MarketSpectrumIllustration() {
   return (
-    <svg width="100%" height="48" viewBox="0 0 280 48" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-      {/* Track */}
-      <line x1="8" y1="22" x2="272" y2="22" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* End arrow */}
-      <polyline points="268,18 272,22 268,26" stroke="#e5e5e5" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-      {/* Ticks: 0 */}
-      <line x1="8" y1="15" x2="8" y2="29" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      <text x="8" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0</text>
-      {/* 0.50 */}
-      <line x1="72" y1="17" x2="72" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <text x="72" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0.5</text>
-      {/* 0.75 */}
-      <line x1="108" y1="17" x2="108" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <text x="108" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">0.75</text>
-      {/* 1.0 — key threshold, yellow */}
-      <line x1="152" y1="12" x2="152" y2="32" stroke="#F5C518" strokeWidth="2" strokeLinecap="round"/>
-      <text x="152" y="42" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">1.0</text>
-      {/* 2.0 */}
-      <line x1="248" y1="17" x2="248" y2="27" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <text x="248" y="42" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">2.0+</text>
+    <svg width="100%" height="64" viewBox="0 0 280 64" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      {/* Zone fills */}
+      <rect x="8"   y="18" width="42" height="18" rx="0" fill="#f3f4f6"/>
+      <rect x="50"  y="18" width="38" height="18" rx="0" fill="#f5f5f5"/>
+      <rect x="88"  y="18" width="40" height="18" rx="0" fill="#fefce8"/>
+      <rect x="128" y="18" width="56" height="18" rx="0" fill="#fffbeb"/>
+      <rect x="184" y="18" width="88" height="18" rx="0" fill="#FFF3CD"/>
+      {/* Outer border on the whole band */}
+      <rect x="8" y="18" width="264" height="18" rx="2" stroke="#e5e5e5" strokeWidth="1" fill="none"/>
+      {/* Internal zone dividers */}
+      <line x1="50"  y1="18" x2="50"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="88"  y1="18" x2="88"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="128" y1="14" x2="128" y2="40" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="184" y1="18" x2="184" y2="36" stroke="#e5e5e5" strokeWidth="1"/>
       {/* Zone labels above */}
-      <text x="40" y="10" textAnchor="middle" fontSize="6.5" fill="#d4d4d4" fontFamily="monospace">surplus</text>
-      <text x="130" y="10" textAnchor="middle" fontSize="6.5" fill="#d4d4d4" fontFamily="monospace">balanced</text>
-      <text x="210" y="10" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">demand ↑</text>
+      <text x="29"  y="12" textAnchor="middle" fontSize="5.5" fill="#c4c4c4" fontFamily="monospace">Sig. Surplus</text>
+      <text x="69"  y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Surplus</text>
+      <text x="108" y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Balanced</text>
+      <text x="156" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Strong Demand</text>
+      <text x="216" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Critical Shortage</text>
+      {/* Threshold labels below */}
+      <text x="8"   y="48" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0</text>
+      <text x="50"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.5</text>
+      <text x="88"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.75</text>
+      <text x="128" y="48" textAnchor="middle" fontSize="6" fill="#92600A" fontFamily="monospace">1.0</text>
+      <text x="184" y="48" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">2.0+</text>
+      {/* Diamond indicator at "Strong Demand" zone (~ratio 1.21) */}
+      <polygon points="152,18 156,22 152,26 148,22" fill="#F5C518" opacity="0.85"/>
+      <text x="152" y="58" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">1.21 →</text>
     </svg>
   );
 }
 
-function ForecastTimelineDiagram() {
+// 7. Forecast — historical solid line → dashed projected line
+function ForecastIllustration() {
+  const hist: [number, number][] = [[24, 48], [52, 42], [80, 37], [108, 32], [124, 28]];
+  const proj: [number, number][] = [[124, 28], [152, 24], [180, 20], [208, 16]];
+  const histPts = hist.map(([x, y]) => `${x},${y}`).join(" ");
+  const projPts = proj.map(([x, y]) => `${x},${y}`).join(" ");
   return (
-    <svg width="220" height="68" viewBox="0 0 220 68" fill="none" aria-hidden="true">
+    <svg width="240" height="80" viewBox="0 0 240 80" fill="none" aria-hidden="true">
       {/* Axes */}
-      <line x1="16" y1="8" x2="16" y2="52" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="16" y1="52" x2="212" y2="52" stroke="#e5e5e5" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* 1:1 reference line */}
-      <line x1="16" y1="40" x2="212" y2="40" stroke="#f0f0f0" strokeWidth="1" strokeDasharray="3 3"/>
-      <text x="12" y="43" textAnchor="end" fontSize="6" fill="#e5e5e5" fontFamily="monospace">1.0</text>
-      {/* Historical line (yellow, solid) */}
-      <polyline points="24,46 52,40 80,36 108,32 124,30" stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="24" cy="46" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="52" cy="40" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="80" cy="36" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="108" cy="32" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="124" cy="30" r="2.5" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="16" y1="8"  x2="16"  y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="60" x2="220" y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* 1.0 reference */}
+      <line x1="16" y1="44" x2="220" y2="44" stroke="#f0f0f0" strokeWidth="1" strokeDasharray="3 3"/>
+      <text x="13" y="47" textAnchor="end" fontSize="6" fill="#e5e5e5" fontFamily="monospace">1.0</text>
       {/* Forecast boundary */}
-      <line x1="124" y1="8" x2="124" y2="52" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
-      {/* Projected line (grey, dashed) */}
-      <polyline points="124,30 152,26 180,22 208,18" stroke="#d4d4d4" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5 3"/>
+      <line x1="124" y1="8" x2="124" y2="60" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
+      {/* Historical line */}
+      <polyline points={histPts} stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      {hist.map(([cx, cy], i) => (
+        <circle key={`h${i}`} cx={cx} cy={cy} r="2.5" fill="#F5C518"/>
+      ))}
+      {/* Projected line (dashed, grey) */}
+      <polyline points={projPts} stroke="#d4d4d4" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5 3"/>
+      {proj.slice(1).map(([cx, cy], i) => (
+        <circle key={`p${i}`} cx={cx} cy={cy} r="2.5" stroke="#d4d4d4" strokeWidth="1.5" fill="white"/>
+      ))}
       {/* Labels */}
-      <text x="70" y="63" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">observed</text>
-      <text x="168" y="63" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">projected</text>
+      <text x="68"  y="74" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">observed</text>
+      <text x="168" y="74" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">projected</text>
     </svg>
   );
 }
 
-function AiFlowDiagram() {
+// 8. AI insight — structured data → Claude → market summary
+function AIInsightIllustration() {
   return (
-    <svg width="220" height="44" viewBox="0 0 220 44" fill="none" aria-hidden="true">
-      <rect x="0" y="12" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="28" y="24" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">computed</text>
-      <text x="28" y="33" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">data</text>
-      <line x1="56" y1="22" x2="74" y2="22" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="70,18 74,22 70,26" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <rect x="74" y="12" width="72" height="20" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
-      <text x="110" y="25" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">Claude (AI model)</text>
-      <line x1="146" y1="22" x2="164" y2="22" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="160,18 164,22 160,26" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      <rect x="164" y="12" width="56" height="20" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="192" y="24" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">market</text>
-      <text x="192" y="33" textAnchor="middle" fontSize="7" fill="#9ca3af" fontFamily="monospace">summary</text>
+    <svg width="240" height="56" viewBox="0 0 240 56" fill="none" aria-hidden="true">
+      {/* Computed data block with subtle grid */}
+      <rect x="0" y="10" width="68" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="0"  y1="22" x2="68" y2="22" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <line x1="0"  y1="32" x2="68" y2="32" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <line x1="22" y1="10" x2="22" y2="46" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <text x="34" y="25.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">computed</text>
+      <text x="34" y="35.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">data</text>
+      {/* Arrow */}
+      <line x1="68" y1="28" x2="88" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="84,24 88,28 84,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      {/* Claude block */}
+      <rect x="88" y="10" width="68" height="36" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="122" y="27" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">Claude</text>
+      <text x="122" y="38" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">interprets</text>
+      {/* Arrow */}
+      <line x1="156" y1="28" x2="176" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="172,24 176,28 172,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      {/* Summary output block with text hint lines */}
+      <rect x="176" y="10" width="64" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="184" y1="21" x2="232" y2="21" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="184" y1="29" x2="228" y2="29" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="184" y1="37" x2="220" y2="37" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      {/* Labels */}
+      <text x="34"  y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">structured input</text>
+      <text x="122" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">AI model</text>
+      <text x="208" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">market summary</text>
     </svg>
   );
 }
 
+// 9. Geographic pin — unchanged (already good)
 function GeographicPinDiagram() {
   return (
     <svg width="140" height="80" viewBox="0 0 140 80" fill="none" aria-hidden="true">
-      {/* Country outline */}
       <rect x="4" y="4" width="132" height="72" rx="5" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="5 3"/>
-      {/* Main city pin (yellow - strongest hub) */}
       <circle cx="42" cy="32" r="7" stroke="#F5C518" strokeWidth="1.5"/>
       <line x1="42" y1="39" x2="42" y2="50" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Ripple */}
       <circle cx="42" cy="32" r="14" stroke="#F5C518" strokeWidth="0.75" strokeDasharray="2 3" strokeOpacity="0.5"/>
-      {/* Secondary pins */}
       <circle cx="88" cy="44" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
       <line x1="88" y1="48" x2="88" y2="56" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
       <circle cx="112" cy="26" r="3" stroke="#d4d4d4" strokeWidth="1"/>
       <line x1="112" y1="29" x2="112" y2="36" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
       <circle cx="68" cy="60" r="2.5" stroke="#d4d4d4" strokeWidth="1"/>
       <line x1="68" y1="62" x2="68" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      {/* National label */}
       <text x="70" y="76" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national level</text>
     </svg>
   );
@@ -356,7 +435,7 @@ export default function MethodologyPage() {
           figures from planned data sources below.
         </p>
         <div className="mt-2">
-          <VacancyPipelineDiagram />
+          <JobDemandIllustration />
         </div>
       </div>
 
@@ -376,7 +455,7 @@ export default function MethodologyPage() {
           labelled.
         </p>
         <div className="mt-2">
-          <GraduateBarDiagram />
+          <GraduateSupplyIllustration />
         </div>
       </div>
 
@@ -418,7 +497,7 @@ export default function MethodologyPage() {
         </p>
 
         <div className="mt-1">
-          <BalanceScaleDiagram />
+          <RatioIllustration />
         </div>
 
         <div className="rounded-md border border-neutral-800 bg-neutral-950 px-5 py-5 font-mono text-sm">
@@ -462,7 +541,7 @@ export default function MethodologyPage() {
           judgements, not regulatory definitions.
         </p>
         <div className="mt-1">
-          <ThresholdSpectrumDiagram />
+          <MarketSpectrumIllustration />
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -511,7 +590,7 @@ export default function MethodologyPage() {
           </li>
         </ol>
         <div className="mt-1">
-          <ForecastTimelineDiagram />
+          <ForecastIllustration />
         </div>
         <p className="text-sm text-neutral-600 leading-relaxed">
           Confidence is capped at <em>Medium</em> when demo data is in use, because the
@@ -534,7 +613,7 @@ export default function MethodologyPage() {
           summary grounded only in those numbers.
         </p>
         <div className="mt-1">
-          <AiFlowDiagram />
+          <AIInsightIllustration />
         </div>
         <p className="text-sm text-neutral-600 leading-relaxed">
           The AI is explicitly instructed not to invent statistics, companies, salaries,
