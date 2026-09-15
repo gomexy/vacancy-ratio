@@ -97,78 +97,175 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── Editorial illustrations ───────────────────────────────────────────────────
+// ── Icon SVGs (outline, 18×18, strokeWidth 1.5) ───────────────────────────────
 
-// 1. Graduate Supply — abstract people flowing into a national count
-function GraduateSupplyIllustration() {
+function IconBriefcase() {
   return (
-    <svg width="220" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
-      {/* Person 1 */}
-      <circle cx="13" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <line x1="13" y1="25.5" x2="13" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Person 2 */}
-      <circle cx="33" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <line x1="33" y1="25.5" x2="33" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Person 3 */}
-      <circle cx="53" cy="20" r="5.5" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <line x1="53" y1="25.5" x2="53" y2="40" stroke="#d4d4d4" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Graduate — highlighted yellow */}
-      <circle cx="73" cy="20" r="5.5" stroke="#F5C518" strokeWidth="1.5"/>
-      <line x1="73" y1="25.5" x2="73" y2="40" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Mortarboard brim + cap */}
-      <line x1="63" y1="14" x2="83" y2="14" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      <rect x="68" y="7" width="10" height="7" rx="1.5" stroke="#F5C518" strokeWidth="1" fill="none"/>
-      {/* Ellipsis "many more" */}
-      <circle cx="90" cy="27" r="1.5" fill="#e5e5e5"/>
-      <circle cx="96" cy="27" r="1.5" fill="#e5e5e5"/>
-      <circle cx="102" cy="27" r="1.5" fill="#e5e5e5"/>
-      {/* Flow arrow */}
-      <line x1="110" y1="40" x2="128" y2="40" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
-      <polyline points="124,36 128,40 124,44" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      {/* Output block */}
-      <rect x="132" y="26" width="80" height="28" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="172" y="37.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">graduate supply</text>
-      <text x="172" y="47" textAnchor="middle" fontSize="7.5" fill="#92600A" fontFamily="monospace" fontWeight="600">n completions / yr</text>
-      {/* Labels */}
-      <text x="43" y="58" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">ISCED completions</text>
-      <text x="172" y="62" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national aggregate</text>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="6" width="14" height="10" rx="2"/>
+      <path d="M6 6V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
+      <line x1="2" y1="11" x2="16" y2="11"/>
     </svg>
   );
 }
 
-// 2. Job Demand — stacked job cards flowing to a vacancy count
-function JobDemandIllustration() {
+function IconSchool() {
   return (
-    <svg width="220" height="64" viewBox="0 0 220 64" fill="none" aria-hidden="true">
-      {/* Back card */}
-      <rect x="4" y="4" width="72" height="42" rx="4" stroke="#ebebeb" strokeWidth="1"/>
-      {/* Mid card */}
-      <rect x="8" y="8" width="72" height="42" rx="4" stroke="#d4d4d4" strokeWidth="1"/>
-      {/* Front card */}
-      <rect x="12" y="12" width="72" height="42" rx="4" stroke="#d4d4d4" strokeWidth="1.5"/>
-      {/* Card content lines */}
-      <line x1="20" y1="22" x2="70" y2="22" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="20" y1="29" x2="58" y2="29" stroke="#e8e8e8" strokeWidth="1" strokeLinecap="round"/>
-      <line x1="20" y1="35" x2="64" y2="35" stroke="#e8e8e8" strokeWidth="1" strokeLinecap="round"/>
-      {/* Location pin */}
-      <circle cx="66" cy="42" r="4" stroke="#F5C518" strokeWidth="1.5"/>
-      <line x1="66" y1="46" x2="66" y2="52" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Flow dots */}
-      <circle cx="100" cy="33" r="1.5" fill="#e5e5e5"/>
-      <circle cx="107" cy="33" r="1.5" fill="#e5e5e5"/>
-      <circle cx="114" cy="33" r="1.5" fill="#e5e5e5"/>
-      <polyline points="118,29 122,33 118,37" stroke="#e5e5e5" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-      {/* Vacancy count block */}
-      <rect x="126" y="14" width="88" height="38" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <text x="170" y="30" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">relevant vacancies</text>
-      <text x="170" y="42" textAnchor="middle" fontSize="7.5" fill="#92600A" fontFamily="monospace" fontWeight="600">field + location</text>
-      {/* Label */}
-      <text x="48" y="62" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">API / survey data</text>
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polygon points="9,2 17,7 9,12 1,7"/>
+      <path d="M5 9.5v4c0 1.1 1.8 2 4 2s4-.9 4-2v-4"/>
+      <line x1="15" y1="7" x2="15" y2="13"/>
     </svg>
   );
 }
 
-// 3. Field mapping — unchanged (already good)
+function IconCategory() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="2" width="6" height="6" rx="1.5"/>
+      <rect x="10" y="2" width="6" height="6" rx="1.5"/>
+      <rect x="2" y="10" width="6" height="6" rx="1.5"/>
+      <rect x="10" y="10" width="6" height="6" rx="1.5"/>
+    </svg>
+  );
+}
+
+function IconCopyOff() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="6" y="6" width="9" height="9" rx="1.5"/>
+      <path d="M12 6V4.5A1.5 1.5 0 0 0 10.5 3H4.5A1.5 1.5 0 0 0 3 4.5v6A1.5 1.5 0 0 0 4.5 12H6"/>
+      <line x1="2" y1="2" x2="16" y2="16"/>
+    </svg>
+  );
+}
+
+function IconMathFunction() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {/* f */}
+      <path d="M4 9h5M7 4.5c0-1 .7-1.5 1.5-1.5H10a1 1 0 0 1 1 1v10"/>
+      {/* x */}
+      <line x1="13" y1="11" x2="17" y2="15"/>
+      <line x1="17" y1="11" x2="13" y2="15"/>
+    </svg>
+  );
+}
+
+// ── Chip component ────────────────────────────────────────────────────────────
+
+function Chip({ label, className }: { label: string; className: string }) {
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono ${className}`}>
+      {label}
+    </span>
+  );
+}
+
+// ── Illustrations for lower sections ─────────────────────────────────────────
+
+function MarketSpectrumIllustration() {
+  return (
+    <svg width="100%" height="64" viewBox="0 0 280 64" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <rect x="8"   y="18" width="42" height="18" fill="#f3f4f6"/>
+      <rect x="50"  y="18" width="38" height="18" fill="#f5f5f5"/>
+      <rect x="88"  y="18" width="40" height="18" fill="#fefce8"/>
+      <rect x="128" y="18" width="56" height="18" fill="#fffbeb"/>
+      <rect x="184" y="18" width="88" height="18" fill="#FFF3CD"/>
+      <rect x="8" y="18" width="264" height="18" rx="2" stroke="#e5e5e5" strokeWidth="1" fill="none"/>
+      <line x1="50"  y1="18" x2="50"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="88"  y1="18" x2="88"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
+      <line x1="128" y1="14" x2="128" y2="40" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="184" y1="18" x2="184" y2="36" stroke="#e5e5e5" strokeWidth="1"/>
+      <text x="29"  y="12" textAnchor="middle" fontSize="5.5" fill="#c4c4c4" fontFamily="monospace">Sig. Surplus</text>
+      <text x="69"  y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Surplus</text>
+      <text x="108" y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Balanced</text>
+      <text x="156" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Strong Demand</text>
+      <text x="216" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Critical Shortage</text>
+      <text x="8"   y="48" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0</text>
+      <text x="50"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.5</text>
+      <text x="88"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.75</text>
+      <text x="128" y="48" textAnchor="middle" fontSize="6" fill="#92600A" fontFamily="monospace">1.0</text>
+      <text x="184" y="48" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">2.0+</text>
+      <polygon points="152,18 156,22 152,26 148,22" fill="#F5C518" opacity="0.85"/>
+      <text x="152" y="58" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">1.21 →</text>
+    </svg>
+  );
+}
+
+function ForecastIllustration() {
+  const hist: [number, number][] = [[24, 48], [52, 42], [80, 37], [108, 32], [124, 28]];
+  const proj: [number, number][] = [[124, 28], [152, 24], [180, 20], [208, 16]];
+  const histPts = hist.map(([x, y]) => `${x},${y}`).join(" ");
+  const projPts = proj.map(([x, y]) => `${x},${y}`).join(" ");
+  return (
+    <svg width="240" height="80" viewBox="0 0 240 80" fill="none" aria-hidden="true">
+      <line x1="16" y1="8"  x2="16"  y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="60" x2="220" y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="44" x2="220" y2="44" stroke="#f0f0f0" strokeWidth="1" strokeDasharray="3 3"/>
+      <text x="13" y="47" textAnchor="end" fontSize="6" fill="#e5e5e5" fontFamily="monospace">1.0</text>
+      <line x1="124" y1="8" x2="124" y2="60" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
+      <polyline points={histPts} stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      {hist.map(([cx, cy], i) => (
+        <circle key={`h${i}`} cx={cx} cy={cy} r="2.5" fill="#F5C518"/>
+      ))}
+      <polyline points={projPts} stroke="#d4d4d4" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5 3"/>
+      {proj.slice(1).map(([cx, cy], i) => (
+        <circle key={`p${i}`} cx={cx} cy={cy} r="2.5" stroke="#d4d4d4" strokeWidth="1.5" fill="white"/>
+      ))}
+      <text x="68"  y="74" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">observed</text>
+      <text x="168" y="74" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">projected</text>
+    </svg>
+  );
+}
+
+function AIInsightIllustration() {
+  return (
+    <svg width="240" height="56" viewBox="0 0 240 56" fill="none" aria-hidden="true">
+      <rect x="0" y="10" width="68" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="0"  y1="22" x2="68" y2="22" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <line x1="0"  y1="32" x2="68" y2="32" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <line x1="22" y1="10" x2="22" y2="46" stroke="#f0f0f0" strokeWidth="0.75"/>
+      <text x="34" y="25.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">computed</text>
+      <text x="34" y="35.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">data</text>
+      <line x1="68" y1="28" x2="88" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="84,24 88,28 84,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="88" y="10" width="68" height="36" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
+      <text x="122" y="27" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">Claude</text>
+      <text x="122" y="38" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">interprets</text>
+      <line x1="156" y1="28" x2="176" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <polyline points="172,24 176,28 172,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
+      <rect x="176" y="10" width="64" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
+      <line x1="184" y1="21" x2="232" y2="21" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="184" y1="29" x2="228" y2="29" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="184" y1="37" x2="220" y2="37" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
+      <text x="34"  y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">structured input</text>
+      <text x="122" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">AI model</text>
+      <text x="208" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">market summary</text>
+    </svg>
+  );
+}
+
+function GeographicPinDiagram() {
+  return (
+    <svg width="140" height="80" viewBox="0 0 140 80" fill="none" aria-hidden="true">
+      <rect x="4" y="4" width="132" height="72" rx="5" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="5 3"/>
+      <circle cx="42" cy="32" r="7" stroke="#F5C518" strokeWidth="1.5"/>
+      <line x1="42" y1="39" x2="42" y2="50" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="42" cy="32" r="14" stroke="#F5C518" strokeWidth="0.75" strokeDasharray="2 3" strokeOpacity="0.5"/>
+      <circle cx="88" cy="44" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="88" y1="48" x2="88" y2="56" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="112" cy="26" r="3" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="112" y1="29" x2="112" y2="36" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="68" cy="60" r="2.5" stroke="#d4d4d4" strokeWidth="1"/>
+      <line x1="68" y1="62" x2="68" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
+      <text x="70" y="76" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national level</text>
+    </svg>
+  );
+}
+
+// ── Field mapping + dedup (unchanged, still good) ─────────────────────────────
+
 function FieldMappingDiagram() {
   return (
     <svg width="220" height="64" viewBox="0 0 220 64" fill="none" aria-hidden="true">
@@ -189,7 +286,6 @@ function FieldMappingDiagram() {
   );
 }
 
-// 4. Deduplication — unchanged (already good)
 function DeduplicationDiagram() {
   return (
     <svg width="160" height="44" viewBox="0 0 160 44" fill="none" aria-hidden="true">
@@ -204,178 +300,6 @@ function DeduplicationDiagram() {
       <polyline points="104,18 108,22 104,26" stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
       <rect x="108" y="14" width="52" height="16" rx="2" stroke="#F5C518" strokeWidth="1.5"/>
       <text x="134" y="25" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">1 record</text>
-    </svg>
-  );
-}
-
-// 5. Ratio — THE FOCAL PIECE: graduate dots ← ratio circle → vacancy dots
-function RatioIllustration() {
-  // 6 graduate dots (2 × 3) on left
-  const grad: [number, number][] = [
-    [16, 34], [28, 34],
-    [16, 50], [28, 50],
-    [16, 66], [28, 66],
-  ];
-  // 9 vacancy dots (3 × 3) on right — more = demand > supply
-  const vac: [number, number][] = [
-    [224, 34], [236, 34], [248, 34],
-    [224, 50], [236, 50], [248, 50],
-    [224, 66], [236, 66], [248, 66],
-  ];
-  return (
-    <svg width="264" height="104" viewBox="0 0 264 104" fill="none" aria-hidden="true">
-      {/* Graduate dots */}
-      {grad.map(([cx, cy], i) => (
-        <circle key={`g${i}`} cx={cx} cy={cy} r="4.5" stroke="#d4d4d4" strokeWidth="1.5"/>
-      ))}
-      {/* Left label */}
-      <text x="22" y="86" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">graduates</text>
-
-      {/* Connecting line left side */}
-      <line x1="40" y1="50" x2="86" y2="50" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="82,46 86,50 82,54" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
-
-      {/* Central ratio circle */}
-      <circle cx="132" cy="50" r="38" stroke="#F5C518" strokeWidth="1.5"/>
-      <circle cx="132" cy="50" r="33" stroke="#FDE68A" strokeWidth="0.75" strokeDasharray="2 4" strokeOpacity="0.6"/>
-      <text x="132" y="44" textAnchor="middle" fontSize="20" fontWeight="700" fill="#111827" fontFamily="monospace">1.21</text>
-      <text x="132" y="57" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">vacancy ratio</text>
-
-      {/* Connecting line right side */}
-      <line x1="174" y1="50" x2="218" y2="50" stroke="#e5e5e5" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="178,46 174,50 178,54" stroke="#e5e5e5" strokeWidth="1" fill="none" strokeLinecap="round"/>
-
-      {/* Vacancy dots */}
-      {vac.map(([cx, cy], i) => (
-        <circle key={`v${i}`} cx={cx} cy={cy} r="4.5" stroke="#F5C518" strokeWidth="1.5"/>
-      ))}
-      {/* Right label */}
-      <text x="236" y="86" textAnchor="middle" fontSize="6.5" fill="#92600A" fontFamily="monospace">vacancies</text>
-
-      {/* Bottom equation hint */}
-      <text x="132" y="100" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">vacancies ÷ graduates = ratio</text>
-    </svg>
-  );
-}
-
-// 6. Market Spectrum — five-zone horizontal spectrum with indicator
-function MarketSpectrumIllustration() {
-  return (
-    <svg width="100%" height="64" viewBox="0 0 280 64" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-      {/* Zone fills */}
-      <rect x="8"   y="18" width="42" height="18" rx="0" fill="#f3f4f6"/>
-      <rect x="50"  y="18" width="38" height="18" rx="0" fill="#f5f5f5"/>
-      <rect x="88"  y="18" width="40" height="18" rx="0" fill="#fefce8"/>
-      <rect x="128" y="18" width="56" height="18" rx="0" fill="#fffbeb"/>
-      <rect x="184" y="18" width="88" height="18" rx="0" fill="#FFF3CD"/>
-      {/* Outer border on the whole band */}
-      <rect x="8" y="18" width="264" height="18" rx="2" stroke="#e5e5e5" strokeWidth="1" fill="none"/>
-      {/* Internal zone dividers */}
-      <line x1="50"  y1="18" x2="50"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
-      <line x1="88"  y1="18" x2="88"  y2="36" stroke="#e5e5e5" strokeWidth="1"/>
-      <line x1="128" y1="14" x2="128" y2="40" stroke="#F5C518" strokeWidth="1.5"/>
-      <line x1="184" y1="18" x2="184" y2="36" stroke="#e5e5e5" strokeWidth="1"/>
-      {/* Zone labels above */}
-      <text x="29"  y="12" textAnchor="middle" fontSize="5.5" fill="#c4c4c4" fontFamily="monospace">Sig. Surplus</text>
-      <text x="69"  y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Surplus</text>
-      <text x="108" y="12" textAnchor="middle" fontSize="5.5" fill="#d4d4d4" fontFamily="monospace">Balanced</text>
-      <text x="156" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Strong Demand</text>
-      <text x="216" y="12" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">Critical Shortage</text>
-      {/* Threshold labels below */}
-      <text x="8"   y="48" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0</text>
-      <text x="50"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.5</text>
-      <text x="88"  y="48" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">0.75</text>
-      <text x="128" y="48" textAnchor="middle" fontSize="6" fill="#92600A" fontFamily="monospace">1.0</text>
-      <text x="184" y="48" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">2.0+</text>
-      {/* Diamond indicator at "Strong Demand" zone (~ratio 1.21) */}
-      <polygon points="152,18 156,22 152,26 148,22" fill="#F5C518" opacity="0.85"/>
-      <text x="152" y="58" textAnchor="middle" fontSize="5.5" fill="#92600A" fontFamily="monospace">1.21 →</text>
-    </svg>
-  );
-}
-
-// 7. Forecast — historical solid line → dashed projected line
-function ForecastIllustration() {
-  const hist: [number, number][] = [[24, 48], [52, 42], [80, 37], [108, 32], [124, 28]];
-  const proj: [number, number][] = [[124, 28], [152, 24], [180, 20], [208, 16]];
-  const histPts = hist.map(([x, y]) => `${x},${y}`).join(" ");
-  const projPts = proj.map(([x, y]) => `${x},${y}`).join(" ");
-  return (
-    <svg width="240" height="80" viewBox="0 0 240 80" fill="none" aria-hidden="true">
-      {/* Axes */}
-      <line x1="16" y1="8"  x2="16"  y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="16" y1="60" x2="220" y2="60" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* 1.0 reference */}
-      <line x1="16" y1="44" x2="220" y2="44" stroke="#f0f0f0" strokeWidth="1" strokeDasharray="3 3"/>
-      <text x="13" y="47" textAnchor="end" fontSize="6" fill="#e5e5e5" fontFamily="monospace">1.0</text>
-      {/* Forecast boundary */}
-      <line x1="124" y1="8" x2="124" y2="60" stroke="#e8e8e8" strokeWidth="1" strokeDasharray="3 2" strokeLinecap="round"/>
-      {/* Historical line */}
-      <polyline points={histPts} stroke="#F5C518" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-      {hist.map(([cx, cy], i) => (
-        <circle key={`h${i}`} cx={cx} cy={cy} r="2.5" fill="#F5C518"/>
-      ))}
-      {/* Projected line (dashed, grey) */}
-      <polyline points={projPts} stroke="#d4d4d4" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="5 3"/>
-      {proj.slice(1).map(([cx, cy], i) => (
-        <circle key={`p${i}`} cx={cx} cy={cy} r="2.5" stroke="#d4d4d4" strokeWidth="1.5" fill="white"/>
-      ))}
-      {/* Labels */}
-      <text x="68"  y="74" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">observed</text>
-      <text x="168" y="74" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">projected</text>
-    </svg>
-  );
-}
-
-// 8. AI insight — structured data → Claude → market summary
-function AIInsightIllustration() {
-  return (
-    <svg width="240" height="56" viewBox="0 0 240 56" fill="none" aria-hidden="true">
-      {/* Computed data block with subtle grid */}
-      <rect x="0" y="10" width="68" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <line x1="0"  y1="22" x2="68" y2="22" stroke="#f0f0f0" strokeWidth="0.75"/>
-      <line x1="0"  y1="32" x2="68" y2="32" stroke="#f0f0f0" strokeWidth="0.75"/>
-      <line x1="22" y1="10" x2="22" y2="46" stroke="#f0f0f0" strokeWidth="0.75"/>
-      <text x="34" y="25.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">computed</text>
-      <text x="34" y="35.5" textAnchor="middle" fontSize="6.5" fill="#9ca3af" fontFamily="monospace">data</text>
-      {/* Arrow */}
-      <line x1="68" y1="28" x2="88" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="84,24 88,28 84,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      {/* Claude block */}
-      <rect x="88" y="10" width="68" height="36" rx="3" stroke="#F5C518" strokeWidth="1.5"/>
-      <text x="122" y="27" textAnchor="middle" fontSize="7" fill="#92600A" fontFamily="monospace">Claude</text>
-      <text x="122" y="38" textAnchor="middle" fontSize="6" fill="#9ca3af" fontFamily="monospace">interprets</text>
-      {/* Arrow */}
-      <line x1="156" y1="28" x2="176" y2="28" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <polyline points="172,24 176,28 172,32" stroke="#d4d4d4" strokeWidth="1" fill="none" strokeLinecap="round"/>
-      {/* Summary output block with text hint lines */}
-      <rect x="176" y="10" width="64" height="36" rx="3" stroke="#d4d4d4" strokeWidth="1.5"/>
-      <line x1="184" y1="21" x2="232" y2="21" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="184" y1="29" x2="228" y2="29" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="184" y1="37" x2="220" y2="37" stroke="#e8e8e8" strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Labels */}
-      <text x="34"  y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">structured input</text>
-      <text x="122" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">AI model</text>
-      <text x="208" y="54" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">market summary</text>
-    </svg>
-  );
-}
-
-// 9. Geographic pin — unchanged (already good)
-function GeographicPinDiagram() {
-  return (
-    <svg width="140" height="80" viewBox="0 0 140 80" fill="none" aria-hidden="true">
-      <rect x="4" y="4" width="132" height="72" rx="5" stroke="#e5e5e5" strokeWidth="1" strokeDasharray="5 3"/>
-      <circle cx="42" cy="32" r="7" stroke="#F5C518" strokeWidth="1.5"/>
-      <line x1="42" y1="39" x2="42" y2="50" stroke="#F5C518" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="42" cy="32" r="14" stroke="#F5C518" strokeWidth="0.75" strokeDasharray="2 3" strokeOpacity="0.5"/>
-      <circle cx="88" cy="44" r="4.5" stroke="#d4d4d4" strokeWidth="1"/>
-      <line x1="88" y1="48" x2="88" y2="56" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <circle cx="112" cy="26" r="3" stroke="#d4d4d4" strokeWidth="1"/>
-      <line x1="112" y1="29" x2="112" y2="36" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <circle cx="68" cy="60" r="2.5" stroke="#d4d4d4" strokeWidth="1"/>
-      <line x1="68" y1="62" x2="68" y2="68" stroke="#d4d4d4" strokeWidth="1" strokeLinecap="round"/>
-      <text x="70" y="76" textAnchor="middle" fontSize="6" fill="#d4d4d4" fontFamily="monospace">national level</text>
     </svg>
   );
 }
@@ -420,117 +344,147 @@ export default function MethodologyPage() {
         </div>
       </div>
 
-      {/* Vacancy data */}
-      <div className="py-10 border-b border-neutral-200 flex flex-col gap-3">
-        <SectionHeading>How vacancy data is collected</SectionHeading>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          Vacancy data is sourced from job postings APIs and official labour surveys. Each
-          posting is tagged with a field/category, location, skills, and posting date. Postings
-          from the same role published by multiple aggregators are deduplicated by title,
-          company, and location before counting.
-        </p>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          When no live provider is connected, an illustrative count is used, clearly labelled
-          as demo data. The vacancy total shown on the Explore page is based on national-level
-          figures from planned data sources below.
-        </p>
-        <div className="mt-2">
-          <JobDemandIllustration />
+      {/* ── Data collection card grid ──────────────────────────────────────── */}
+      <div className="py-10 border-b border-neutral-200">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          {/* 1. Vacancy data — blue */}
+          <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-blue-50 text-blue-600">
+                <IconBriefcase />
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-500">
+                Vacancy Data
+              </span>
+            </div>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              Sourced from job posting APIs and official labour surveys, tagged by field,
+              location, skills, and date. Deduped by title, company, and city.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-neutral-100">
+              <Chip label="field + location key" className="bg-blue-50 text-blue-700"/>
+              <Chip label="national-level" className="bg-neutral-100 text-neutral-600"/>
+            </div>
+          </div>
+
+          {/* 2. Graduate data — green */}
+          <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-green-50 text-green-600">
+                <IconSchool />
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-500">
+                Graduate Data
+              </span>
+            </div>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              Completions per field per year from national education bodies. Excludes
+              enrolments, dropouts, and late-year graduates. Always national — city
+              vacancy is estimated.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-neutral-100">
+              <Chip label="completions / yr" className="bg-green-50 text-green-700"/>
+              <Chip label="UG + PG" className="bg-neutral-100 text-neutral-600"/>
+            </div>
+          </div>
+
+          {/* 3. Field mapping — amber */}
+          <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-amber-50 text-amber-600">
+                <IconCategory />
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-500">
+                Field Mapping
+              </span>
+            </div>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              Graduates follow ISCED categories. Vacancies (ISCO, SOC, Adzuna) are mapped
+              to 8 harmonised field slugs. Boundary assignments are approximate.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-neutral-100">
+              <Chip label="8 field slugs" className="bg-amber-50 text-amber-700"/>
+              <Chip label="ISCED aligned" className="bg-neutral-100 text-neutral-600"/>
+            </div>
+          </div>
+
+          {/* 4. Deduplication — red */}
+          <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-red-50 text-red-500">
+                <IconCopyOff />
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-500">
+                Deduplication
+              </span>
+            </div>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              Same vacancy from multiple providers is collapsed using a compound key of
+              normalised title, company, and city. Only one record counted. Demo data is
+              not deduped.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-3 border-t border-neutral-100">
+              <Chip label="title · company · city" className="bg-red-50 text-red-600"/>
+            </div>
+          </div>
+
+          {/* 5. The formula — violet, full width */}
+          <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 flex flex-col gap-4 sm:col-span-2">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-violet-50 text-violet-600">
+                <IconMathFunction />
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-neutral-500">
+                The Formula
+              </span>
+            </div>
+            <p className="text-sm text-neutral-700 leading-relaxed">
+              Both metrics are derived at query time — never stored. This ensures
+              auditability and consistency across views.
+            </p>
+            {/* Code + legend side by side */}
+            <div className="flex flex-col lg:flex-row gap-4 items-start">
+              <div
+                className="rounded-md px-5 py-4 font-mono text-sm flex-1 w-full"
+                style={{ background: "#1a1a2e" }}
+              >
+                <p className="text-neutral-500 text-xs mb-2">// Primary metric</p>
+                <p>
+                  <span className="text-emerald-400">vacancyRatio</span>
+                  <span className="text-neutral-400"> = </span>
+                  <span className="text-emerald-400">relevantVacancies</span>
+                  <span className="text-neutral-400"> / </span>
+                  <span className="text-emerald-400">graduates</span>
+                </p>
+                <p className="text-neutral-500 text-xs mt-3 mb-2">// Normalised</p>
+                <p>
+                  <span className="text-emerald-400">vacanciesPer100Graduates</span>
+                  <span className="text-neutral-400"> = vacancyRatio × </span>
+                  <span className="text-neutral-300">100</span>
+                </p>
+              </div>
+              <div className="flex flex-col gap-2.5 lg:py-1 lg:min-w-[220px]">
+                <div className="flex items-start gap-2">
+                  <span className="mt-1 w-2 h-2 rounded-full bg-blue-400 flex-shrink-0"/>
+                  <span className="text-xs text-neutral-500 leading-relaxed">
+                    Above 1.0 → more vacancies than graduates
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="mt-1 w-2 h-2 rounded-full bg-rose-400 flex-shrink-0"/>
+                  <span className="text-xs text-neutral-500 leading-relaxed">
+                    Below 1.0 → more graduates than vacancies
+                  </span>
+                </div>
+                <p className="text-[11px] text-neutral-400 mt-1 leading-relaxed">
+                  Supply-demand signal, not individual job probability.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </div>
-
-      {/* Graduate data */}
-      <div className="py-10 border-b border-neutral-200 flex flex-col gap-3">
-        <SectionHeading>How graduate data is collected</SectionHeading>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          Graduate supply is the number of people who completed a qualification in a specific
-          field in a given year, as reported by national education statistics bodies. This
-          includes undergraduate and postgraduate completions. It does not include enrolments,
-          dropouts, or those who graduated in a different year.
-        </p>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          Graduate data is a national-level figure. City-level graduate data is rarely
-          published and is not currently used. When a city is selected, the graduate count
-          remains national and the vacancy count is estimated at city level — this is clearly
-          labelled.
-        </p>
-        <div className="mt-2">
-          <GraduateSupplyIllustration />
-        </div>
-      </div>
-
-      {/* Field classification */}
-      <div className="py-10 border-b border-neutral-200 flex flex-col gap-3">
-        <SectionHeading>How jobs are categorised into fields</SectionHeading>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          Graduate fields follow ISCED (International Standard Classification of Education)
-          categories. Vacancy data from providers uses different classifications (ISCO, SOC,
-          Adzuna categories). VacancyRatio maps these to a harmonised set of eight field slugs
-          used throughout the product. The mapping is approximate — some graduates and vacancies
-          near field boundaries may be mis-assigned.
-        </p>
-        <div className="mt-2">
-          <FieldMappingDiagram />
-        </div>
-      </div>
-
-      {/* Deduplication */}
-      <div className="py-10 border-b border-neutral-200 flex flex-col gap-3">
-        <SectionHeading>How duplicate jobs are handled</SectionHeading>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          When multiple providers are connected, the same vacancy may appear from several
-          sources. Deduplication uses a compound key of normalised job title, company name,
-          and city. If two records share all three after normalisation, only one is counted.
-          No deduplication is applied in the demo data because all listings have unique IDs.
-        </p>
-        <div className="mt-2">
-          <DeduplicationDiagram />
-        </div>
-      </div>
-
-      {/* Formula */}
-      <div className="py-10 border-b border-neutral-200 flex flex-col gap-5">
-        <SectionHeading>The formula</SectionHeading>
-        <p className="text-sm text-neutral-600 leading-relaxed">
-          Two metrics are computed. Neither is stored — both are derived at query time from
-          the raw source figures. This ensures consistency and auditability.
-        </p>
-
-        <div className="mt-1">
-          <RatioIllustration />
-        </div>
-
-        <div className="rounded-md border border-neutral-800 bg-neutral-950 px-5 py-5 font-mono text-sm">
-          <p className="text-neutral-500 text-xs mb-3">// Primary metric</p>
-          <p className="text-emerald-400">
-            vacancyRatio{" "}
-            <span className="text-neutral-500">=</span>{" "}
-            relevantVacancies{" "}
-            <span className="text-neutral-500">/</span>{" "}
-            graduates
-          </p>
-          <p className="text-neutral-600 text-xs mt-4 mb-3">// Normalised for readability</p>
-          <p className="text-emerald-400">
-            vacanciesPer100Graduates{" "}
-            <span className="text-neutral-500">=</span>{" "}
-            vacancyRatio{" "}
-            <span className="text-neutral-500">×</span>{" "}
-            100
-          </p>
-        </div>
-
-        <p className="text-sm text-neutral-500">
-          A ratio of <code className="rounded bg-neutral-100 px-1 font-mono text-xs text-neutral-700">1.0</code> means one vacancy per graduate.
-          Above <code className="rounded bg-neutral-100 px-1 font-mono text-xs text-neutral-700">1.0</code> = more vacancies than graduates.
-          Below <code className="rounded bg-neutral-100 px-1 font-mono text-xs text-neutral-700">1.0</code> = more graduates than vacancies.
-        </p>
-
-        <p className="text-sm text-neutral-500 leading-relaxed">
-          <strong className="font-semibold text-neutral-700">Important:</strong> This is a
-          labour-market supply-and-demand indicator, not an individual&apos;s probability of
-          getting a job. Many graduates work in adjacent fields, in other geographies, or
-          outside their field of study entirely.
-        </p>
       </div>
 
       {/* Thresholds */}
