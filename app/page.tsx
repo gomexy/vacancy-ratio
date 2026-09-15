@@ -211,34 +211,54 @@ export default function HomePage() {
             }}
           />
 
-          {/* 3D Glossy Sphere — emerges from behind the ribbed panel */}
+          {/* 3D Glossy Sphere — SVG with metallic gold shading */}
           <div
             style={{
               position: "absolute",
               top: "50%",
-              left: "35%",
+              right: "-60px",
               transform: "translateY(-50%)",
-              width: 220,
-              height: 220,
-              borderRadius: "50%",
-              background: [
-                "radial-gradient(",
-                "circle at 32% 28%,",
-                "rgba(255,255,255,0.97) 0%,",
-                "rgba(255,255,255,0.80) 4%,",
-                "#FEFCE8 11%,",
-                "#FDE047 26%,",
-                "#F5C518 50%,",
-                "#CA8A04 68%,",
-                "#854D0E 86%,",
-                "#422006 100%",
-                ")",
-              ].join(""),
-              boxShadow: "0 24px 64px rgba(202,138,4,0.50), 0 0 0 1px rgba(255,255,255,0.20)",
-              zIndex: 1,
+              width: 320,
+              height: 320,
+              zIndex: 3,
               pointerEvents: "none",
+              filter: "drop-shadow(0 28px 48px rgba(180,83,9,0.55)) drop-shadow(0 8px 20px rgba(202,138,4,0.35))",
             }}
-          />
+          >
+            <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" width="320" height="320">
+              <defs>
+                <radialGradient id="sphereBase" cx="33%" cy="27%" r="78%" fx="33%" fy="27%">
+                  <stop offset="0%"   stopColor="#FFFFFF" stopOpacity="1"/>
+                  <stop offset="3%"   stopColor="#FFFEF0"/>
+                  <stop offset="10%"  stopColor="#FEF08A"/>
+                  <stop offset="22%"  stopColor="#FDE047"/>
+                  <stop offset="40%"  stopColor="#F5C518"/>
+                  <stop offset="58%"  stopColor="#D97706"/>
+                  <stop offset="74%"  stopColor="#92400E"/>
+                  <stop offset="88%"  stopColor="#5C1F06"/>
+                  <stop offset="100%" stopColor="#3A0F02"/>
+                </radialGradient>
+                <radialGradient id="sphereSpec" cx="30%" cy="24%" r="32%" fx="28%" fy="22%">
+                  <stop offset="0%"   stopColor="#FFFFFF" stopOpacity="0.98"/>
+                  <stop offset="40%"  stopColor="#FFFFFF" stopOpacity="0.45"/>
+                  <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0"/>
+                </radialGradient>
+                <radialGradient id="sphereRim" cx="50%" cy="50%" r="50%">
+                  <stop offset="72%"  stopColor="#00000000"/>
+                  <stop offset="88%"  stopColor="#00000022"/>
+                  <stop offset="100%" stopColor="#00000055"/>
+                </radialGradient>
+                <radialGradient id="sphereBottom" cx="62%" cy="78%" r="38%">
+                  <stop offset="0%"   stopColor="#FFED4A" stopOpacity="0.18"/>
+                  <stop offset="100%" stopColor="#FFED4A" stopOpacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="160" cy="160" r="148" fill="url(#sphereBase)"/>
+              <circle cx="160" cy="160" r="148" fill="url(#sphereRim)"/>
+              <circle cx="160" cy="160" r="148" fill="url(#sphereBottom)"/>
+              <circle cx="160" cy="160" r="148" fill="url(#sphereSpec)"/>
+            </svg>
+          </div>
         </div>
       </section>
 
