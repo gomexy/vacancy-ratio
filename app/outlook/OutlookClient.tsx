@@ -49,6 +49,46 @@ function Divider() {
   return <div style={{ borderTop: "1px solid #f0f0f0" }} />;
 }
 
+function Badge({
+  icon,
+  bg,
+  color,
+}: {
+  icon: string;
+  bg: string;
+  color: string;
+}) {
+  return (
+    <span
+      className={`flex-shrink-0 flex items-center justify-center rounded-lg ${bg} ${color}`}
+      style={{ width: 36, height: 36 }}
+    >
+      <i className={`ti ti-${icon}`} style={{ fontSize: 18 }} />
+    </span>
+  );
+}
+
+function CardTitle({
+  icon,
+  bg,
+  color,
+  children,
+}: {
+  icon: string;
+  bg: string;
+  color: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <Badge icon={icon} bg={bg} color={color} />
+      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+        {children}
+      </p>
+    </div>
+  );
+}
+
 function fmtCAGR(v: number): string {
   const sign = v >= 0 ? "+" : "";
   return `${sign}${v.toFixed(1)}%`;
@@ -390,477 +430,463 @@ export default function OutlookClient({ countries, fields }: Props) {
       )}
 
       {forecast && trendFirst && trendLast && (
-        <div className={`${C} py-6`}>
+        <div className={`${C} py-6 flex flex-col gap-4`}>
+
+          {/* ── Row 1: Hero + Timeline ─────────────────────────────────────────── */}
           <div className="grid grid-cols-12 gap-4">
 
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 1 — Overview                                              */}
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className="col-span-12 lg:col-span-5 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
-            <SectionLabel>5-Year Outlook</SectionLabel>
-            <h1
-              className="font-semibold tracking-tight text-neutral-900 mb-1"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}
-            >
-              {fieldLabel} in {locationLabel}
-            </h1>
-            <p className="text-sm text-neutral-500 mb-8">
-              Trend extrapolation from observed data — not a live forecast
-            </p>
+            {/* Card 1 — Overview */}
+            <div className="col-span-12 lg:col-span-5 rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-5">
+              <CardTitle icon="trending-up" bg="bg-blue-50" color="text-blue-600">
+                5-Year Outlook
+              </CardTitle>
 
-            {/* Demo disclaimer banner */}
-            <div
-              className="mb-8 rounded-lg px-4 py-4"
-              style={{
-                background: "#fffbeb",
-                border: "1px solid #fde68a",
-              }}
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-amber-700 mb-1">
-                Illustrative projection — not a verified forecast
-              </p>
-              <p className="text-sm text-amber-800 leading-relaxed">
-                Extrapolated from {trendFirst.year}–{trendLast.year} data using CAGR trend modelling.
-                Actual outcomes depend on economic conditions, policy changes, and structural shifts.
-              </p>
-            </div>
-
-            {/* Headline outcome */}
-            <div className="mb-2">
-              <p
-                className="font-semibold tracking-tight leading-none"
-                style={{
-                  fontSize: "clamp(2.5rem, 7vw, 4rem)",
-                  color: outlookColor(forecast.outlookLabel),
-                }}
-              >
-                {forecast.outlookLabel.toUpperCase()}{" "}
-                <span style={{ fontSize: "0.7em" }}>
-                  {outlookArrow(forecast.outlookLabel)}
-                </span>
-              </p>
-            </div>
-
-            {/* Confidence badge + explanation */}
-            <div className="flex items-start gap-3 mb-8">
-              <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold flex-shrink-0"
-                style={{
-                  background:
-                    forecast.confidence === "High"
-                      ? "#f0fdf4"
-                      : forecast.confidence === "Medium"
-                      ? "#fffbeb"
-                      : "#fef2f2",
-                  border:
-                    forecast.confidence === "High"
-                      ? "1px solid #bbf7d0"
-                      : forecast.confidence === "Medium"
-                      ? "1px solid #fde68a"
-                      : "1px solid #fecaca",
-                  color:
-                    forecast.confidence === "High"
-                      ? "#166534"
-                      : forecast.confidence === "Medium"
-                      ? "#92400e"
-                      : "#991b1b",
-                }}
-              >
-                Confidence: {forecast.confidence}
-              </span>
-              <p className="text-sm text-neutral-500 leading-relaxed">
-                {confidenceExplanation(forecast.confidence)}
-              </p>
-            </div>
-
-            {/* CAGR row */}
-            <div className="flex flex-wrap gap-8">
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">
-                  Vacancy demand
+                <h1
+                  className="font-semibold tracking-tight text-neutral-900"
+                  style={{ fontSize: "clamp(1.5rem, 3.5vw, 2rem)" }}
+                >
+                  {fieldLabel} in {locationLabel}
+                </h1>
+                <p className="text-sm text-neutral-500 mt-1">
+                  Trend extrapolation from observed data — not a live forecast
+                </p>
+              </div>
+
+              {/* Demo disclaimer */}
+              <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 flex items-start gap-2">
+                <i
+                  className="ti ti-info-circle flex-shrink-0"
+                  style={{ fontSize: 14, color: "#d97706", marginTop: 2 }}
+                />
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-amber-700 mb-0.5">
+                    Illustrative projection
+                  </p>
+                  <p className="text-xs text-amber-800 leading-relaxed">
+                    Extrapolated from {trendFirst.year}–{trendLast.year} data using CAGR trend
+                    modelling. Actual outcomes depend on economic conditions, policy changes, and
+                    structural shifts.
+                  </p>
+                </div>
+              </div>
+
+              {/* Outlook badge */}
+              <div className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-4">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-2">
+                  Outlook
                 </p>
                 <p
-                  className="text-2xl font-semibold tabular-nums tracking-tight"
+                  className="font-semibold tracking-tight leading-none"
                   style={{
-                    color:
-                      forecast.vacancyCAGR > forecast.graduateCAGR
-                        ? "#059669"
-                        : forecast.vacancyCAGR < 0
-                        ? "#dc2626"
-                        : "#737373",
+                    fontSize: "clamp(2rem, 6vw, 3rem)",
+                    color: outlookColor(forecast.outlookLabel),
                   }}
                 >
-                  {fmtCAGR(forecast.vacancyCAGR)} p.a.
+                  {forecast.outlookLabel.toUpperCase()}{" "}
+                  <span style={{ fontSize: "0.7em" }}>{outlookArrow(forecast.outlookLabel)}</span>
                 </p>
               </div>
-              <div className="hidden sm:block w-px bg-neutral-100 self-stretch" />
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-0.5">
-                  Graduate supply
-                </p>
-                <p className="text-2xl font-semibold tabular-nums tracking-tight text-neutral-600">
-                  {fmtCAGR(forecast.graduateCAGR)} p.a.
+
+              {/* Confidence row */}
+              <div className="rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 flex items-center gap-3">
+                <i
+                  className="ti ti-shield-check flex-shrink-0"
+                  style={{
+                    fontSize: 20,
+                    color:
+                      forecast.confidence === "High"
+                        ? "#059669"
+                        : forecast.confidence === "Medium"
+                        ? "#d97706"
+                        : "#dc2626",
+                  }}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+                    Confidence
+                  </p>
+                  <p className="text-sm font-semibold text-neutral-800">{forecast.confidence}</p>
+                </div>
+                <p className="text-xs text-neutral-500 text-right leading-relaxed max-w-[140px]">
+                  {confidenceExplanation(forecast.confidence)}
                 </p>
               </div>
-            </div>
-          </div>
 
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 2 — Timeline                                              */}
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className="col-span-12 lg:col-span-7 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
-            <SectionLabel>Timeline</SectionLabel>
-            <SectionHeading>Observed to Projected</SectionHeading>
-            <p className="text-sm text-neutral-500 mb-8">
-              {trendFirst.year}–{trendLast.year} historical data, extrapolated
-              to {lastProjectedYear ?? trendLast.year + 5}
-            </p>
-
-            {/* Chart */}
-            <OutlookTimeline entries={timelineEntries} />
-
-            <div className="mt-3 flex items-center gap-3">
-              <DataStatusBadge isDemo source="Extrapolation from historical trend" />
-              <p className="text-[10px] text-neutral-400 font-mono">
-                Projected values assume continuation of observed trend rates
-              </p>
-            </div>
-
-            {/* Year-by-year table */}
-            <div className="mt-10 overflow-x-auto">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                Year-by-year data
-              </p>
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr style={{ borderBottom: "1px solid #F3F4F6" }}>
-                    <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 pr-6">
-                      Year
-                    </th>
-                    <th className="text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 pr-6">
-                      Vacancies per 100 graduates
-                    </th>
-                    <th className="text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2">
-                      Type
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableRows.map((row) => (
-                    <tr
-                      key={row.year}
-                      style={{
-                        borderBottom: "1px solid #F9FAFB",
-                        background: row.isProjected ? "#FFFBEB" : "transparent",
-                      }}
-                    >
-                      <td className="py-2.5 pr-6 tabular-nums text-neutral-800 font-medium">
-                        {row.year}
-                      </td>
-                      <td className="py-2.5 pr-6 tabular-nums text-right text-neutral-700">
-                        {row.per100 >= 10
-                          ? Math.round(row.per100)
-                          : row.per100.toFixed(1)}
-                      </td>
-                      <td className="py-2.5 text-right">
-                        {row.isProjected ? (
-                          <span className="text-[9px] font-semibold uppercase tracking-widest text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-100">
-                            Projected
-                          </span>
-                        ) : (
-                          <span className="text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded" style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}>
-                            Historical
-                          </span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="mt-4">
-              <DataStatusBadge isDemo />
-            </div>
-          </div>
-
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 3 — Why this outlook?                                     */}
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {outlookFactors.length > 0 && (
-            <div className="col-span-12 lg:col-span-6 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
-              <SectionLabel>Why?</SectionLabel>
-              <SectionHeading>What is driving this projection?</SectionHeading>
-              <p className="text-sm text-neutral-500 mb-8">
-                These are the observed inputs that shape the modelled outlook.
-              </p>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {outlookFactors.map((factor) => (
-                  <div
-                    key={factor.id}
-                    className="rounded-xl border border-neutral-100 bg-neutral-50 p-4"
-                  >
-                    {/* Direction icon + label */}
-                    <div className="flex items-center gap-2 mb-3">
-                      <span
-                        className="text-base font-semibold flex-shrink-0"
-                        style={{ color: directionColor(factor.direction) }}
-                        aria-hidden
-                      >
-                        {directionArrow(factor.direction)}
-                      </span>
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                        {factor.label}
-                      </p>
-                    </div>
-
-                    {/* Value */}
-                    <p
-                      className="text-2xl font-semibold tabular-nums tracking-tight mb-2"
-                      style={{ color: directionColor(factor.direction) }}
-                    >
-                      {factor.value}
-                    </p>
-
-                    {/* Headline */}
-                    <p className="text-sm font-semibold text-neutral-800 mb-1.5">
-                      {factor.headline}
-                    </p>
-
-                    {/* Detail */}
-                    <p className="text-xs text-neutral-500 leading-relaxed">
-                      {factor.detail}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 4 — What could change this?                               */}
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {changeScenarios.length > 0 && (
-            <div className="col-span-12 lg:col-span-6 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
-              <SectionLabel>Uncertainty</SectionLabel>
-              <SectionHeading>What could change this outlook?</SectionHeading>
-              <p className="text-sm text-neutral-500 mb-8">
-                These scenarios are not predictions — they illustrate the factors
-                that could push outcomes above or below the baseline projection.
-              </p>
-
-              <div className="flex flex-col gap-4">
-                {changeScenarios.map((scenario, i) => (
-                  <div
-                    key={i}
-                    className="pl-4 py-4 pr-4 rounded-r-md"
+              {/* CAGR stat chips */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
+                    Vacancy demand
+                  </p>
+                  <p
+                    className="text-xl font-semibold tabular-nums tracking-tight"
                     style={{
-                      borderLeft: `3px solid ${scenarioTypeBorderColor(scenario.type)}`,
-                      background: "#F9FAFB",
+                      color:
+                        forecast.vacancyCAGR > forecast.graduateCAGR
+                          ? "#059669"
+                          : forecast.vacancyCAGR < 0
+                          ? "#dc2626"
+                          : "#737373",
                     }}
                   >
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span
-                        className="text-[10px] font-semibold uppercase tracking-widest"
-                        style={{ color: scenarioTypeColor(scenario.type) }}
-                      >
-                        {scenarioTypeLabel(scenario.type)}
-                      </span>
-                    </div>
-                    <p className="text-sm font-semibold text-neutral-800 mb-1">
-                      {scenario.label}
-                    </p>
-                    <p className="text-sm text-neutral-500 leading-relaxed">
-                      {scenario.description}
-                    </p>
-                  </div>
-                ))}
+                    {fmtCAGR(forecast.vacancyCAGR)} p.a.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-3">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
+                    Graduate supply
+                  </p>
+                  <p className="text-xl font-semibold tabular-nums tracking-tight text-neutral-600">
+                    {fmtCAGR(forecast.graduateCAGR)} p.a.
+                  </p>
+                </div>
               </div>
+            </div>
+
+            {/* Card 2 — Timeline */}
+            <div className="col-span-12 lg:col-span-7 rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-5">
+              <CardTitle icon="chart-line" bg="bg-violet-50" color="text-violet-600">
+                Timeline
+              </CardTitle>
+
+              <div>
+                <p className="text-sm font-semibold text-neutral-800">Observed to Projected</p>
+                <p className="text-sm text-neutral-500">
+                  {trendFirst.year}–{trendLast.year} historical data, extrapolated to{" "}
+                  {lastProjectedYear ?? trendLast.year + 5}
+                </p>
+              </div>
+
+              {/* Chart */}
+              <OutlookTimeline entries={timelineEntries} />
+
+              <div className="flex items-center gap-3">
+                <DataStatusBadge isDemo source="Extrapolation from historical trend" />
+                <p className="text-[10px] text-neutral-400 font-mono">
+                  Projected values assume continuation of observed trend rates
+                </p>
+              </div>
+
+              {/* Year-by-year table */}
+              <div className="rounded-xl border border-neutral-200 overflow-hidden">
+                <div className="px-4 py-2.5 border-b border-neutral-200 bg-neutral-50">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+                    Year-by-year data
+                  </p>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr style={{ borderBottom: "1px solid #F3F4F6", background: "#FAFAFA" }}>
+                        <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 px-4">
+                          Year
+                        </th>
+                        <th className="text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 px-4">
+                          Vacancies per 100 graduates
+                        </th>
+                        <th className="text-right text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2 px-4">
+                          Type
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tableRows.map((row) => (
+                        <tr
+                          key={row.year}
+                          style={{
+                            borderBottom: "1px solid #F9FAFB",
+                            background: row.isProjected ? "#FFFBEB" : "transparent",
+                          }}
+                        >
+                          <td className="py-2.5 px-4 tabular-nums text-neutral-800 font-medium">
+                            {row.year}
+                          </td>
+                          <td className="py-2.5 px-4 tabular-nums text-right text-neutral-700">
+                            {row.per100 >= 10
+                              ? Math.round(row.per100)
+                              : row.per100.toFixed(1)}
+                          </td>
+                          <td className="py-2.5 px-4 text-right">
+                            {row.isProjected ? (
+                              <span className="text-[9px] font-semibold uppercase tracking-widest text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-100">
+                                Projected
+                              </span>
+                            ) : (
+                              <span
+                                className="text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded"
+                                style={{
+                                  color: "#92600A",
+                                  background: "#FFFBEB",
+                                  border: "1px solid #FDE68A",
+                                }}
+                              >
+                                Historical
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <DataStatusBadge isDemo />
+            </div>
+
+          </div>
+
+          {/* ── Row 2: Drivers + Scenarios ─────────────────────────────────────── */}
+          {(outlookFactors.length > 0 || changeScenarios.length > 0) && (
+            <div className="grid grid-cols-12 gap-4">
+
+              {/* Card 3 — Why this outlook? */}
+              {outlookFactors.length > 0 && (
+                <div
+                  className={`col-span-12${changeScenarios.length > 0 ? " lg:col-span-6" : ""} rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-5`}
+                >
+                  <CardTitle icon="bulb" bg="bg-amber-50" color="text-amber-600">
+                    Why this outlook?
+                  </CardTitle>
+                  <p className="text-sm text-neutral-500">
+                    Observed inputs that shape the modelled outlook.
+                  </p>
+
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {outlookFactors.map((factor) => (
+                      <div
+                        key={factor.id}
+                        className="rounded-xl border border-neutral-200 bg-neutral-50 p-4 flex flex-col gap-2"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="text-sm font-semibold flex-shrink-0"
+                            style={{ color: directionColor(factor.direction) }}
+                          >
+                            {directionArrow(factor.direction)}
+                          </span>
+                          <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+                            {factor.label}
+                          </p>
+                        </div>
+                        <p
+                          className="text-xl font-semibold tabular-nums tracking-tight"
+                          style={{ color: directionColor(factor.direction) }}
+                        >
+                          {factor.value}
+                        </p>
+                        <p className="text-sm font-semibold text-neutral-800">{factor.headline}</p>
+                        <p className="text-xs text-neutral-500 leading-relaxed">{factor.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Card 4 — What could change? */}
+              {changeScenarios.length > 0 && (
+                <div
+                  className={`col-span-12${outlookFactors.length > 0 ? " lg:col-span-6" : ""} rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-5`}
+                >
+                  <CardTitle icon="alert-triangle" bg="bg-neutral-100" color="text-neutral-500">
+                    What could change?
+                  </CardTitle>
+                  <p className="text-sm text-neutral-500">
+                    Not predictions — factors that could push outcomes above or below the baseline.
+                  </p>
+
+                  <div className="flex flex-col gap-3">
+                    {changeScenarios.map((scenario, i) => (
+                      <div
+                        key={i}
+                        className="rounded-xl bg-neutral-50 p-4"
+                        style={{
+                          border: "1px solid #e5e5e5",
+                          borderLeftColor: scenarioTypeBorderColor(scenario.type),
+                          borderLeftWidth: 3,
+                        }}
+                      >
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span
+                            className="text-[10px] font-semibold uppercase tracking-widest"
+                            style={{ color: scenarioTypeColor(scenario.type) }}
+                          >
+                            {scenarioTypeLabel(scenario.type)}
+                          </span>
+                        </div>
+                        <p className="text-sm font-semibold text-neutral-800 mb-1">
+                          {scenario.label}
+                        </p>
+                        <p className="text-xs text-neutral-500 leading-relaxed">
+                          {scenario.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
             </div>
           )}
 
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          {/* SECTION 5 — How this outlook was built                            */}
-          {/* ══════════════════════════════════════════════════════════════════ */}
-          <div className="col-span-12 rounded-2xl border border-neutral-200 bg-white p-8 sm:p-10">
-            <SectionLabel>Methodology</SectionLabel>
-            <SectionHeading>How this outlook was built</SectionHeading>
+          {/* ── Card 5 — Methodology ──────────────────────────────────────────── */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-5">
+            <CardTitle icon="git-branch" bg="bg-blue-50" color="text-blue-600">
+              Methodology
+            </CardTitle>
+            <p className="text-sm text-neutral-500">How this outlook was built</p>
 
-            {/* Pipeline visualization */}
-            <div className="mt-6 mb-10">
-              <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-0">
-                {/* Step 1 */}
-                <div
-                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
-                >
-                  <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                    Step 1
-                  </p>
-                  <p className="text-sm font-semibold text-neutral-800 mb-0.5">
-                    Observed data
-                  </p>
-                  <p className="text-xs text-neutral-500">
-                    {trendFirst.year}–{trendLast.year}
-                  </p>
-                  <p className="text-xs text-neutral-400 mt-1">
-                    n = {trendEntries.length} years
-                  </p>
-                </div>
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-0">
 
-                {/* Arrow */}
-                <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">
-                  →
+              <div className="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-semibold"
+                    style={{ width: 20, height: 20, fontSize: 11 }}
+                  >
+                    1
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-800">Observed data</p>
                 </div>
-
-                {/* Step 2 */}
-                <div
-                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
-                >
-                  <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                    Step 2
-                  </p>
-                  <p className="text-sm font-semibold text-neutral-800 mb-0.5">
-                    CAGR model
-                  </p>
-                  <p className="text-xs text-neutral-500">
-                    Vacancy + graduate
-                  </p>
-                  <p className="text-xs text-neutral-400 mt-1">
-                    CAGR extrapolation
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">
-                  →
-                </div>
-
-                {/* Step 3 */}
-                <div
-                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
-                >
-                  <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                    Step 3
-                  </p>
-                  <p className="text-sm font-semibold text-neutral-800 mb-0.5">
-                    Interpretation
-                  </p>
-                  <p className="text-xs text-neutral-500">
-                    Claude (when API key set)
-                  </p>
-                  <p className="text-xs text-neutral-400 mt-1">
-                    Template fallback
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">
-                  →
-                </div>
-
-                {/* Step 4 */}
-                <div
-                  className="flex-1 rounded-xl border border-neutral-100 bg-neutral-50 p-4"
-                >
-                  <p className="text-[9px] font-semibold uppercase tracking-widest text-neutral-400 mb-1">
-                    Step 4
-                  </p>
-                  <p className="text-sm font-semibold text-neutral-800 mb-0.5">
-                    Human insight
-                  </p>
-                  <p className="text-xs text-neutral-500">
-                    This page
-                  </p>
-                  <p className="text-xs text-neutral-400 mt-1">
-                    Structured context
-                  </p>
-                </div>
+                <p className="text-xs text-neutral-500">{trendFirst.year}–{trendLast.year}</p>
+                <p className="text-xs text-neutral-400 mt-0.5">n = {trendEntries.length} years</p>
               </div>
+
+              <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">→</div>
+
+              <div className="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-semibold"
+                    style={{ width: 20, height: 20, fontSize: 11 }}
+                  >
+                    2
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-800">CAGR model</p>
+                </div>
+                <p className="text-xs text-neutral-500">Vacancy + graduate</p>
+                <p className="text-xs text-neutral-400 mt-0.5">CAGR extrapolation</p>
+              </div>
+
+              <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">→</div>
+
+              <div className="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-semibold"
+                    style={{ width: 20, height: 20, fontSize: 11 }}
+                  >
+                    3
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-800">Interpretation</p>
+                </div>
+                <p className="text-xs text-neutral-500">Claude (when API key set)</p>
+                <p className="text-xs text-neutral-400 mt-0.5">Template fallback</p>
+              </div>
+
+              <div className="flex items-center justify-center px-2 text-neutral-300 text-lg md:self-center">→</div>
+
+              <div className="flex-1 rounded-xl border border-neutral-200 bg-neutral-50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span
+                    className="flex-shrink-0 flex items-center justify-center rounded-full bg-neutral-200 text-neutral-600 font-semibold"
+                    style={{ width: 20, height: 20, fontSize: 11 }}
+                  >
+                    4
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-800">Human insight</p>
+                </div>
+                <p className="text-xs text-neutral-500">This page</p>
+                <p className="text-xs text-neutral-400 mt-0.5">Structured context</p>
+              </div>
+
+            </div>
+          </div>
+
+          {/* ── Card 6 — AI Interpretation ────────────────────────────────────── */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <CardTitle icon="robot" bg="bg-violet-50" color="text-violet-600">
+                Interpretation
+              </CardTitle>
+              {aiSource === "claude" && !aiLoading && (
+                <span
+                  className="inline-flex items-center gap-1 rounded px-2 py-1 text-[9px] font-semibold uppercase tracking-widest"
+                  style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
+                  AI
+                </span>
+              )}
             </div>
 
-            {/* AI interpretation section */}
-            <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5 mb-10">
-              <div className="flex items-center gap-2 mb-3">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
-                  Interpretation
-                </p>
-                {aiSource === "claude" && (
-                  <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest" style={{ color: "#92600A", background: "#FFFBEB", border: "1px solid #FDE68A" }}>
-                    <span className="h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: "#F5C518" }} />
-                    AI
-                  </span>
-                )}
-              </div>
-
+            <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5">
               {aiLoading ? (
                 <div className="flex flex-col gap-3 animate-pulse">
-                  <div className="h-4 bg-neutral-100 rounded w-full" />
-                  <div className="h-4 bg-neutral-100 rounded w-5/6" />
-                  <div className="h-4 bg-neutral-100 rounded w-4/6" />
+                  <div className="h-4 bg-neutral-200 rounded w-full" />
+                  <div className="h-4 bg-neutral-200 rounded w-5/6" />
+                  <div className="h-4 bg-neutral-200 rounded w-4/6" />
                 </div>
               ) : (
                 <p className="text-[15px] text-neutral-700 leading-relaxed">
                   {aiAnalysis ?? "Generating interpretation…"}
                 </p>
               )}
-
-              {aiSource === "template" && !aiLoading && (
-                <p className="mt-3 text-[10px] text-neutral-400 font-mono">
-                  Set ANTHROPIC_API_KEY for AI-generated interpretation.
-                </p>
-              )}
             </div>
 
-            {/* Confidence detail table */}
-            <div className="mb-10">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400 mb-3">
-                Confidence levels
+            {aiSource === "template" && !aiLoading && (
+              <p className="text-[10px] text-neutral-400 font-mono">
+                Set ANTHROPIC_API_KEY for AI-generated interpretation.
               </p>
-              <div className="overflow-hidden rounded-xl border border-neutral-200">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr style={{ background: "#FAFAFA", borderBottom: "1px solid #F3F4F6" }}>
-                      <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2.5 px-4 w-28">
-                        Confidence
-                      </th>
-                      <th className="text-left text-[10px] font-semibold uppercase tracking-widest text-neutral-400 py-2.5 px-4">
-                        What it means
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ borderBottom: "1px solid #f9f9f9" }}>
-                      <td className="py-2.5 px-4 text-sm font-medium text-neutral-700">High</td>
-                      <td className="py-2.5 px-4 text-sm text-neutral-500">
-                        5+ validated data points with external source confirmation
-                      </td>
-                    </tr>
-                    <tr style={{ borderBottom: "1px solid #f9f9f9" }}>
-                      <td className="py-2.5 px-4 text-sm font-medium text-neutral-700">Medium</td>
-                      <td className="py-2.5 px-4 text-sm text-neutral-500">
-                        4 years of demo data — directional, not investment-grade
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2.5 px-4 text-sm font-medium text-neutral-700">Low</td>
-                      <td className="py-2.5 px-4 text-sm text-neutral-500">
-                        Insufficient historical data for reliable trend extraction
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+            )}
+          </div>
+
+          {/* ── Card 7 — Confidence Levels ────────────────────────────────────── */}
+          <div className="rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col gap-4">
+            <CardTitle icon="shield-check" bg="bg-green-50" color="text-green-600">
+              Confidence Levels
+            </CardTitle>
+
+            <div className="flex flex-col gap-3">
+              <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 flex items-start gap-3">
+                <span className="text-xs font-semibold text-green-700 flex-shrink-0 min-w-[52px] pt-0.5">
+                  High
+                </span>
+                <div className="w-px self-stretch bg-green-200 flex-shrink-0" />
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  5+ validated data points with external source confirmation
+                </p>
+              </div>
+              <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 flex items-start gap-3">
+                <span className="text-xs font-semibold text-amber-700 flex-shrink-0 min-w-[52px] pt-0.5">
+                  Medium
+                </span>
+                <div className="w-px self-stretch bg-amber-200 flex-shrink-0" />
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  4 years of demo data — directional, not investment-grade
+                </p>
+              </div>
+              <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 flex items-start gap-3">
+                <span className="text-xs font-semibold text-red-700 flex-shrink-0 min-w-[52px] pt-0.5">
+                  Low
+                </span>
+                <div className="w-px self-stretch bg-red-200 flex-shrink-0" />
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Insufficient historical data for reliable trend extraction
+                </p>
               </div>
             </div>
 
-            {/* Footer */}
-            <p className="text-[10px] text-neutral-300 leading-relaxed font-mono mb-3">
-              Projections assume current CAGR rates continue. Demo data has not been externally validated. Not financial or career advice.
-            </p>
-            <DataStatusBadge isDemo />
+            <div className="pt-2 border-t border-neutral-100">
+              <p className="text-[10px] text-neutral-300 leading-relaxed font-mono mb-2">
+                Projections assume current CAGR rates continue. Demo data has not been externally
+                validated. Not financial or career advice.
+              </p>
+              <DataStatusBadge isDemo />
+            </div>
           </div>
 
-          </div>
         </div>
       )}
     </div>
